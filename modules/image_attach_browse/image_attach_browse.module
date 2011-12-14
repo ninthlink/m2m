@@ -1,0 +1,250 @@
+<?php
+
+define('IMAGE_BROWSER_NUM_PER_ROW', 4);
+define('IMAGE_BROWSER_NUM_ROWS', 5);
+
+define('PERM_BROWSE_IMAGE_ATTACHMENTS', 'browse image attachments');
+define('PERM_ATTACH_EXISTING_IMAGE', 'attach existing image');
+define('PH_IMAGE_BROWSER_DOM_ID', 'phImageBrowser');
+define('MENU_IMAGE_ATTACH_BROWSE', 'image_attach/browse');
+
+define('IMAGE_BROWSE_ALLOWED_FILTER_REGEX', '/[^\(\)\.A-Za-z0-9%]/');
+define('IMAGE_BROWSE_ALLOWED_FILTER_OPS', '=,>,<,<=,>=,LIKE,IS,IS NOT,IS NULL,IS NOT NULL,!=,<>,NOT LIKE');
+define('IMAGE_BROWSE_ALLOWED_FILTER_CLAUSES', 'WHERE,ORDERBY');
+
+define('IMAGE_BROWSE_DEFAULT_FILTER_ORDERBY', ' n.sticky DESC, n.title ASC ');
+define('IMAGE_BROWSE_DEFAULT_FILTER_WHERE', ' n.status=1 AND type=\'image\' ');
+
+/**
+ * hook_perm implementation
+ * @return the single permission for this module "browse image attachments"
+ */
+function image_attach_browse_perm() {
+  return array(PERM_BROWSE_IMAGE_ATTACHMENTS => PERM_BROWSE_IMAGE_ATTACHMENTS,
+                PERM_ATTACH_EXISTING_IMAGE => PERM_ATTACH_EXISTING_IMAGE);
+}
+
+/**
+ * hook_menu implementation
+ * @return the single menu for this module, "image_attach/browse"
+ */
+function image_attach_browse_menu() {
+  return array(
+      MENU_IMAGE_ATTACH_BROWSE => array(
+      'title' => 'Browse Images',
+      'page callback' => 'image_attach_browse_browser',
+      'access arguments' => array(PERM_BROWSE_IMAGE_ATTACHMENTS),
+      'type' => MENU_CALLBACK,
+    ));
+}
+
+/**
+ * hook_form_alter implementation
+ *
+ * if the user has appropriate access, inject the placeholder for the image attach browser theme
+ */
+function image_attach_browse_form_alter(&$form, $form_state, $form_id) {
+  if (!empty($form['image_attach'])) {
+    if (!user_access(PERM_ATTACH_EXISTING_IMAGE)) {
+      if ($form['image_attach']['iids']['#default_value']) {
+        $form['image_attach']['iids']['#description'] =
+          'Select "None" to remove the existing image attachment.';
+        $form['image_attach']['iids']['#options'] = array(
+          0 => 'None',
+          $form['image_attach']['iids']['#default_value'] =>
+            $form['image_attach']['iids']['#options'][$form['image_attach']['iids']['#default_value']]
+          );
+      } else {
+        $form['image_attach']['iids'] = array('#type' => 'value', '#value' => 0);
+        unset($form['image_attach']['#description'], $form['image_attach'][0]);
+      }
+    } elseif (user_access(PERM_BROWSE_IMAGE_ATTACHMENTS)) {
+      $form['image_attach'] = $form['image_attach'] +
+        array('browse' => array(
+          '#type' => 'value',
+          '#value' => l('Click here to browse images.', MENU_IMAGE_ATTACH_BROWSE)),
+          '#theme' => 'image_attach_browse_attach_browser',
+      );
+    }
+  }
+}
+
+/**
+ * this is the ajax callback which invokes the theming function for the image browser
+ *
+ * @todo An initial version of the basic framework for implementing filters is outlined below, 
+ *  lines 86 - 139. Now the UI needs to be built out to invoke the requests.
+ *  The idea is to make the browser ajax request with extra args on the end.
+ *  For example: image_attach/browse/where:title:like:t%/orderby:modified:desc
+ * @return void
+ */
+function image_attach_browse_browser() {
+  //checking whether this request is AJAX is not mission critical
+  // since this function is already protected with access arguments
+  if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
+    drupal_json();
+    $query = "SELECT n.nid, n.title FROM {node} n WHERE n.status=1 AND type='image' ";
+    $args = func_get_args();
+    if (count($args)) {
+      $filters = array();
+      $operators = explode(',', IMAGE_BROWSE_ALLOWED_FILTER_OPS);
+      $clauses = explode(',', IMAGE_BROWSE_ALLOWED_FILTER_CLAUSES);
+      foreach ($args as $arg) {
+        $elements = explode(':', $arg);
+        if (empty($elements)) {
+          continue;
+        }
+        $clause = array_shift($elements);
+        $clause = strtoupper(urldecode($clause));
+        if (empty($clause) || !in_array($clause, $clauses)) {
+          continue;
+        }
+        $add = FALSE;
+        switch($clause) {
+          case 'ORDERBY': {
+            list($field, $direction) = explode(':', $arg, 2);
+            $field = preg_replace(IMAGE_BROWSE_ALLOWED_FILTER_REGEX, '', urldecode($field));
+            $direction = (strtoupper($direction) != 'ASC') ? 'ASC' : 'DESC';
+            if (!empty($field)) {
+              $filters[$clause][] = $field . ' ' . $direction;
+            }
+            break;
+          }
+          case 'WHERE': {
+            list($field, $op, $filter) = explode(':', $arg, 3);
+            $field = preg_replace(IMAGE_BROWSE_ALLOWED_FILTER_REGEX, '', urldecode($field));
+            $filter = preg_replace(IMAGE_BROWSE_ALLOWED_FILTER_REGEX, '', urldecode($filter));
+            $op = urldecode($op);
+            if (!empty($op) && !empty($field) && in_array($op, $operators)) {
+              $filter = str_replace('%', '%%', $filter);
+              $filters[$clause][] = $field . ' ' . $op . ' ' . $filter;
+            }
+            break;
+          }
+          case 'WHEREGLUE': {
+          $filters[$clause] = $arg == 'OR' ? 'OR' : 'AND';
+          break;
+        }
+        }
+      }
+    }
+    $where = ' WHERE ';
+    if (!empty($filters['WHERE'])) {
+      $glue = $filters['WHEREGLUE'] == 'OR' ? 'OR' : 'AND';
+      $where .= '(' . implode(' ' . $glue . ' ', $filters['WHERE']) . ')';
+    }
+    $where .= IMAGE_BROWSE_DEFAULT_FILTER_WHERE;
+
+    $orderby = ' ORDER BY ';
+    if (!empty($filters['ORDERBY'])) {
+      $orderby .= implode(', ', $filters['ORDERBY']);
+    }
+    $orderby .= IMAGE_BROWSE_DEFAULT_FILTER_ORDERBY;
+
+    $result = pager_query(
+      "SELECT n.nid, n.title FROM {node} n $where $orderby", 
+      IMAGE_BROWSER_NUM_PER_ROW * IMAGE_BROWSER_NUM_ROWS);
+    while ($row = db_fetch_array($result)) {
+      $rows[$row['nid']] = $row;
+    }
+    if (!empty($rows)) {
+      echo theme('image_attach_browse_browser', $rows) 
+        . '<div id="' . PH_IMAGE_BROWSER_DOM_ID . 'Pager">' . theme('pager') . '</div>';
+    } else {
+      echo '<div class="nonmodal">' . t('No attached images found.') . '</div>';
+    }
+  }
+}
+
+// =====================
+// = THEMING FUNCTIONS =
+// =====================
+/**
+ * hook_theme implementation
+ */
+function image_attach_browse_theme() {
+  return array(
+    'image_attach_browse_attach_browser' => array(
+      'arguments' => array('element' => null),
+      ),
+    'image_attach_browse_browser' => array(
+      'arguments' => array('rows' => null),
+      ),
+    );
+}
+
+/**
+ * attach the javascript, css, and browser placeholder for the image browser
+ *
+ * @param string $element
+ * @return void
+ */
+function theme_image_attach_browse_attach_browser($element) {
+  if (empty($element['browse'])) {
+    return drupal_render($element);
+  }
+  drupal_add_js(drupal_get_path('module', 'image_attach_browse') . '/jqModal.js');
+  drupal_add_js(drupal_get_path('module', 'image_attach_browse') . '/image_attach_browse.js');
+  drupal_add_css(drupal_get_path('module', 'image_attach_browse') . '/image_attach_browse.css');
+  drupal_add_js(array(
+    'phImageBrowser' => '#'.PH_IMAGE_BROWSER_DOM_ID,
+    'imageBrowserTrigger' => '#' . $element['iids']['#id'] . '-wrapper div.description a',
+    'imageAttachSelect' => '#' . $element['iids']['#id'],
+    'imageAttachSelectWrapper' => '#' . $element['iids']['#id'] . '-wrapper',
+    ), 'setting');
+
+  $element['iids']['#description'] .= ' ' . $element['browse']['#value'];
+  return drupal_render($element)
+    . '<div id="'.PH_IMAGE_BROWSER_DOM_ID.'" class="jqmWindow jqmFixedWindow"> </div>';
+}
+
+/**
+ * build the actual image browser
+ *
+ * @param string $rows
+ * @return void
+ */
+function theme_image_attach_browse_browser($rows) {
+  //counter
+  $i = 0;
+  $c = IMAGE_BROWSER_NUM_PER_ROW;
+  $r = IMAGE_BROWSER_NUM_ROWS;
+  //total items
+  $n = count($rows);
+  $trs = $tds = array();
+
+  // FIXME:
+  $defaults = array();
+
+  foreach ($rows as $row) {
+    $node = (object)array('nid' => $row['nid']);
+    image_load($node);
+    $img = image_display($node, IMAGE_THUMBNAIL);
+    $title = truncate_utf8($row['title'], 15, FALSE, TRUE);
+    $checkbox = array('checkbox_' . $row['nid'] => array(
+      '#type' => 'checkbox',
+      '#title' => $title,
+      '#default_value' => $defaults[$row['nid']],
+      '#return_value' => $row['nid'],
+      ));
+    $tds[] =
+      '<a href="javascript:;" class="image-browser-choice" id="image-browser-item-' . $row['nid'] . '">' 
+           . $img . '<br />' 
+           . drupal_render($checkbox)
+         . '</a>';
+    if (++$i >= $c) {
+      $i = 0;
+      $trs[] = $tds;
+      $tds = array();
+    }
+  }
+  if (!empty($tds)) { 
+    $trs[] = $tds; 
+  }
+  $ok_button = array('ok_button' => array('#type' => 'submit', '#value' => t('OK')));
+  $cancel = '<a href="javascript:;" id="image-browser-cancel">' . t('Cancel') . '</a>';
+  return theme('table', array(), $trs)
+    . '<div id="' . PH_IMAGE_BROWSER_DOM_ID . 'Submit">' . drupal_render($ok_button) . ' '
+    . $cancel . '</div>';
+}
+

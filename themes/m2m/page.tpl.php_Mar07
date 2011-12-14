@@ -1,0 +1,232 @@
+<?php // $Id: page.tpl.php,v 1.18.2.1 2009/04/30 00:13:31 goba Exp $ ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
+  <head>
+    <?php print $head ?>
+    <title><?php print $head_title ?></title>
+    <?php print $styles ?>
+    <?php print $scripts ?>
+    <!--[if lt IE 7]>
+      <?php print phptemplate_get_ie_styles(); ?>
+    <![endif]-->
+ <script type="text/javascript">	
+	$(function(){			
+		var speedA = $('select#speedA').selectmenu();		
+		$("#index").click(function(event){
+			console.log($('select#speedA').selectmenu("index"));
+		});
+		$("#indexNumber").click(function(event){
+			console.log($('select#speedA').selectmenu("index", 4));
+		});
+		$("#value").click(function(event){
+			console.log($('select#speedA').selectmenu("value"));
+		});
+		$("#valueString").click(function(event){
+			console.log($('select#speedA').selectmenu("value", "Medium"));
+		});
+		$("#valueNumber").click(function(event){
+			console.log($('select#speedA').selectmenu("value", 4));
+		});
+		$("#valueNumberAsString").click(function(event){
+			console.log($('select#speedA').selectmenu("value", "11"));
+		});
+		$("#valueNonExisting").click(function(event){
+			console.log($('select#speedA').selectmenu("value", "test123"));
+		});
+	});	
+</script>
+  </head>
+  <body<?php print phptemplate_body_class($left, $right); ?>>
+<div class="headerMain">
+ <div class="header">
+  <div class="headerLogo"><a href="/"><img src="<?php echo $base_path.$directory;?>/images/msm_logo.png" width="158" height="80" alt="M2M" /></a></div>
+  <div class="headerMenu">
+  <!--<ul>
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Register</a></li>
+  </ul> -->  
+  </div>
+  <div class="headerLogin">
+    <?php if ($search_box): ?><?php print $search_box ?><?php endif; ?>
+  </div>
+ </div>
+</div>
+<div class="wrapperMain">
+  <div class="wrapper">  
+  
+  
+     <?php 
+	 if($base_path!=$_SERVER['REQUEST_URI']){
+	 if (isset($primary_links)) : ?>
+          <?php print theme('links', $primary_links, array('class' => 'links primary-links')) ?>
+        <?php endif; ?>
+        <?php if (isset($secondary_links)) : ?>
+          <?php print theme('links', $secondary_links, array('class' => 'links secondary-links')) ?>
+        <?php endif; ?>
+         <?php if ($show_messages && $messages): print $messages; endif; ?>
+       <div style="float:left;">
+	   <?php print $content;?>
+       </div>
+       <?php }?>
+       
+       <?php if ($is_front):?>
+           <?php print $content;?>
+           
+            <div class="view-filters">
+      <form action="/search"  accept-charset="UTF-8" method="get" id="views-exposed-form-Search-page-1">
+<div><div class="deviceSearch">
+    <h2>Device Search</h2>
+     <div class="deviceSearchL">
+     Select from the following options to search the device database. Press and hold the Ctrl button to select multiple items. 
+     <div><a href="/search">View all</a></div>
+     </div>
+
+       
+<div class="views-exposed-form">
+  <div class="views-exposed-widgets clear-block">
+  
+        <div class="deviceSearchR">
+      <div class="views-exposed-widget">
+                  <label for="edit-field-company-value-many-to-one">
+            Company          </label>
+                        <div class="views-widget">
+          <div class="form-item" id="edit-field-company-value-many-to-one-wrapper">
+
+ <select name="field_company_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-company-value-many-to-one"  size="4"><option value="All">View All</option><option value="Sierra Wireless">Sierra Wireless</option><option value="Novatel Wireless">Novatel Wireless</option></select>
+</div>
+        </div>
+      </div>
+      </div>
+        <div class="deviceSearchR">
+      <div class="views-exposed-widget">
+                  <label for="edit-field-modem-technology-value-many-to-one">
+
+            Modem Technology          </label>
+                        <div class="views-widget">
+          <div class="form-item" id="edit-field-modem-technology-value-many-to-one-wrapper">
+ <select name="field_modem_technology_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-modem-technology-value-many-to-one"  size="4"><option value="All">View All</option><option value="1X-RTT">1X-RTT</option><option value="EDGE">EDGE</option><option value="EVDO rev.0">EVDO rev.0</option><option value="EVDO Rev.A">EVDO Rev.A</option><option value="EVDO rev.B">EVDO rev.B</option><option value="GPRS">GPRS</option><option value="GSM">GSM</option><option value="HSPA">HSPA</option><option value="HSPA+">HSPA+</option><option value="HSUPA">HSUPA</option><option value="LTE">LTE</option><option value="TD-SCDMA">TD-SCDMA</option><option value="UMTS">UMTS</option></select>
+
+</div>
+        </div>
+      </div>
+      </div>
+        <!--<div class="deviceSearchR">
+      <div class="views-exposed-widget">
+                  <label for="edit-field-frequncy-bands-value-many-to-one">
+            Frequncy Bands          </label>
+                        <div class="views-widget">
+
+          <div class="form-item" id="edit-field-frequncy-bands-value-many-to-one-wrapper">
+ <select name="field_frequncy_bands_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-frequncy-bands-value-many-to-one"  size="4"><option value="All">View All</option><option value="CDMA 1XRTT/EV-DO REV A">CDMA 1XRTT/EV-DO REV A</option><option value="CDMA 800/1900 MHz">CDMA 800/1900 MHz</option><option value="CDMA 850/1900 MHz">CDMA 850/1900 MHz</option><option value="GSM/GPRS/EDGE 850/900/1800/1900 MHz">GSM/GPRS/EDGE 850/900/1800/1900 MHz</option><option value="GPRS 850/900/1800/1900 MHz">GPRS 850/900/1800/1900 MHz</option><option value="HSPA+/UMTS 850/900/1900/2100 MHz">HSPA+/UMTS 850/900/1900/2100 MHz</option><option value="LTE 700 MHz (B17)/AWS">LTE 700 MHz (B17)/AWS</option><option value="LTE 700 MHz (B17) (with MIMO)">LTE 700 MHz (B17) (with MIMO)</option><option value="LTE 700 MHz (B13) (with MIMO)S">LTE 700 MHz (B13) (with MIMO)S</option><option value="LTE 800/900/1800/2100/2600 MHz">LTE 800/900/1800/2100/2600 MHz</option><option value="WCDMA 900/1900/2100 MHz">WCDMA 900/1900/2100 MHz</option><option value="WCDMA 850/900/2100 MHz (8550)">WCDMA 850/900/2100 MHz (8550)</option><option value="WCDMA 850 1900 AWS MHz (8552)">WCDMA 850 1900 AWS MHz (8552)</option></select>
+
+</div> 
+        </div>
+      </div>
+      </div>
+        <div class="deviceSearchR">
+      <div class="views-exposed-widget">
+                  <label for="edit-field-commercial-availability-value-many-to-one">
+            Commercial Availability          </label>
+                        <div class="views-widget">
+
+          <div class="form-item" id="edit-field-commercial-availability-value-many-to-one-wrapper">
+ <select name="field_commercial_availability_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-commercial-availability-value-many-to-one"  size="4"><option value="All">View All</option><option value="AVAILABLE">AVAILABLE</option><option value="ON REQUEST">ON REQUEST</option><option value="PLANNED">PLANNED</option><option value="DISCONTINUED">DISCONTINUED</option></select>
+</div>
+        </div>
+      </div>
+      </div>-->
+        <div class="deviceSearchR">
+
+      <div class="views-exposed-widget">
+                  <label for="edit-field-voice-support-value-many-to-one">
+            Voice Support          </label>
+                        <div class="views-widget">
+          <div class="form-item" id="edit-field-voice-support-value-many-to-one-wrapper">
+ <select name="field_voice_support_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-voice-support-value-many-to-one"  size="4"><option value="All">View All</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not Specified">Not Specified</option></select>
+
+</div>
+        </div>
+      </div>
+      </div>
+        <div class="deviceSearchR">
+      <div class="views-exposed-widget">
+                  <label for="edit-field-sms-support-value-many-to-one">
+            SMS Support          </label>
+                        <div class="views-widget">
+
+          <div class="form-item" id="edit-field-sms-support-value-many-to-one-wrapper">
+ <select name="field_sms_support_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-sms-support-value-many-to-one"  size="4"><option value="All">View All</option><option value="Yes">Yes</option><option value="No">No</option><option value="Not Specified">Not Specified</option></select>
+</div>
+        </div>
+      </div>
+      </div>
+        <div class="deviceSearchR">
+
+      <div class="views-exposed-widget">
+                  <label for="edit-field-gps-capabilities-value-many-to-one">
+            GPS Capabilities          </label>
+                        <div class="views-widget">
+          <div class="form-item" id="edit-field-gps-capabilities-value-many-to-one-wrapper">
+ <select name="field_gps_capabilities_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-gps-capabilities-value-many-to-one"  size="4"><option value="All">View All</option><option value="ASSISTED">ASSISTED</option><option value="STANDALONE">STANDALONE</option><option value="ASSISTED &amp;amp; STANDALONE">ASSISTED &amp; STANDALONE</option><option value="NO">NO</option></select>
+
+</div>
+        </div>
+      </div>
+      </div>
+        <div class="deviceSearchR">
+      <div class="views-exposed-widget">
+                  <label for="edit-field-operator-certifications-value-many-to-one">
+            Operator Certifications          </label>
+                        <div class="views-widget">
+
+          <div class="form-item" id="edit-field-operator-certifications-value-many-to-one-wrapper">
+ <select name="field_operator_certifications_value_many_to_one[]" multiple="multiple"  class="form-select" id="edit-field-operator-certifications-value-many-to-one"  size="4"><option value="All">View All</option><option value="AT&amp;amp;T">AT&amp;T</option><option value="A-Tick">A-Tick</option><option value="Bell">Bell</option><option value="GCF">GCF</option><option value="NTT DoCoMo">NTT DoCoMo</option><option value="Optus">Optus</option><option value="PTCRB">PTCRB</option><option value="Softbank">Softbank</option><option value="Sprint">Sprint</option><option value="Telstra">Telstra</option><option value="Verizon">Verizon</option></select>
+
+</div>
+        </div>
+      </div>
+      </div>
+        <div class="deviceSearchLink">
+      <input type="submit" id="edit-submit-Search" value="Apply"  class="form-submit" />
+    </div>
+    
+    
+  
+  
+  </div>
+</div>
+        
+
+
+</div>
+</div></form>
+    </div>
+
+           
+           
+           
+           
+           
+           
+       <?php endif;?>
+       
+          
+   
+    
+  </div>
+</div>
+<div class="footerMain">
+ <div class="footer">
+   <a href="http://www.qualcomm.com"  target="_blank"><div class="footerLogo"></div></a> 
+   <div class="footerLink"><a href="/">Home</a><span>l</span><a href="/search">Search</a><span>l</span> <a href="http://www.qualcomm.com/site/legal"  target="_blank">legal</a><span>l</span> <a href="http://www.qualcomm.com/site/privacy" target="_blank">Privacy</a>
+   </div>
+   <div class="footerCopyright"> &copy; 2011 QUALCOMM Incorporated. All Rights Reserved</div>
+ </div>
+</div>
+  <?php print $closure ?>
+ <!-- <script language="javascript">
+  $("#s").click(function(){
+  $("#s").val('');     
+  });
+  </script>-->
+  </body>
+</html>

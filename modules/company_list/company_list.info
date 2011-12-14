@@ -1,0 +1,5 @@
+; $Id$  
+name = Company list
+description = Company list 
+core = 6.x
+package = Company list

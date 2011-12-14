@@ -1,0 +1,5 @@
+; $Id$  
+name = Node publish
+description = Node publish
+core = 6.x
+package = Node publish

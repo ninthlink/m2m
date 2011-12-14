@@ -1,0 +1,5 @@
+; $Id$  
+name = paging
+description = paging
+core = 6.x
+package = paging

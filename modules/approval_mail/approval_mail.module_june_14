@@ -1,0 +1,75 @@
+<?php 
+function approval_mail_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+	$headers = array(
+    			'MIME-Version'              => '1.0',
+			    'Content-Type'              => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+			    'Content-Transfer-Encoding' => '8Bit',
+			    'X-Mailer'                  => 'Drupal',
+				'From'                      => 'admin@m2msearch.com',  
+				'Reply-to'                  => 'admin@m2msearch.com'  
+	 );
+	 global $base_path;
+  switch ($op) {
+    case 'insert':	
+	if($node->type=='device'){
+		$company_name='';
+		foreach($node->field_company as $com_key=>$com_val) { $company_name .= rtrim(implode(", ",$com_val),", ") .", ";}
+		$company_name = rtrim($company_name,", ");
+		//print_r($node->nid);		
+		$email_id=array();		 
+		foreach($node->field_company as $key=>$val){
+			foreach($val as $value){
+					$sql="select u.name, u.mail , u.uid , n.title from {content_field_company} c, {node} n, {users} u where c.field_company_value='$value' AND c.nid=n.nid AND n.type='profile' AND n.uid=u.uid";
+					$res=db_query($sql);
+					while($row=db_fetch_object($res)){
+					   $user_fields = user_load($row->uid);
+   					   $company_user_fields = user_load($node->uid);
+					   if($user_fields->roles[3]=='Sales Rep'){
+							$email_id[]=$row->mail;	
+							$subject = "M2M Search: New Module Awaiting Approval"; 				
+	//						$mail_header =" From: webmaster@example.com " ;
+							$login_url="http://".$_SERVER['HTTP_HOST']."/user/login";
+							//$node_url="http://".$_SERVER['HTTP_HOST']."/node/".$node->nid."/edit?destination=manage/owndevice";
+							$node_url="http://".$_SERVER['HTTP_HOST']."/manage/owndevice";
+							$message ="Dear $row->name,<br><bR>
+ 
+<b>$company_name</b> has uploaded a new module, <b>$row->title</b> , to the online M2M module database. It requires your verification and approval for it to post publically; to review the module, Please <a href='".$login_url."'> Login </a> into the site to approve the devices waiting your approval.<br><br><br>  
+ 
+Thank you,<br>
+M2M Search Admin<br>
+"; 					
+							//mail($row->mail, $subject, $message) or die("error in mail function");
+							drupal_mail_send(array('to'=>$row->mail, 'body' => $message, 'subject' => $subject, 'headers' => $headers));
+						}
+					}				
+			}
+		}
+		$message="All new devices require approval.Please allow for a delay in your device to be publish to the site.";
+		drupal_set_message($message);		
+	}
+    break;
+    case update:
+	if($node->type=='device'){
+	 	global $user;
+	 	$node_edit=node_load($node->nid);
+	 	if($node_edit->status==0 && $node->status && ($node_edit->uid!=$user->uid)){
+			 $user_owner=user_load($node_edit->uid);
+			 //print_r($user_owner);
+			 //echo $user_owner->mail;
+			 $subject="M2M Search: New Module Approved and Now Publicly Viewable";
+			 $mailto = $user_owner->mail;    
+			$mailfrom = 'sender@domain.com';
+			$message = "Dear $user_owner->name,<br><br>
+	We are pleased to notify you that your recently uploaded module, <b>$node->title</b>, has been approved by Qualcomm Sales and is now publicly listed on the online M2M module database.<br><br><br>
+	 
+	Thank you,<bR>
+	Qualcomm Sales and M2M Team<bR>
+	";    
+			drupal_mail_send(array('to'=>$mailto, 'body' => $message, 'subject' => $subject, 'headers' => $headers));
+	 	}
+		
+	}	
+	 break;
+	 
+  }
+}

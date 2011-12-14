@@ -1,0 +1,5 @@
+; $Id$  
+name = Approval mail
+description = Approval mail
+core = 6.x
+package = Approval mail

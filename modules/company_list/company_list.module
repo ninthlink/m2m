@@ -1,0 +1,44 @@
+<?php 
+function company_list_form_alter(&$form, $form_state, $form_id) { 
+    global $user;
+    switch($form_id) { 					
+	   case 'device_node_form': 
+			$user_fields = user_load($user->uid);
+			//code to display only assigned companies
+			//if($user_fields->roles[3]=='Sales Rep'){
+				$form['#after_build'][] = 'x_form_after_build';
+			//}	
+			break;	
+		case 'search_theme_form':
+		//$form['#action'] ='/search/device_list';
+		//$form_state['redirect'] = "search/device_list/". trim($form_state['values'][$form_id]);
+		$form['#submit'] = array('search_all_special_submit');  
+		break;				  					
+		/*case 'user_login':
+		case 'user_login_block':
+			$form['#action'] = 'user/login?destination=manage/owndevice';
+		break;*/
+    }
+}
+
+function x_form_after_build($form, &$form_state){
+	global $user;
+	
+	$sql=db_query("select field_company_value from {node} n, {content_field_company} c where n.uid='$user->uid' AND n.type='profile' AND n.nid=c.nid");
+	$option_company=array();
+	while($row=db_fetch_array($sql)){
+		$option_company[$row['field_company_value']]=$row['field_company_value'];	
+	}
+
+	$form['field_company']['value']['#options']= $option_company;
+ 	$form['field_company']['#default_value']= $form['field_company']['#default_value'];
+	return $form;
+}
+
+function search_all_special_submit($form, &$form_state) {
+	$form_id = $form['form_id']['#value'];
+	$form_state['redirect'] = 'search/device_list/'. trim($form_state['values'][$form_id]);
+}
+function company_list_get_destination(){
+//	return url('','destination=manage/owndevice');
+}

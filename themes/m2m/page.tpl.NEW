@@ -1,0 +1,220 @@
+<?php
+// $Id: page.tpl.php,v 1.18.2.1 2009/04/30 00:13:31 goba Exp $
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
+  <head>
+    <?php print $head ?>
+    <title><?php print $head_title ?></title>
+    <?php print $styles ?>
+    <?php print $scripts ?>
+    <!--[if lt IE 7]>
+      <?php print phptemplate_get_ie_styles(); ?>
+    <![endif]-->
+  <script type="text/javascript">	
+	$(function(){			
+		var speedA = $('select#speedA').selectmenu();		
+		$("#index").click(function(event){
+			console.log($('select#speedA').selectmenu("index"));
+		});
+		$("#indexNumber").click(function(event){
+			console.log($('select#speedA').selectmenu("index", 4));
+		});
+		$("#value").click(function(event){
+			console.log($('select#speedA').selectmenu("value"));
+		});
+		$("#valueString").click(function(event){
+			console.log($('select#speedA').selectmenu("value", "Medium"));
+		});
+		$("#valueNumber").click(function(event){
+			console.log($('select#speedA').selectmenu("value", 4));
+		});
+		$("#valueNumberAsString").click(function(event){
+			console.log($('select#speedA').selectmenu("value", "11"));
+		});
+		$("#valueNonExisting").click(function(event){
+			console.log($('select#speedA').selectmenu("value", "test123"));
+		});
+	});	
+</script>
+  </head>
+  <body<?php print phptemplate_body_class($left, $right); ?>>
+
+<div class="headerMain">
+ <div class="header">
+  <div class="headerLogo"><img src="<?php echo $base_path.$directory;?>/images/msm_logo.png" width="158" height="80" alt="M2M" /></div>
+  <div class="headerMenu">
+  <!--<ul>
+  <li><a href="#">Home</a></li>
+  <li><a href="#">Register</a></li>
+  </ul> -->
+  
+  </div>
+  <div class="headerLogin">
+    <input type="text" value="Search" />
+  </div>
+ </div>
+</div>
+<div class="wrapperMain">
+  <div class="wrapper">
+  <?php if(arg(1)==''){?>
+    <div class="banner"></div>
+    <div class="bannerTitle">
+    These offerings are enabled by a healthy ecosystem of top-tier commercial suppliers for integration of mobile
+technology in various fields such as smart grid, automotive, tracking, home security, vending, digital signage, and others
+    </div>
+     <?php }?>
+    
+     <?php 
+	 if($base_path!=$_SERVER['REQUEST_URI']){
+	 if (isset($primary_links)) : ?>
+          <?php print theme('links', $primary_links, array('class' => 'links primary-links')) ?>
+        <?php endif; ?>
+        <?php if (isset($secondary_links)) : ?>
+          <?php print theme('links', $secondary_links, array('class' => 'links secondary-links')) ?>
+        <?php endif; ?>
+         <?php if ($show_messages && $messages): print $messages; endif; ?>
+       <div style="float:left;">
+        <?php print $breadcrumb; ?>
+	   <?php print $content;?></div>
+       <?php }?>
+    <div class="deviceSearch">
+    <h2>Device Search</h2>
+     <div class="deviceSearchL">
+     Select from the following option to find the right device.  Press and hold the crt button to select multiple choices.
+     <div ><a href="#">View all</a></div>
+     </div>
+     <div class="deviceSearchR">
+             <form action="" method="get">
+        <fieldset>
+            <label>Company</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="Sierra Wireless" >Sierra Wireless</option>
+                <option value="Novatel Wireless">Novatel Wireless</option>
+            </select>
+            
+        
+           <label>Modem Technology</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="1X-RTT">1X-RTT</option>
+                <option value="EDGE">EDGE</option>
+                <option value="EVDO rev.0">EVDO rev.0</option>
+                <option value="EVDO Rev.A">EVDO Rev.A</option>
+                <option value="EVDO rev.B">EVDO rev.B</option>
+                <option value="GPRS">GPRS</option>
+                <option value="GSM">GSM</option>
+                <option value="HSPA">HSPA</option>
+                <option value="HSPA+">HSPA+</option>
+                <option value="HSUPA">HSUPA</option>
+                <option value="LTE">LTE</option>
+                <option value="TD-SCDMA">TD-SCDMA</option>
+                <option value="UMTS">UMTS</option>
+            </select>
+        
+        <label>Frequency Bands</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="CDMA 1XRTT/EV-DO REV A">CDMA 1XRTT/EV-DO REV A</option>
+                <option value="CDMA 800/1900 MHz">CDMA 800/1900 MHz</option>
+                <option value="CDMA 850/1900 MHz">CDMA 850/1900 MHz</option>
+                <option value="GSM/GPRS/EDGE 850/900/1800/1900 MHz">GSM/GPRS/EDGE 850/900/1800/1900 MHz</option>
+                <option value="GPRS 850/900/1800/1900 MHz">GPRS 850/900/1800/1900 MHz</option>
+                <option value="HSPA+/UMTS 850/900/1900/2100 MHz">HSPA+/UMTS 850/900/1900/2100 MHz</option>
+                <option value="LTE 700 MHz (B17)/AWS">LTE 700 MHz (B17)/AWS</option>
+                <option value="LTE 700 MHz (B17) (with MIMO)/AWS">LTE 700 MHz (B17) (with MIMO)</option>
+                <option value="LTE 700 MHz (B13) (with MIMO)">LTE 700 MHz (B13) (with MIMO)S</option>
+                <option value="WCDMA 900/1900/2100 MHz">WCDMA 900/1900/2100 MHz</option>
+                <option value="WCDMA 850/900/2100 MHz (8550)">WCDMA 850/900/2100 MHz (8550)</option>
+                <option value="WCDMA 850 1900 AWS MHz (8552)">WCDMA 850 1900 AWS MHz (8552)</option>
+            </select>
+        </fieldset>
+        </form>
+
+     </div>
+     
+     <div class="deviceSearchR">
+             <form action="#">
+        <fieldset>
+            <label>Commercial Availability</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="Available" >Available</option>
+                <option value="On Request">On Request</option>
+                <option value="Planned">Planned</option>
+                <option value="Discontinued">Discontinued</option>
+            </select>
+            
+            <label>Voice Support</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Not Specified">Not Specified</option>
+            </select>
+        
+            <label>SMS Support</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Not Specified">Not Specified</option>
+            </select>
+        </fieldset>
+        </form>
+
+     </div>
+     
+     <div class="deviceSearchR">
+             <form action="#">
+        <fieldset>
+            <label>GPS Capabilities</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="Assisted">Assisted</option>
+                <option value="Standalone">Standalone</option>
+                <option value="Assisted & Standalone">Assisted & Standalone </option>
+                <option value="No">No</option>
+            </select>
+           
+           <label>Operator Certifications</label>
+            <select size="4" multiple="multiple">
+                <option value="View All" selected="selected" >View All</option>
+                <option value="AT&T">AT&T</option>
+                <option value="A-Tick">A-Tick</option>
+                <option value="Bell">Bell</option>
+                <option value="GCF">GCF</option>
+                <option value="NTT DoCoMo">NTT DoCoMo</option>
+                <option value="Optus">Optus</option>
+                <option value="PTCRB">PTCRB</option>
+                <option value="Softbank">Softbank</option>
+                <option value="Sprint">Sprint</option>
+                <option value="Telstra">Telstra</option>
+                <option value="Verizon">Verizon</option>
+
+            </select>
+        </fieldset>
+<div class="deviceSearchLink"><input type="button" class="searchforDevice" value=""/></div>
+        </form>
+     </div>
+    </div>
+  </div>
+</div>
+<div class="footerMain">
+ <div class="footer">
+   <div class="footerLogo"></div> 
+   <div class="footerLink"><a href="#">Home</a><span>l</span><a href="#">Browse</a><span>l</span><a href="#">Post</a><span>l</span> <a href="#">My Account</a><span>l</span> <a href="#">Login</a><span>l</span> <a href="#">Register</a><span>l</span> <a href="#">legal</a><span>l</span> <a href="#">Privacy</a>
+   </div>
+   <div class="footerCopyright"> &copy; 2011 QUALCOMM Incorporated. All Rights Reserved</div>
+ </div>
+</div>
+
+  <?php print $closure ?>
+  <script language="javascript">
+  $("#s").click(function(){
+  $("#s").val('');     
+  });
+  </script>
+  </body>
+</html>

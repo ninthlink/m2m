@@ -1,0 +1,88 @@
+<?php
+function device_list_search($op = 'search', $keys = NULL) {
+  switch($op) {
+    /**
+     * Sets the tab
+     */
+    case 'name':
+      return t('name of the new tab');
+	break;
+    /**
+     * Defines the results
+     */
+    case 'search':
+      global $base_path;
+      // Change wildcards to SQL wildcard (+ will also act like * with this)
+      $keys = preg_replace('!\*+!', '%', $keys);
+	  //echo $keys;
+	  $sql_num = "SELECT COUNT(*) FROM {node} n, {node_revisions} nr, {content_type_device} td WHERE (n.title LIKE '%%%s%%' OR nr.body LIKE '%%%s%%' OR nr.title LIKE '%%%s%%' OR td.field_advertised_markets_value LIKE '%%%s%%' OR td.field_commercial_availability_value LIKE '%%%s%%' OR td.field_electrical_interface_value LIKE '%%%s%%' OR td.field_dimensions_value  LIKE '%%%s%%' OR td.field_weight_value LIKE '%%%s%%' OR td.field_operational_temperature_ra_value LIKE '%%%s%%' OR td.field_control_commands_value LIKE '%%%s%%' OR td.field_application_processor_value LIKE '%%%s%%' OR td.field_ss_environment_value LIKE '%%%s%%' OR td.field_voice_support_value LIKE '%%%s%%' OR td.field_sms_support_value LIKE '%%%s%%' OR td.field_gps_capabilities_value LIKE '%%%s%%' OR td.field_i2c_value LIKE '%%%s%%' OR td.field_spi_value LIKE '%%%s%%' OR td.field_usb_value LIKE '%%%s%%' OR td.field_uart_ports_value LIKE '%%%s%%' OR td.field_max_gpios_value LIKE '%%%s%%' OR td.field_adc_value LIKE '%%%s%%' OR td.field_pwm_value LIKE '%%%s%%' OR td.field_interrupt_pins_value LIKE '%%%s%%' OR td.field_sim_ruim_interface_value LIKE '%%%s%%' OR td.field_sim_ruim_embedded_slots_value LIKE '%%%s%%' OR td.field_security_features_value LIKE '%%%s%%' OR td.field_fota_support_value  LIKE '%%%s%%' OR td.field_remote_management_value LIKE '%%%s%%' OR td.field_standard_certifications_value LIKE '%%%s%%' OR td.field_website_url LIKE '%%%s%%' OR td.field_contact_email_value LIKE '%%%s%%' OR td.field_chipset_model_value LIKE '%%%s%%' OR td.field_frequncy_bands_value LIKE '%%%s%%' OR td.field_gobi_api_value LIKE '%%%s%%') AND n.nid = nr.nid AND n.type='device' group by n.nid";
+
+$rows=db_result(db_query($sql_num));
+//echo $rows;
+$GLOBALS['pager_page_array'][] = 10;
+$GLOBALS['pager_total'][] =ceil($rows/10) ;
+$pager_num = ceil($rows/10);
+
+ if (!(isset($_REQUEST['page'])))  { 
+ $page = 1; 
+ } else{
+ $page = $_REQUEST['page'];
+}
+ 
+ $last = ceil($rows/10); 
+ if ($page < 1)  { 
+ $page = 1; 
+ }elseif ($page > $last)  { 
+ $page = $last; 
+ } 
+ $max = 'limit ' .($page - 1) * 10 .', 10';
+//echo $max;
+   // Get all the data you need. Kept simple in this example
+      $sql = "SELECT n.nid FROM {node} n, {node_revisions} nr, {content_type_device} td WHERE (n.title LIKE '%%%s%%' OR nr.body LIKE '%%%s%%' OR nr.title LIKE '%%%s%%' OR td.field_advertised_markets_value LIKE '%%%s%%' OR td.field_commercial_availability_value LIKE '%%%s%%' OR td.field_electrical_interface_value LIKE '%%%s%%' OR td.field_dimensions_value  LIKE '%%%s%%' OR td.field_weight_value LIKE '%%%s%%' OR td.field_operational_temperature_ra_value LIKE '%%%s%%' OR td.field_control_commands_value LIKE '%%%s%%' OR td.field_application_processor_value LIKE '%%%s%%' OR td.field_ss_environment_value LIKE '%%%s%%' OR td.field_voice_support_value LIKE '%%%s%%' OR td.field_sms_support_value LIKE '%%%s%%' OR td.field_gps_capabilities_value LIKE '%%%s%%' OR td.field_i2c_value LIKE '%%%s%%' OR td.field_spi_value LIKE '%%%s%%' OR td.field_usb_value LIKE '%%%s%%' OR td.field_uart_ports_value LIKE '%%%s%%' OR td.field_max_gpios_value LIKE '%%%s%%' OR td.field_adc_value LIKE '%%%s%%' OR td.field_pwm_value LIKE '%%%s%%' OR td.field_interrupt_pins_value LIKE '%%%s%%' OR td.field_sim_ruim_interface_value LIKE '%%%s%%' OR td.field_sim_ruim_embedded_slots_value LIKE '%%%s%%' OR td.field_security_features_value LIKE '%%%s%%' OR td.field_fota_support_value  LIKE '%%%s%%' OR td.field_remote_management_value LIKE '%%%s%%' OR td.field_standard_certifications_value LIKE '%%%s%%' OR td.field_website_url LIKE '%%%s%%' OR td.field_contact_email_value LIKE '%%%s%%' OR td.field_chipset_model_value LIKE '%%%s%%' OR td.field_frequncy_bands_value LIKE '%%%s%%' OR td.field_gobi_api_value LIKE '%%%s%%') AND n.nid = nr.nid AND n.type='device' group by n.nid ";
+
+      //$result = db_query($sql, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys);
+	  
+	  $result = pager_query(db_rewrite_sql($sql), 10, 0, $sql_num, NULL, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys, $keys);
+	  
+      $find = array();
+
+      // Runs through all database results to build the search results
+      while($nid = db_result($result)) {
+	  
+        $node = node_load($nid);
+		/*****************************/
+  	    $sql_company=db_query("select field_company_value from {node} n, {content_field_company} c where n.nid='$node->nid' AND n.nid=c.nid");
+		$option_company1=array();
+		while($row_company=db_fetch_array($sql_company)){
+			$option_company1[]=$row_company['field_company_value'];	
+		}
+	   	$sql_modem=db_query("select field_modem_technology_value from {content_field_modem_technology} m where m.nid='$node->nid'");
+		$option_modem=array();
+		while($row_modem=db_fetch_array($sql_modem)){
+				$option_modem[]=$row_modem['field_modem_technology_value'];	
+			}
+		$sql_operator=db_query("select field_operator_certifications_value from {content_field_operator_certifications} o where o.nid='$node->nid'");
+		$option_operator=array();
+		while($row_operator=db_fetch_array($sql_operator)){
+			$option_operator[]=$row_operator['field_operator_certifications_value'];	
+		}
+		/*****************************/
+		$node_con="<b>Company: </b>".substr(rtrim(implode(",",$option_company1),","),0,23)."..." ."<b>Modem:</b> " .substr(trim(implode(",",$option_modem),","),0,23)."..."." <b>Operator:</b>    ".substr(rtrim(implode(",",$option_operator),","),0,23)."...";
+		
+        $link = '/';
+        switch($node->type) {
+          case 'device':
+            $link .= 'node/' . $node->nid; // example link
+            $find[] = array('title' => $node->title, 'link' => $link, 'snippet' => search_excerpt($keys, $node_con.$node->teaser));
+            break;
+          case 'anothernodetype':
+            $link .= 'anotherpath/' . $node->nid;
+            $find[] = array('title' => $node->title, 'link' => $link, 'snippet' => search_excerpt($keys,$node->teaser));
+            break;
+        }
+      }
+     
+      // Returns the results for display
+      return $find;
+  }
+}

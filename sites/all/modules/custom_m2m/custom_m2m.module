@@ -1,0 +1,21 @@
+<?php
+// $Id: custom_m2m.module,v 1.236.2.3 2011/04/14 10:09:19 Tanzeel Exp $
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function custom_m2m_form_alter(&$form, $form_state, $form_id) {
+  if($form_id == 'device_node_form'){
+    global $user;
+    if($user->uid){
+      $query = db_query("SELECT cc.field_company_value FROM {node} n
+                                          LEFT JOIN {content_field_company} cc ON n.nid = cc.nid
+                                          WHERE uid = %d AND type = '%s'", $user->uid, 'profile');
+      while($res = db_fetch_object($query)){
+          $options .= $res->field_company_value.'
+            ';
+      }
+      $form['#field_info']['field_company']['allowed_values'] = $options;
+    }
+  }
+}

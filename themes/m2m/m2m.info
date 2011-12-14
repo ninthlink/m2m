@@ -1,0 +1,18 @@
+; $Id: m2m.info,v 1.5 2007/07/01 23:27:32 goba Exp $
+name = M2M
+description = Tableless, recolorable, multi-column, fluid width theme (default).
+version = VERSION
+core = 6.x
+engine = phptemplate
+stylesheets[all][] = style.css
+scripts[] = js/jquery-1.4.4.js
+scripts[] = js/jquery.ui.core.js
+scripts[] = js/jquery.ui.widget.js
+scripts[] = js/jquery.ui.position.js
+scripts[] = js/jquery.ui.selectmenu.js
+
+; Information added by drupal.org packaging script on 2010-12-15
+version = "6.20"
+project = "drupal"
+datestamp = "1292447788"
+

@@ -1,0 +1,23 @@
+<?php
+function node_publish_menu() {
+  $items['node/%/publish'] = array(
+    'title' => 'Node published',
+    'page callback' => 'node_publish_publish',
+    'page arguments' => array(1),
+    'access arguments' => array('administer nodes'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function node_publish_publish($nid) {
+  if (is_numeric($nid)) {
+    db_query("UPDATE {node} SET status = 1 WHERE nid = %d", $nid);
+  }
+  if (isset($_REQUEST['destination'])) {
+    drupal_goto($_REQUEST['destination']);
+  }
+  else {
+    drupal_goto('node/'. $nid);
+  }
+}

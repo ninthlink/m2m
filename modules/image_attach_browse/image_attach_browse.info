@@ -1,0 +1,13 @@
+; $Id: image_attach_browse.info,v 1.1 2009/02/03 17:19:15 ambiguator Exp $
+name = Image Attach Browse
+description = Extends Image Attach with a paged-ajaxy image thumbnail browser
+package = Image
+dependencies[] = image
+dependencies[] = image_attach
+core = 6.x
+; Information added by drupal.org packaging script on 2010-03-05
+version = "6.x-1.0-beta3"
+core = "6.x"
+project = "image_attach_browse"
+datestamp = "1267815306"
+
