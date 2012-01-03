@@ -119,10 +119,9 @@ if((arg(0)=='user' && arg(1)==$user->uid && $user->uid!=0) || (strpos($_SERVER['
           <?php print $help; ?>         
 	   <?php print $content;?>       
        </div>
-       <?php }?>       
-       <?php if ($is_front):?>            
+       <?php }elseif ($is_front){?>            
            <?php print $content;?>           
-       <?php endif;?>
+       <?php }?>
   </div>
 </div>
 <div class="footerMain">
