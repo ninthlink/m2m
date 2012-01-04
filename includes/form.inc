@@ -1,5 +1,4 @@
 <?php
-// $Id: form.inc,v 1.265.2.33 2010/05/19 15:02:32 goba Exp $
 
 /**
  * @defgroup forms Form builder functions
@@ -62,7 +61,9 @@
  *   Any additional arguments are passed on to the functions called by
  *   drupal_get_form(), including the unique form constructor function.
  *   For example, the node_edit form requires that a node object be passed
- *   in here when it is called.
+ *   in here when it is called. These are available to implementations of
+ *   hook_form_alter() and hook_form_FORM_ID_alter() as the array
+ *   $form['#parameters'].
  * @return
  *   The rendered form.
  */
@@ -248,9 +249,14 @@ function form_get_cache($form_build_id, &$form_state) {
 }
 
 /**
- * Retrieves a form using a form_id, populates it with $form_state['values'],
- * processes it, and returns any validation errors encountered. This
- * function is the programmatic counterpart to drupal_get_form().
+ * Retrieves, populates, and processes a form.
+ *
+ * This function allows you to supply values for form elements and submit a
+ * form for processing. Compare to drupal_get_form(), which also builds and
+ * processes a form, but does not allow you to supply values.
+ *
+ * There is no return value, but you can check to see if there are errors by
+ * calling form_get_errors().
  *
  * @param $form_id
  *   The unique string identifying the desired form. If a function
@@ -270,7 +276,6 @@ function form_get_cache($form_build_id, &$form_state) {
  *   For example, the node_edit form requires that a node object be passed
  *   in here when it is called.
  * For example:
- *
  * @code
  * // register a new user
  * $form_state = array();
@@ -2044,7 +2049,6 @@ function theme_textfield($element) {
   if (isset($element['#field_prefix'])) {
     $output .= '<span class="field-prefix">'. $element['#field_prefix'] .'</span> ';
   }
-if($element['#name'] == "search_theme_form" && $element['#value']=='') $element['#value'] = "Search";
 
   $output .= '<input type="text"'. $maxlength .' name="'. $element['#name'] .'" id="'. $element['#id'] .'"'. $size .' value="'. check_plain($element['#value']) .'"'. drupal_attributes($element['#attributes']) .' />';
 
@@ -2069,7 +2073,6 @@ if($element['#name'] == "search_theme_form" && $element['#value']=='') $element[
 function theme_form($element) {
   // Anonymous div to satisfy XHTML compliance.
   $action = $element['#action'] ? 'action="'. check_url($element['#action']) .'" ' : '';
-  if($element['#id'] == "search-theme-form" or $element['#id']=="search-form") {$action='action="/search/device_list/"';}
   return '<form '. $action .' accept-charset="UTF-8" method="'. $element['#method'] .'" id="'. $element['#id'] .'"'. drupal_attributes($element['#attributes']) .">\n<div>". $element['#children'] ."\n</div></form>\n";
 }
 

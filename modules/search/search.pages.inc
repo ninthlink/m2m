@@ -1,5 +1,4 @@
 <?php
-// $Id: search.pages.inc,v 1.4 2007/12/06 09:51:01 goba Exp $
 
 /**
  * @file
@@ -18,7 +17,7 @@ function search_view($type = 'node') {
       // Note: search/node can not be a default tab because it would take on the
       // path of its parent (search). It would prevent remembering keywords when
       // switching tabs. This is why we drupal_goto to it from the parent instead.
-      drupal_goto('search/device_list');
+      drupal_goto('search/node');
     }
 
     $keys = search_get_keys();
@@ -26,7 +25,7 @@ function search_view($type = 'node') {
     $results = '';
     if (trim($keys)) {
       // Log the search keys:
-      watchdog('search', '%keys (@type).', array('%keys' => $keys, '@type' => module_invoke($type, 'search', 'name')), WATCHDOG_NOTICE, l(t('results'), 'search/device_list/'. $keys));
+      watchdog('search', '%keys (@type).', array('%keys' => $keys, '@type' => module_invoke($type, 'search', 'name')), WATCHDOG_NOTICE, l(t('results'), 'search/'. $type .'/'. $keys));
 
       // Collect the search results:
       $results = search_data($keys, $type);
@@ -42,7 +41,7 @@ function search_view($type = 'node') {
     // Construct the search form.
     $output = drupal_get_form('search_form', NULL, $keys, $type);
     $output .= $results;
-//echo $output;
+
     return $output;
   }
 
@@ -125,7 +124,6 @@ function search_form_submit($form, &$form_state) {
   }
 
   $type = $form_state['values']['module'] ? $form_state['values']['module'] : 'node';
-//  $form_state['redirect'] = 'search/'. $type .'/'. $keys;
-  $form_state['redirect'] = 'search/device_list/'. $keys;
+  $form_state['redirect'] = 'search/'. $type .'/'. $keys;
   return;
 }

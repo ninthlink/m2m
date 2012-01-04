@@ -1,5 +1,4 @@
 <?php
-// $Id: node.pages.inc,v 1.28.2.4 2009/04/27 11:35:01 goba Exp $
 
 /**
  * @file
@@ -504,7 +503,7 @@ function node_delete_confirm(&$form_state, $node) {
   return confirm_form($form,
     t('Are you sure you want to delete %title?', array('%title' => $node->title)),
     isset($_GET['destination']) ? $_GET['destination'] : 'node/'. $node->nid,
-    t('This action cannot be undone. No formal notification will be sent to module company, please follow-up directly.'),
+    t('This action cannot be undone.'),
     t('Delete'),
     t('Cancel')
   );
@@ -591,7 +590,7 @@ function node_revision_revert_confirm_submit($form, &$form_state) {
 
 function node_revision_delete_confirm($form_state, $node_revision) {
   $form['#node_revision'] = $node_revision;
-  return confirm_form($form, t('Are you sure you want to delete the revision from %revision-date?', array('%revision-date' => format_date($node_revision->revision_timestamp))), 'node/'. $node_revision->nid .'/revisions', t('This action cannot be undone. No formal notification will be sent to module company, please follow-up directly.'), t('Delete'), t('Cancel'));
+  return confirm_form($form, t('Are you sure you want to delete the revision from %revision-date?', array('%revision-date' => format_date($node_revision->revision_timestamp))), 'node/'. $node_revision->nid .'/revisions', t('This action cannot be undone.'), t('Delete'), t('Cancel'));
 }
 
 function node_revision_delete_confirm_submit($form, &$form_state) {
