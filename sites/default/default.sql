@@ -67,8 +67,8 @@ INSERT INTO `drpl_blocks` VALUES ('31','views','Search-block_1','m2m','0','-4','
 INSERT INTO `drpl_blocks` VALUES ('32','views','-exp-Search-block_1','m2m','1','-10','content','0','0','1','<front>','','1');
 INSERT INTO `drpl_blocks` VALUES ('33','views','router_search-block_1','m2m','0','-2','','0','0','0','','','-1');
 INSERT INTO `drpl_blocks` VALUES ('34','views','-exp-router_search-block_1','m2m','1','-9','content','0','0','1','routers','','1');
-INSERT INTO `drpl_blocks` VALUES ('35','views','featured_devices-block','m2m','1','-8','content','0','0','1','<front>\r\ndevicesearch','Featured','-1');
-INSERT INTO `drpl_blocks` VALUES ('37','views','featured_routers-block','m2m','1','-7','content','0','0','1','routers\r\nroutersearch','Featured','-1');
+INSERT INTO `drpl_blocks` VALUES ('35','views','featured_devices-block','m2m','1','-8','content','0','0','1','<front>\r\ndevicesearch\r\nfeatured','Featured','-1');
+INSERT INTO `drpl_blocks` VALUES ('37','views','featured_routers-block','m2m','1','-7','content','0','0','1','routers\r\nroutersearch\r\nfeatured','Featured','-1');
 INSERT INTO `drpl_blocks` VALUES ('38','menu','menu-resources','m2m','1','-6','content','0','0','1','resources\r\nresources/*','<none>','-1');
 INSERT INTO `drpl_blocks` VALUES ('39','block','2','garland','0','0','','0','0','1','<front>','','-1');
 INSERT INTO `drpl_blocks` VALUES ('40','block','2','m2m','1','-5','content','0','0','1','<front>','','-1');
@@ -1542,7 +1542,7 @@ INSERT INTO `drpl_history` VALUES ('1','8','1297386068');
 INSERT INTO `drpl_history` VALUES ('1','9','1297386829');
 INSERT INTO `drpl_history` VALUES ('1','10','1297387161');
 INSERT INTO `drpl_history` VALUES ('1','11','1297390648');
-INSERT INTO `drpl_history` VALUES ('1','12','1325635484');
+INSERT INTO `drpl_history` VALUES ('1','12','1325638145');
 INSERT INTO `drpl_history` VALUES ('1','13','1297392198');
 INSERT INTO `drpl_history` VALUES ('1','14','1302239031');
 INSERT INTO `drpl_history` VALUES ('1','15','1298914194');
@@ -1856,6 +1856,7 @@ INSERT INTO `drpl_history` VALUES ('1','182','1323735570');
 INSERT INTO `drpl_history` VALUES ('1','183','1323735625');
 INSERT INTO `drpl_history` VALUES ('1','184','1323735792');
 INSERT INTO `drpl_history` VALUES ('1','185','1323735888');
+INSERT INTO `drpl_history` VALUES ('1','186','1325638154');
 DROP TABLE IF EXISTS `drpl_image`;
 CREATE TABLE `drpl_image` (   `nid` int(10) unsigned NOT NULL DEFAULT '0',   `fid` int(10) unsigned NOT NULL DEFAULT '0',   `image_size` varchar(32) NOT NULL DEFAULT '',   PRIMARY KEY (`nid`,`image_size`),   KEY `fid` (`fid`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `drpl_imagecache_action`;
@@ -2812,7 +2813,7 @@ INSERT INTO `drpl_menu_router` VALUES ('admin/content/node-type/router/fields/fi
 INSERT INTO `drpl_menu_router` VALUES ('admin/content/nodequeue/%/add/%/%','a:3:{i:3;s:14:\"nodequeue_load\";i:5;s:13:\"subqueue_load\";i:6;s:9:\"node_load\";}','','nodequeue_node_and_queue_access','a:3:{i:0;i:6;i:1;i:3;i:2;i:5;}','nodequeue_admin_add_node','a:3:{i:0;i:3;i:1;i:5;i:2;i:6;}','116','7','','admin/content/nodequeue/%/add/%/%','','t','','4','','','','0','sites/all/modules/nodequeue/includes/nodequeue.admin.inc');
 INSERT INTO `drpl_menu_router` VALUES ('admin/content/nodequeue/%/remove-node/%/%','a:3:{i:3;s:14:\"nodequeue_load\";i:5;s:13:\"subqueue_load\";i:6;s:9:\"node_load\";}','','nodequeue_node_and_queue_access','a:3:{i:0;i:6;i:1;i:3;i:2;i:5;}','nodequeue_admin_remove_node','a:3:{i:0;i:3;i:1;i:5;i:2;i:6;}','116','7','','admin/content/nodequeue/%/remove-node/%/%','','t','','4','','','','0','sites/all/modules/nodequeue/includes/nodequeue.admin.inc');
 DROP TABLE IF EXISTS `drpl_node`;
-CREATE TABLE `drpl_node` (   `nid` int(10) unsigned NOT NULL AUTO_INCREMENT,   `vid` int(10) unsigned NOT NULL DEFAULT '0',   `type` varchar(32) NOT NULL DEFAULT '',   `language` varchar(12) NOT NULL DEFAULT '',   `title` varchar(255) NOT NULL DEFAULT '',   `uid` int(11) NOT NULL DEFAULT '0',   `status` int(11) NOT NULL DEFAULT '1',   `created` int(11) NOT NULL DEFAULT '0',   `changed` int(11) NOT NULL DEFAULT '0',   `comment` int(11) NOT NULL DEFAULT '0',   `promote` int(11) NOT NULL DEFAULT '0',   `moderate` int(11) NOT NULL DEFAULT '0',   `sticky` int(11) NOT NULL DEFAULT '0',   `tnid` int(10) unsigned NOT NULL DEFAULT '0',   `translate` int(11) NOT NULL DEFAULT '0',   `mailstatus` int(8) NOT NULL DEFAULT '0',   PRIMARY KEY (`nid`),   UNIQUE KEY `vid` (`vid`),   KEY `node_changed` (`changed`),   KEY `node_created` (`created`),   KEY `node_moderate` (`moderate`),   KEY `node_promote_status` (`promote`,`status`),   KEY `node_status_type` (`status`,`type`,`nid`),   KEY `node_title_type` (`title`,`type`(4)),   KEY `node_type` (`type`(4)),   KEY `uid` (`uid`),   KEY `tnid` (`tnid`),   KEY `translate` (`translate`) ) ENGINE=MyISAM AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 AUTO_INCREMENT=186;
+CREATE TABLE `drpl_node` (   `nid` int(10) unsigned NOT NULL AUTO_INCREMENT,   `vid` int(10) unsigned NOT NULL DEFAULT '0',   `type` varchar(32) NOT NULL DEFAULT '',   `language` varchar(12) NOT NULL DEFAULT '',   `title` varchar(255) NOT NULL DEFAULT '',   `uid` int(11) NOT NULL DEFAULT '0',   `status` int(11) NOT NULL DEFAULT '1',   `created` int(11) NOT NULL DEFAULT '0',   `changed` int(11) NOT NULL DEFAULT '0',   `comment` int(11) NOT NULL DEFAULT '0',   `promote` int(11) NOT NULL DEFAULT '0',   `moderate` int(11) NOT NULL DEFAULT '0',   `sticky` int(11) NOT NULL DEFAULT '0',   `tnid` int(10) unsigned NOT NULL DEFAULT '0',   `translate` int(11) NOT NULL DEFAULT '0',   `mailstatus` int(8) NOT NULL DEFAULT '0',   PRIMARY KEY (`nid`),   UNIQUE KEY `vid` (`vid`),   KEY `node_changed` (`changed`),   KEY `node_created` (`created`),   KEY `node_moderate` (`moderate`),   KEY `node_promote_status` (`promote`,`status`),   KEY `node_status_type` (`status`,`type`,`nid`),   KEY `node_title_type` (`title`,`type`(4)),   KEY `node_type` (`type`(4)),   KEY `uid` (`uid`),   KEY `tnid` (`tnid`),   KEY `translate` (`translate`) ) ENGINE=MyISAM AUTO_INCREMENT=187 DEFAULT CHARSET=utf8 AUTO_INCREMENT=187;
 INSERT INTO `drpl_node` VALUES ('111','111','device','','AirPrime MC8355','14','1','1302211040','1309999411','0','0','0','0','0','0','1');
 INSERT INTO `drpl_node` VALUES ('110','110','device','','AirPrime MC8305','14','1','1302210522','1309999376','0','0','0','0','0','0','1');
 INSERT INTO `drpl_node` VALUES ('37','37','device','','Expedite E120','8','1','1299945431','1309996907','0','0','0','0','0','0','1');
@@ -2943,6 +2944,7 @@ INSERT INTO `drpl_node` VALUES ('182','182','page','','Module vs Wireless Gatewa
 INSERT INTO `drpl_node` VALUES ('183','183','page','','Recent News','1','1','1323735625','1323735821','0','1','0','0','0','0','0');
 INSERT INTO `drpl_node` VALUES ('184','184','page','','Videos','1','1','1323735792','1323735792','0','1','0','0','0','0','0');
 INSERT INTO `drpl_node` VALUES ('185','185','page','','White Papers','1','1','1323735887','1323735959','0','1','0','0','0','0','0');
+INSERT INTO `drpl_node` VALUES ('186','186','page','','Featured','1','1','1325638107','1325638107','0','1','0','0','0','0','0');
 DROP TABLE IF EXISTS `drpl_node_access`;
 CREATE TABLE `drpl_node_access` (   `nid` int(10) unsigned NOT NULL DEFAULT '0',   `gid` int(10) unsigned NOT NULL DEFAULT '0',   `realm` varchar(255) NOT NULL DEFAULT '',   `grant_view` tinyint(3) unsigned NOT NULL DEFAULT '0',   `grant_update` tinyint(3) unsigned NOT NULL DEFAULT '0',   `grant_delete` tinyint(3) unsigned NOT NULL DEFAULT '0',   PRIMARY KEY (`nid`,`gid`,`realm`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 INSERT INTO `drpl_node_access` VALUES ('0','0','all','1','0','0');
@@ -2962,7 +2964,7 @@ INSERT INTO `drpl_node_comment_statistics` VALUES ('11','1297387552',null,'1','0
 DROP TABLE IF EXISTS `drpl_node_counter`;
 CREATE TABLE `drpl_node_counter` (   `nid` int(11) NOT NULL DEFAULT '0',   `totalcount` bigint(20) unsigned NOT NULL DEFAULT '0',   `daycount` mediumint(8) unsigned NOT NULL DEFAULT '0',   `timestamp` int(10) unsigned NOT NULL DEFAULT '0',   PRIMARY KEY (`nid`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `drpl_node_revisions`;
-CREATE TABLE `drpl_node_revisions` (   `nid` int(10) unsigned NOT NULL DEFAULT '0',   `vid` int(10) unsigned NOT NULL AUTO_INCREMENT,   `uid` int(11) NOT NULL DEFAULT '0',   `title` varchar(255) NOT NULL DEFAULT '',   `body` longtext NOT NULL,   `teaser` longtext NOT NULL,   `log` longtext NOT NULL,   `timestamp` int(11) NOT NULL DEFAULT '0',   `format` int(11) NOT NULL DEFAULT '0',   PRIMARY KEY (`vid`),   KEY `nid` (`nid`),   KEY `uid` (`uid`) ) ENGINE=MyISAM AUTO_INCREMENT=186 DEFAULT CHARSET=utf8 AUTO_INCREMENT=186;
+CREATE TABLE `drpl_node_revisions` (   `nid` int(10) unsigned NOT NULL DEFAULT '0',   `vid` int(10) unsigned NOT NULL AUTO_INCREMENT,   `uid` int(11) NOT NULL DEFAULT '0',   `title` varchar(255) NOT NULL DEFAULT '',   `body` longtext NOT NULL,   `teaser` longtext NOT NULL,   `log` longtext NOT NULL,   `timestamp` int(11) NOT NULL DEFAULT '0',   `format` int(11) NOT NULL DEFAULT '0',   PRIMARY KEY (`vid`),   KEY `nid` (`nid`),   KEY `uid` (`uid`) ) ENGINE=MyISAM AUTO_INCREMENT=187 DEFAULT CHARSET=utf8 AUTO_INCREMENT=187;
 INSERT INTO `drpl_node_revisions` VALUES ('111','111','14','AirPrime MC8355','','','','1309999411','0');
 INSERT INTO `drpl_node_revisions` VALUES ('110','110','14','AirPrime MC8305','','','','1309999376','0');
 INSERT INTO `drpl_node_revisions` VALUES ('37','37','8','Expedite E120','','','','1309996907','0');
@@ -3093,6 +3095,7 @@ INSERT INTO `drpl_node_revisions` VALUES ('182','182','1','Module vs Wireless Ga
 INSERT INTO `drpl_node_revisions` VALUES ('183','183','1','Recent News','Recent News body','Recent News body','','1323735821','2');
 INSERT INTO `drpl_node_revisions` VALUES ('184','184','1','Videos','Videos body','Videos body','','1323735792','2');
 INSERT INTO `drpl_node_revisions` VALUES ('185','185','1','White Papers','White Papers body','White Papers body','','1323735959','2');
+INSERT INTO `drpl_node_revisions` VALUES ('186','186','1','Featured','','','','1325638107','1');
 DROP TABLE IF EXISTS `drpl_node_type`;
 CREATE TABLE `drpl_node_type` (   `type` varchar(32) NOT NULL,   `name` varchar(255) NOT NULL DEFAULT '',   `module` varchar(255) NOT NULL,   `description` mediumtext NOT NULL,   `help` mediumtext NOT NULL,   `has_title` tinyint(3) unsigned NOT NULL,   `title_label` varchar(255) NOT NULL DEFAULT '',   `has_body` tinyint(3) unsigned NOT NULL,   `body_label` varchar(255) NOT NULL DEFAULT '',   `min_word_count` smallint(5) unsigned NOT NULL,   `custom` tinyint(4) NOT NULL DEFAULT '0',   `modified` tinyint(4) NOT NULL DEFAULT '0',   `locked` tinyint(4) NOT NULL DEFAULT '0',   `orig_type` varchar(255) NOT NULL DEFAULT '',   PRIMARY KEY (`type`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 INSERT INTO `drpl_node_type` VALUES ('device','Device','node','A <em>page</em>, similar in form to a <em>story</em>, is a simple method for creating and displaying information that rarely changes, such as an \"About us\" section of a website. By default, a <em>page</em> entry does not allow visitor comments and is not featured on the sites initial home page.','','1','Product Name','1','Description if Featured','0','1','1','0','page');
@@ -3276,7 +3279,7 @@ CREATE TABLE `drpl_upload` (   `fid` int(10) unsigned NOT NULL DEFAULT '0',   `n
 DROP TABLE IF EXISTS `drpl_upload_images`;
 CREATE TABLE `drpl_upload_images` (   `nid` int(10) unsigned NOT NULL DEFAULT '0',   `fid` int(10) unsigned NOT NULL DEFAULT '0',   `oid` int(10) unsigned NOT NULL DEFAULT '0',   PRIMARY KEY (`nid`),   KEY `oid` (`oid`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `drpl_url_alias`;
-CREATE TABLE `drpl_url_alias` (   `pid` int(10) unsigned NOT NULL AUTO_INCREMENT,   `src` varchar(128) NOT NULL DEFAULT '',   `dst` varchar(128) NOT NULL DEFAULT '',   `language` varchar(12) NOT NULL DEFAULT '',   PRIMARY KEY (`pid`),   UNIQUE KEY `dst_language_pid` (`dst`,`language`,`pid`),   KEY `src_language_pid` (`src`,`language`,`pid`) ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 AUTO_INCREMENT=8;
+CREATE TABLE `drpl_url_alias` (   `pid` int(10) unsigned NOT NULL AUTO_INCREMENT,   `src` varchar(128) NOT NULL DEFAULT '',   `dst` varchar(128) NOT NULL DEFAULT '',   `language` varchar(12) NOT NULL DEFAULT '',   PRIMARY KEY (`pid`),   UNIQUE KEY `dst_language_pid` (`dst`,`language`,`pid`),   KEY `src_language_pid` (`src`,`language`,`pid`) ) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 AUTO_INCREMENT=9;
 INSERT INTO `drpl_url_alias` VALUES ('1','node/180','routers','');
 INSERT INTO `drpl_url_alias` VALUES ('2','node/12','home','');
 INSERT INTO `drpl_url_alias` VALUES ('3','node/181','resources','');
@@ -3284,10 +3287,11 @@ INSERT INTO `drpl_url_alias` VALUES ('4','node/182','resources/module-vs-wireles
 INSERT INTO `drpl_url_alias` VALUES ('5','node/183','resources/recent-news','');
 INSERT INTO `drpl_url_alias` VALUES ('6','node/184','resources/videos','');
 INSERT INTO `drpl_url_alias` VALUES ('7','node/185','resources/white-papers','');
+INSERT INTO `drpl_url_alias` VALUES ('8','node/186','featured','');
 DROP TABLE IF EXISTS `drpl_users`;
 CREATE TABLE `drpl_users` (   `uid` int(10) unsigned NOT NULL AUTO_INCREMENT,   `name` varchar(60) NOT NULL DEFAULT '',   `pass` varchar(32) NOT NULL DEFAULT '',   `mail` varchar(64) DEFAULT '',   `mode` tinyint(4) NOT NULL DEFAULT '0',   `sort` tinyint(4) DEFAULT '0',   `threshold` tinyint(4) DEFAULT '0',   `theme` varchar(255) NOT NULL DEFAULT '',   `signature` varchar(255) NOT NULL DEFAULT '',   `signature_format` smallint(6) NOT NULL DEFAULT '0',   `created` int(11) NOT NULL DEFAULT '0',   `access` int(11) NOT NULL DEFAULT '0',   `login` int(11) NOT NULL DEFAULT '0',   `status` tinyint(4) NOT NULL DEFAULT '0',   `timezone` varchar(8) DEFAULT NULL,   `language` varchar(12) NOT NULL DEFAULT '',   `picture` varchar(255) NOT NULL DEFAULT '',   `init` varchar(64) DEFAULT '',   `data` longtext,   PRIMARY KEY (`uid`),   UNIQUE KEY `name` (`name`),   KEY `access` (`access`),   KEY `created` (`created`),   KEY `mail` (`mail`) ) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 AUTO_INCREMENT=35;
 INSERT INTO `drpl_users` VALUES ('0','','','','0','0','0','','','0','0','0','0','0',null,'','','',null);
-INSERT INTO `drpl_users` VALUES ('1','admin','cbf420ec166af3ac38145a7f301a213f','m2msearch@qualcomm.com','0','0','0','','','0','1297318714','1325637438','1325620404','1','19800','','','admin@domain.mail','a:1:{s:13:\"form_build_id\";s:37:\"form-3c37af9677da925968bd6e4be8ca60d3\";}');
+INSERT INTO `drpl_users` VALUES ('1','admin','cbf420ec166af3ac38145a7f301a213f','m2msearch@qualcomm.com','0','0','0','','','0','1297318714','1325638155','1325620404','1','19800','','','admin@domain.mail','a:1:{s:13:\"form_build_id\";s:37:\"form-3c37af9677da925968bd6e4be8ca60d3\";}');
 INSERT INTO `drpl_users` VALUES ('3','maleika','4a53d506fe2f3c71a0a63fd7a2ed669b','maleika@graysuit.com','0','0','0','','','0','1299529808','1305649241','1305647544','1','-28800','','','maleika@graysuit.com','a:1:{s:13:\"form_build_id\";s:37:\"form-98ae846a731dccc28a0064f1d8be1fdf\";}');
 INSERT INTO `drpl_users` VALUES ('6','novateltest','e26ca38d210da12d18cd78002762b43a','dgabriel@qualcomm.com','0','0','0','','','0','1299631777','1299631777','1299631875','1','-28800','','','dgabriel@qualcomm.com','a:1:{s:13:\"form_build_id\";s:37:\"form-ac86ff4f2cbb6df9b103639edc33d9cb\";}');
 INSERT INTO `drpl_users` VALUES ('7','dgabriel','8fcc3b97d84f44488238a447a773d659','derek.gabriel@gmail.com','0','0','0','','','0','1299637788','1299637788','0','1','-28800','','','derek.gabriel@gmail.com','a:1:{s:13:\"form_build_id\";s:37:\"form-386a3a17bf7f9ba5ec553ef25e138c42\";}');
@@ -3523,7 +3527,7 @@ CREATE TABLE `drpl_vocabulary` (   `vid` int(10) unsigned NOT NULL AUTO_INCREMEN
 DROP TABLE IF EXISTS `drpl_vocabulary_node_types`;
 CREATE TABLE `drpl_vocabulary_node_types` (   `vid` int(10) unsigned NOT NULL DEFAULT '0',   `type` varchar(32) NOT NULL DEFAULT '',   PRIMARY KEY (`type`,`vid`),   KEY `vid` (`vid`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 DROP TABLE IF EXISTS `drpl_watchdog`;
-CREATE TABLE `drpl_watchdog` (   `wid` int(11) NOT NULL AUTO_INCREMENT,   `uid` int(11) NOT NULL DEFAULT '0',   `type` varchar(16) NOT NULL DEFAULT '',   `message` longtext NOT NULL,   `variables` longtext NOT NULL,   `severity` tinyint(3) unsigned NOT NULL DEFAULT '0',   `link` varchar(255) NOT NULL DEFAULT '',   `location` text NOT NULL,   `referer` text,   `hostname` varchar(128) NOT NULL DEFAULT '',   `timestamp` int(11) NOT NULL DEFAULT '0',   PRIMARY KEY (`wid`),   KEY `type` (`type`) ) ENGINE=MyISAM AUTO_INCREMENT=5545 DEFAULT CHARSET=utf8 AUTO_INCREMENT=5545;
+CREATE TABLE `drpl_watchdog` (   `wid` int(11) NOT NULL AUTO_INCREMENT,   `uid` int(11) NOT NULL DEFAULT '0',   `type` varchar(16) NOT NULL DEFAULT '',   `message` longtext NOT NULL,   `variables` longtext NOT NULL,   `severity` tinyint(3) unsigned NOT NULL DEFAULT '0',   `link` varchar(255) NOT NULL DEFAULT '',   `location` text NOT NULL,   `referer` text,   `hostname` varchar(128) NOT NULL DEFAULT '',   `timestamp` int(11) NOT NULL DEFAULT '0',   PRIMARY KEY (`wid`),   KEY `type` (`type`) ) ENGINE=MyISAM AUTO_INCREMENT=5547 DEFAULT CHARSET=utf8 AUTO_INCREMENT=5547;
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
