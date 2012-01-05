@@ -4,12 +4,12 @@
 # Page Password Protect 2.13
 ###############################################################
 # Visit http://www.zubrag.com/scripts/ for updates
-############################################################### 
+###############################################################
 #
 # Usage:
 # Set usernames / passwords below between SETTINGS START and SETTINGS END.
 # Open it in browser with "help" parameter to get the code
-# to add to all files being protected. 
+# to add to all files being protected.
 #    Example: password_protect.php?help
 # Include protection string which it gave you into every file that needs to be protected
 #
@@ -114,7 +114,7 @@ function showLoginPasswordProtect($error_msg) {
     <input type="password" name="access_password" /><p></p><input type="submit" name="Submit" value="Submit" />
   </form>
   <br />
- 
+
   </div>
 </body>
 </html>
@@ -131,14 +131,14 @@ if (isset($_POST['access_password'])) {
   $login = isset($_POST['access_login']) ? $_POST['access_login'] : '';
   $pass = $_POST['access_password'];
   if (!USE_USERNAME && !in_array($pass, $LOGIN_INFORMATION)
-  || (USE_USERNAME && ( !array_key_exists($login, $LOGIN_INFORMATION) || $LOGIN_INFORMATION[$login] != $pass ) ) 
+  || (USE_USERNAME && ( !array_key_exists($login, $LOGIN_INFORMATION) || $LOGIN_INFORMATION[$login] != $pass ) )
   ) {
     showLoginPasswordProtect("Incorrect password.");
   }
   else {
     // set cookie if password was validated
     setcookie("verify", md5($login.'%'.$pass), $timeout, '/');
-    
+
     // Some programs (like Form1 Bilder) check $_POST array to see if parameters passed
     // So need to clear password protector variables
     unset($_POST['access_login']);

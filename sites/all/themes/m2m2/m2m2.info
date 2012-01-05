@@ -1,0 +1,22 @@
+name = M2M 2012
+description = New M2M theme for 2012
+
+screenshot = screenshot.png
+
+core   = 6.x
+engine = phptemplate
+
+; STYLESHEETS
+;-------------------------------------------------------------------------------
+stylesheets[all][] = css/html-elements.css
+stylesheets[all][] = css/styles.css
+stylesheets[print][] = css/print.css
+
+regions[header] = Header
+regions[left]  = First sidebar
+regions[right] = Second sidebar
+regions[content_top]    = Content top
+regions[content] = Content
+regions[content_home] = Content Home
+regions[content_bottom] = Content bottom
+regions[footer] = Footer
