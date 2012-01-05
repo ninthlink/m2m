@@ -32,6 +32,12 @@
 <div id="main_outer">
   <div id="main">
 
+        <?php if ($section_title): ?>
+        <div id="section_title">
+          <?php print $section_title ?>
+        </div><!-- END: section_title -->
+      <?php endif; ?>
+
       <?php if ($left): ?>
         <div id="sidebar_first" class="sidebar">
           <?php print $left ?>
@@ -40,6 +46,7 @@
       <?php endif; ?>
 
     <div id="main_content">
+
       <?php if ($content_top): ?>
         <div id="content_top">
           <?php print $content_top ?>
@@ -59,6 +66,7 @@
           <?php print $content ?>
           <div class="clear"></div>
       </div><!-- END: content -->
+
       <?php if ($content_bottom): ?>
         <div id="content_bottom">
           <?php print $content_bottom ?>
@@ -75,12 +83,14 @@
         </div><!-- END: sidebar -->
       <?php endif; ?>
 
-    <div id="footer">
-      <?php print $footer ?>
-      <div class="clear"></div>
-    </div>
     <div class="clear"></div>
     </div></div><!-- END: main -->
+      <?php if ($footer): ?>
+      <div id="footer">
+        <?php print $footer ?>
+        <div class="clear"></div>
+      </div>
+      <?php endif; ?>
   </div><!-- END: page layout -->
 </div><!-- END: bg -->
 
