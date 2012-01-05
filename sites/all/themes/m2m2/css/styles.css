@@ -28,7 +28,8 @@ body {
 }
 
 body.front h1,
-body.page-routers h1 {
+body.page-routers h1,
+body.page-featured h1 {
   display: none;
 }
 /* CSS DOCUMENT */
@@ -364,7 +365,6 @@ body.no-sidebars #main_content {
 /* Post Script */
 #content_bottom {
   clear: both;
-  padding: 20px;
 }
 div.views-admin-links,
 div.block-edit-link,
@@ -405,3 +405,199 @@ body.page-routers {}
   width: 350px;
   margin: 0 0 0 10px;
 }
+
+/* featured and exposed search */
+body.front #content,
+body.page-routers #content  {
+  margin: 0 0 20px;
+}
+body.front #content_bottom,
+body.page-routers #content_bottom  {
+  -webkit-box-shadow: 0px 0px 4px #999;
+  -moz-box-shadow: 0px 0px 4px #999;
+  box-shadow: 0px 0px 4px #999;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background: url(../images/bg_line.png) repeat-y 730px 0;
+}
+/* featured */
+#block-views-featured_devices-block,
+#block-views-featured_routers-block {
+  position: relative;
+  float: right;
+  width: 246px;
+}
+#block-views-featured_devices-block h2,
+#block-views-featured_routers-block h2 {
+  background: #000 url(../images/bg_subhead_black.png) repeat-x;
+  font-size: 18px;
+  font-weight: normal;
+  height: 56px;
+  line-height: 56px;
+  padding: 0 20px;
+  margin: 0;
+  color:#fff;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-radius: 0px 10px 0px 0px;
+  border-radius: 0px 10px 0px 0px;
+}
+#block-views-featured_devices-block .view,
+#block-views-featured_routers-block .view {}
+#block-views-featured_devices-block .view .views-slideshow-controls-top,
+#block-views-featured_routers-block .view .views-slideshow-controls-top {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+}
+#block-views-featured_devices-block .view a.views_slideshow_previous,
+#block-views-featured_routers-block .view a.views_slideshow_previous,
+#block-views-featured_devices-block .view a.views_slideshow_next,
+#block-views-featured_routers-block .view a.views_slideshow_next {
+  display: block;
+  width: 29px;
+  height: 29px;
+  text-indent: -9999px;
+  overflow: hidden;
+  background: url(../images/arrow_previous.png) no-repeat;
+  float: left;
+  margin: 0 2px;
+}
+#block-views-featured_devices-block .view .views_slideshow_pause,
+#block-views-featured_routers-block .view .views_slideshow_pause {
+  display: none;
+}
+#block-views-featured_devices-block .view a.views_slideshow_next,
+#block-views-featured_routers-block .view a.views_slideshow_next {
+  background: url(../images/arrow_next.png) no-repeat;
+}
+#block-views-featured_devices-block .view .views-row,
+#block-views-featured_routers-block .view .views-row  {
+  padding: 20px 30px 20px 20px;
+}
+#block-views-featured_devices-block .view .views-field-field-image-fid,
+#block-views-featured_routers-block .view .views-field-field-image-fid  {
+  margin: 0 0 10px;
+  text-align: center;
+}
+#block-views-featured_devices-block .view .views-field-title,
+#block-views-featured_devices-block .view .views-field-title a,
+#block-views-featured_routers-block .view .views-field-title,
+#block-views-featured_routers-block .view .views-field-title a  {
+  font-size: 16px;
+  margin: 0 0 10px;
+  color:#000;
+}
+#block-views-featured_devices-block .view .views-field-body,
+#block-views-featured_routers-block .view .views-field-body  {
+  font-size: 12px;
+  line-height: 14px;
+}
+#block-views-featured_devices-block .view .views-field-view-node,
+#block-views-featured_routers-block .view .views-field-view-node  {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+/* exposed */
+#block-views--exp-Search-block_1,
+#block-views--exp-router_search-block_1 {
+  position: relative;
+  float: left;
+  width: 730px;
+}
+.views-exposed-form {
+  padding: 20px 0 0 20px;
+}
+.views-exposed-form .views-exposed-widget {
+  width: 220px;
+  margin: 0 15px 10px 0;
+  padding: 0;
+}
+.views-exposed-form .views-exposed-widget label {
+  color: #6ea202;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.views-exposed-form .views-exposed-widget .form-select  {
+  width: 220px;
+  height: 60px;
+}
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 22px;
+}
+.views-exposed-form input.form-submit {
+  font-size: 15px;
+  font-weight: bold;
+  color:#fff;
+  text-transform: uppercase;
+  width: 220px;
+  height:58px;
+  background: url(../images/btn_filter.png) no-repeat;
+  padding: 0 30px 0 20px;
+  border: 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-family: arial, helvetica, sans-serif;
+  text-align: left;
+}
+
+
+
+#block-block-2,
+#block-block-3  {
+  position: relative;
+  float: left;
+  width: 640px;
+  margin: 20px;
+}
+
+/* featured page */
+body.page-featured #main_content .block-views {
+  -webkit-box-shadow: 0px 0px 4px #999;
+  -moz-box-shadow: 0px 0px 4px #999;
+  box-shadow: 0px 0px 4px #999;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin: 0 0 20px;
+}
+body.page-featured #main_content .block-views h2  {
+  background: #6da101 url(../images/bg_subhead_green.png) repeat-x;
+  font-size: 18px;
+  font-weight: normal;
+  height: 56px;
+  line-height: 56px;
+  padding: 0 20px;
+  margin: 0;
+  color:#fff;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+body.page-featured #main_content .block-views table.views-view-grid  {
+  margin: 0;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+body.page-featured #main_content .block-views table.views-view-grid tr  {
+  border: 0;
+}
+body.page-featured #main_content .block-views table.views-view-grid td  {
+  width: 25%;
+  padding: 20px;
+}
+body.page-featured #main_content .block-views table.views-view-grid .views-field-field-image-fid  {
+  text-align: center;
+}
+body.page-featured #main_content .block-views table.views-view-grid .views-field-title,
+body.page-featured #main_content .block-views table.views-view-grid .views-field-title a  {
+  font-size: 16px;
+  color:#000;
+  margin: 0 0 5px;
+}
+body.page-featured #main_content .block-views table.views-view-grid .views-field-body {}
+body.page-featured #main_content .block-views table.views-view-grid .views-field-view-node  {}
