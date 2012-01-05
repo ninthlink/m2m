@@ -47,6 +47,8 @@
 
     <div id="main_content">
 
+          <?php if ($show_messages && $messages): print $messages; endif; ?>
+
       <?php if ($content_top): ?>
         <div id="content_top">
           <?php print $content_top ?>
@@ -61,7 +63,6 @@
           <?php if ($tabs2): print '<ul class="tabs secondary">'. $tabs2 .'</ul>'; endif; ?>
           <?php if ($title): print '<h1'. ($tabs ? ' class="with-tabs"' : '') .'>'. $title .'</h1>'; endif; ?>
 
-          <?php if ($show_messages && $messages): print $messages; endif; ?>
           <?php print $help; ?>
           <?php print $content ?>
           <div class="clear"></div>
