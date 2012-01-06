@@ -7,6 +7,10 @@
     <title>Approve Devices</title>
     <?php print $styles ?>
     <?php print $scripts ?>
+    <style>
+        .views-row-even {background-color: #FAFFF0}
+        .views-row {padding:10px;}
+    </style>
  <script type="text/javascript">
   $(function(){
     var speedA = $('select#speedA').selectmenu();
@@ -128,7 +132,7 @@
           <?php print theme('links', $secondary_links, array('class' => 'links secondary-links')) ?>
         <?php endif; ?>
          <?php //if ($show_messages && $messages): print $messages; endif; ?>
-       <div style="float:left;">
+       <div>
          <h1 class="title"><?php if (arg(0) == 'user' && arg(1) == 'register') : ?>
             Create an Account
           <?php elseif (arg(0) == 'user' && arg(1) == 'password') : ?>
@@ -239,7 +243,7 @@ $cmp_val= "('".$option_sales_comp."')";
  echo "<a href='".$base_path."manage/owndevice?pagenum=$next'>Next </a>";
  echo " <a href='".$base_path."manage/owndevice?pagenum=$last'>Last </a>";
  }
- echo "</p></div>";
+ echo "</p></div><div style='clear:both;'></div>";
   $sql="SELECT node.nid AS nid,
    node_data_field_image.field_image_fid AS node_data_field_image_field_image_fid,
    node_data_field_image.field_image_list AS node_data_field_image_field_image_list,
@@ -249,25 +253,27 @@ $cmp_val= "('".$option_sales_comp."')";
    node.title AS node_title,
    node_data_field_company.field_company_value AS node_data_field_company_field_company_value,
    node_data_field_company.delta AS node_data_field_company_delta,
-   node_data_field_image.field_frequncy_bands_value AS node_data_field_image_field_frequncy_bands_value,
-   node_data_field_image.field_commercial_availability_value AS node_data_field_image_field_commercial_availability_value,
-   node_data_field_image.field_voice_support_value AS node_data_field_image_field_voice_support_value,
-   node_data_field_image.field_sms_support_value AS node_data_field_image_field_sms_support_value,
-   node_data_field_image.field_gps_capabilities_value AS node_data_field_image_field_gps_capabilities_value,
+   node_content_type_device.field_frequncy_bands_value AS node_data_field_image_field_frequncy_bands_value,
+   node_content_type_device.field_commercial_availability_value AS node_data_field_image_field_commercial_availability_value,
+   node_content_type_device.field_voice_support_value AS node_data_field_image_field_voice_support_value,
+   node_content_type_device.field_sms_support_value AS node_data_field_image_field_sms_support_value,
+   node_content_type_device.field_gps_capabilities_value AS node_data_field_image_field_gps_capabilities_value,
    node.uid AS node_uid,
    node_revisions.format AS node_revisions_format,
    users.uid AS users_uid,
    node.created AS node_created
  FROM {node} node
- LEFT JOIN {content_type_device} node_data_field_image ON node.vid = node_data_field_image.vid
+ LEFT JOIN {content_field_image} node_data_field_image ON node.vid = node_data_field_image.vid
+ LEFT JOIN {content_type_device} node_content_type_device ON node.vid = node_content_type_device.vid
  LEFT JOIN {content_field_company} node_data_field_company ON node.vid = node_data_field_company.vid
  LEFT JOIN {node_revisions} node_revisions ON node.vid = node_revisions.vid
  INNER JOIN {users} users ON node.uid = users.uid
  WHERE node.type in ('device') AND node.status='0' AND (node_data_field_company.field_company_value IN $cmp_val OR node.uid='$user->uid') GROUP BY node.nid ORDER BY node_created DESC $max";
 
  $res=db_query($sql);
+ $count_i = 0;
  while($row=db_fetch_object($res)){
-
+   $count_i++;
    $sql_company=db_query("select field_company_value from {node} n, {content_field_company} c where n.nid='$row->nid' AND n.nid=c.nid");
   $option_company1=array();
   while($row_company=db_fetch_array($sql_company)){
@@ -289,20 +295,20 @@ $cmp_val= "('".$option_sales_comp."')";
     $row_img=db_fetch_array($sql_img);
 
 ?>
-<div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+<div class="views-row views-row-<?php echo $count_i;?> views-row-<?php echo ($count_i&1 ? 'odd' : 'even');?> views-row-first views-row-last">
 <div class="views-field-field-image-fid">
                 <span class="field-content"><a class="imagecache imagecache-142x106 imagecache-linked imagecache-142x106_linked" href="/node/<?php echo $row->nid;?>"><img height="106" width="142" class="imagecache imagecache-142x106" title="" alt="" src="<?php echo $base_path.$row_img['filepath'];?>"></a></span>
   </div>
   <div class="views-field-title"><label class="views-label-title">Product:</label><span class="field-content"><?php echo $row->node_title;?></span>
   </div>
-  <div class="views-field-field-company-value"><label class="views-label-field-company-value">Company:</label><div class="field-content"><?php  echo substr(rtrim(implode(",",$option_company1),","),0,23)."...";?></div></div>
- <div class="views-field-field-modem-technology-value"><label class="views-label-field-modem-technology-value">Modem Technology:</label><div class="field-content"><?php  echo substr(trim(implode(",",$option_modem),","),0,23)."...";?></div></div>
-  <div class="views-field-field-frequncy-bands-value"><label class="views-label-field-frequncy-bands-value">Frequency Bands:</label><span class="field-content"><?php echo $row->node_data_field_image_field_frequncy_bands_value;?></span></div>
-  <div class="views-field-field-commercial-availability-value"><label class="views-label-field-commercial-availability-value">Commercial Availability:</label><span class="field-content"><?php echo $row->node_data_field_image_field_commercial_availability_value;?></span></div>
-  <div class="views-field-field-voice-support-value"><label class="views-label-field-voice-support-value">Voice support:</label><span class="field-content"><?php echo $row->node_data_field_image_field_voice_support_value;?></span></div>
-  <div class="views-field-field-sms-support-value"><label class="views-label-field-sms-support-value">SMS Support:</label><span class="field-content"><?php echo $row->node_data_field_image_field_sms_support_value;?></span></div>
-  <div class="views-field-field-gps-capabilities-value"><label class="views-label-field-gps-capabilities-value">GPS Capabilities:</label><span class="field-content"><?php echo $row->node_data_field_image_field_gps_capabilities_value;?></span></div>
-  <div class="views-field-field-operator-certifications-value"><label class="views-label-field-operator-certifications-value">Operator Certifications:</label><div class="field-content"><?php  echo substr(rtrim(implode(",",$option_operator),","),0,23)."...";?></div></div>
+  <div class="views-field-field-company-value"><label class="views-label-field-company-value">Company: </label><span class="field-content"><?php echo substr(rtrim(implode(", ",$option_company1),","),0,23).(strlen(rtrim(implode(", ",$option_company1),",")) > 23 ? "..." : '');?></span></div>
+ <div class="views-field-field-modem-technology-value"><label class="views-label-field-modem-technology-value">Modem Technology: </label><span class="field-content"><?php  echo substr(trim(implode(", ",$option_modem),","),0,23).(strlen(trim(implode(", ",$option_modem),",")) > 23 ? "..." : "");?></span></div>
+  <div class="views-field-field-frequncy-bands-value"><label class="views-label-field-frequncy-bands-value">Frequency Bands: </label><span class="field-content"><?php echo $row->node_data_field_image_field_frequncy_bands_value;?></span></div>
+  <div class="views-field-field-commercial-availability-value"><label class="views-label-field-commercial-availability-value">Commercial Availability: </label><span class="field-content"><?php echo $row->node_data_field_image_field_commercial_availability_value;?></span></div>
+  <div class="views-field-field-voice-support-value"><label class="views-label-field-voice-support-value">Voice support: </label><span class="field-content"><?php echo $row->node_data_field_image_field_voice_support_value;?></span></div>
+  <div class="views-field-field-sms-support-value"><label class="views-label-field-sms-support-value">SMS Support: </label><span class="field-content"><?php echo $row->node_data_field_image_field_sms_support_value;?></span></div>
+  <div class="views-field-field-gps-capabilities-value"><label class="views-label-field-gps-capabilities-value">GPS Capabilities: </label><span class="field-content"><?php echo $row->node_data_field_image_field_gps_capabilities_value;?></span></div>
+  <div class="views-field-field-operator-certifications-value"><label class="views-label-field-operator-certifications-value">Operator Certifications: </label><span class="field-content"><?php  echo substr(rtrim(implode(", ",$option_operator),","),0,23).(strlen(rtrim(implode(", ",$option_operator),",")) > 23 ? "..." : '');?></span></div>
   <div class="div_manage_links">
 <div class="views-field-edit-node"><span class="field-content"><a href="/node/<?php echo $row->nid;?>/publish?destination=manage/owndevice">Approve Device</a></span></div> <div class="views-field-edit-node"><span class="field-content"><a href="/node/<?php echo $row->nid;?>?destination=manage/owndevice">View</a></span></div> <div class="views-field-edit-node"><span class="field-content"><a href="/node/<?php echo $row->nid;?>/edit?destination=manage/owndevice">Edit</a></span></div>    <div class="views-field-delete-node"><span class="field-content"><a href="/node/<?php echo $row->nid;?>/delete?destination=manage/owndevice">Delete</a></span></div>
   </div>
