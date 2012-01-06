@@ -19,3 +19,49 @@ function custom_m2m_form_alter(&$form, $form_state, $form_id) {
     }
   }
 }
+
+/*Hook into the nodewords API to add googlebot tag with the same data as the robots tag*/
+function custom_m2m_nodewords_api() {
+  return array('version' => '1.13');
+}
+
+function custom_m2m_nodewords_tags_alter(&$output, $parameters) {
+  if(isset($output['robots'])){
+    $output['googlebot'] = $output['robots'];
+  }
+  if (empty($output['abstract']) && $parameters['type'] == NODEWORDS_TYPE_PAGE) {
+    $output['abstract'] = t('Node content');
+  }
+}
+
+function custom_m2m_nodewords_tags_info() {
+  $tags = array(
+    'googlebot' => array(
+      'callback' => 'nodewords_basic_robots',
+      'context' => array(
+        'allowed' => array(
+          NODEWORDS_TYPE_DEFAULT,
+          NODEWORDS_TYPE_ERRORPAGE,
+          NODEWORDS_TYPE_FRONTPAGE,
+          NODEWORDS_TYPE_NODE,
+          NODEWORDS_TYPE_OFFLINE,
+          NODEWORDS_TYPE_PAGE,
+          NODEWORDS_TYPE_PAGER,
+          NODEWORDS_TYPE_TERM,
+          NODEWORDS_TYPE_TRACKER,
+          NODEWORDS_TYPE_USER,
+          NODEWORDS_TYPE_VOCABULARY,
+        ),
+      ),
+      'label' => t('Googlebot'),
+      'permission' => 'edit meta tag ROBOTS',
+      'templates' => array(
+        'head' => array(
+          'googlebot' => NODEWORDS_META,
+        ),
+      ),
+    ),
+  );
+
+  return $tags;
+}
