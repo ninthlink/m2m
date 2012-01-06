@@ -47,7 +47,7 @@
 
     <div id="main_content">
 
-          <?php if ($show_messages && $messages): print $messages; endif; ?>
+      <?php if ($show_messages && $messages): print $messages; endif; ?>
 
       <?php if ($content_top): ?>
         <div id="content_top">
