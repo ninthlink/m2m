@@ -298,7 +298,8 @@ body.node-type-router #main_outer,
 body.page-search #main_outer,
 body.page-user #main_outer,
 body.node-type-profile #main_outer,
-body.page-manage #main_outer {
+body.page-manage #main_outer,
+body.page-managedevice #main_outer {
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -308,7 +309,8 @@ body.page-manage #main_outer {
 }
 body.page-user #content,
 body.node-type-profile #content,
-body.page-manage #content {
+body.page-manage #content,
+body.page-managedevice #content {
   padding: 20px;
 }
 #section_title  {

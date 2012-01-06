@@ -1,13 +1,12 @@
-<?php // $Id: page.tpl.php,v 1.18.2.1 2009/04/30 00:13:31 goba Exp $ ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
+<?php
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language ?>" lang="<?php print $language->language ?>" dir="<?php print $language->dir ?>">
   <head>
     <?php print $head ?>
-    <title><?php print "Approve devices"; ?></title>
+    <title>Approve Devices</title>
     <?php print $styles ?>
     <?php print $scripts ?>
-    <!--[if lt IE 7]>
-      <?php print phptemplate_get_ie_styles(); ?>
-    <![endif]-->
  <script type="text/javascript">
   $(function(){
     var speedA = $('select#speedA').selectmenu();
@@ -54,6 +53,18 @@
   </div>
 
     <?php print $header; ?>
+<div class="clear-block block block-menu" id="block-menu-primary-links">
+    <ul class="menu">
+      <li class="leaf first">
+        <a title="" href="/">Module Search</a>
+      </li>
+      <li class="leaf last">
+        <a title="" href="/routers">Wireless/Gateway Routers</a>
+      </li>
+    </ul>
+</div>
+
+
 
   </div><!-- END: header -->
 
@@ -315,6 +326,27 @@ $cmp_val= "('".$option_sales_comp."')";
     </div></div><!-- END: main -->
       <?php if ($footer): ?>
       <div id="footer">
+<div class="clear-block block block-menu" id="block-menu-menu-footer">
+  <div class="content">
+    <ul class="menu">
+      <li class="leaf first active-trail">
+        <a class="active" title="" href="/">Home</a>
+      </li>
+      <li class="leaf">
+        <a title="" href="/devicesearch">Search</a>
+      </li>
+      <li class="leaf">
+        <a title="" href="http://www.qualcomm.com/site/legal">Legal</a>
+      </li>
+      <li class="leaf">
+        <a title="" href="http://www.qualcomm.com/site/privacy">Privacy</a>
+      </li>
+      <li class="leaf last">
+        <a title="" href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>
         <?php print $footer ?>
         <div class="clear"></div>
       </div>
