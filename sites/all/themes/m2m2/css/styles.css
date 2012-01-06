@@ -209,17 +209,19 @@ h1 {
   line-height: 32px;
   padding: 0;
   margin: 0 0 20px;
-  font-family: "arial rounded", arial, sans-serif;
+  font-family: "arial rounded mt", arial, sans-serif;
 }
 h2 {
   font-size: 16px;
   padding: 0 0 5px;
   margin: 0;
   font-weight: bold;
+  font-family: "arial rounded mt", arial, sans-serif;
 }
 h3 {
   padding: 0 0 5px;
   font-size: 18px;
+  font-family: "arial rounded mt", arial, sans-serif;
 }
 h4 {
   font-size: 11px;
@@ -295,7 +297,8 @@ body.node-type-device #main_outer,
 body.node-type-router #main_outer,
 body.page-search #main_outer,
 body.page-user #main_outer,
-body.node-type-profile #main_outer {
+body.node-type-profile #main_outer,
+body.page-manage #main_outer {
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -304,7 +307,8 @@ body.node-type-profile #main_outer {
   border-radius: 10px;
 }
 body.page-user #content,
-body.node-type-profile #content {
+body.node-type-profile #content,
+body.page-manage #content {
   padding: 20px;
 }
 #section_title  {
@@ -337,6 +341,9 @@ body.no-sidebars #main_content {
 }
 #content {
   position: relative;
+}
+#content p a  {
+  text-decoration: underline;
 }
 #footer {
   position: relative;
@@ -1027,8 +1034,11 @@ body.page-search .box dd p {
   margin: 0;
 }
 
-body.not-logged-in #tabs-wrapper {
+#tabs-wrapper {
   display: none;
+}
+body.page-user #tabs-wrapper {
+  display: block;
 }
 ul.primary {
   border-collapse:collapse;
