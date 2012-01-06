@@ -102,7 +102,10 @@ a:hover {
 }
 #block-menu-primary-links ul.menu li a:hover  {}
 #block-menu-primary-links ul.menu li.active-trail a.active,
-body.page-devicesearch #block-menu-primary-links ul.menu li.first a  {
+body.page-devicesearch #block-menu-primary-links ul.menu li.first a,
+body.page-routersearch #block-menu-primary-links ul.menu li.last a,
+body.node-type-device #block-menu-primary-links ul.menu li.first a,
+body.node-type-router #block-menu-primary-links ul.menu li.last a  {
   background: url(../images/bg_nav.png) repeat-x;
   color: #000;
 }
@@ -747,7 +750,6 @@ body.page-routersearch .view-router-search {
   font-size: 13px;
   line-height: 15px;
   min-height: 180px;
-
 }
 .view-Search .view-content .views-row div,
 .view-router-search .view-content .views-row div {
@@ -881,7 +883,70 @@ body.node-type-device #content,
 body.node-type-router #content  {
   padding: 30px 50px 70px 20px;
 }
-.fieldgroup.group-product-details {
+body.node-type-router h1,
+body.node-type-router h1  {
+  display: none;
+}
+.product_column1 {
+  float: left;
+  width: 250px;
+  margin: 0;
+  font-size: 13px;
+  color:#333;
+}
+.product_column2 {
   float: right;
   width: 600px;
+  margin: 0;
+  font-size: 13px;
+  color:#333;
+}
+.product_column1 h2,
+.product_column2 h2 {
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px;
+}
+.product_column1 .product_image {
+  margin: 0 0 30px;
+}
+
+.fieldgroup.group-product-details .content {
+  padding: 0;
+}
+.fieldgroup.group-product-details .field  {}
+.fieldgroup.group-product-details .field-label  {
+  display: inline-block;
+}
+.fieldgroup.group-product-details .field-items {
+  display: inline-block;
+}
+.backtosearch {
+  background: #000 url(../images/bg_subhead_black.png) repeat-x;
+  font-size: 18px;
+  height: 56px;
+  line-height: 56px;
+  margin: -30px -50px 30px -20px;
+  color:#fff;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0px 0px;
+}
+.backtosearch a {
+  display: inline-block;
+  background: url(../images/btn_back.png) no-repeat;
+  height: 48px;
+  line-height: 48px;
+  margin: 4px 0 0 4px;
+  color:#fff;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 0 20px 0 40px;
 }
