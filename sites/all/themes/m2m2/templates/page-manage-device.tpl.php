@@ -64,7 +64,18 @@
       </li>
     </ul>
 </div>
-
+<div class="clear-block block block-menu" id="block-menu-secondary-links">
+  <div class="content">
+    <ul class="menu">
+      <li class="leaf first">
+        <a title="" href="/resources">Resources</a>
+      </li>
+      <li class="leaf last">
+        <a title="Featured" href="/featured">Featured</a>
+      </li>
+    </ul>
+  </div>
+</div>
   </div><!-- END: header -->
 
 
