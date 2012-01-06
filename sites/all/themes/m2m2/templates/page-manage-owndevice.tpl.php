@@ -205,7 +205,7 @@ $cmp_val= "('".$option_sales_comp."')";
     $rows++;
     }
   if(!$rows){
-  echo "No devices";
+  echo "<br class='clear' />No devices";
 }else{
 
 //  echo "NUM ROWS: ".$rows;
