@@ -147,38 +147,6 @@
        <?php if(!is_front) print $breadcrumb; ?>
           <?php if ($mission): print '<div id="mission">'. $mission .'</div>'; endif; ?>
           <?php if ($tabs): print '<div id="tabs-wrapper" class="clear-block">'; endif; ?>
-<?php
-global $node;
-$node = node_load(arg(1));
-
-if((arg(0)=='user' && arg(1)==$user->uid && $user->uid!=0) || (strpos($_SERVER['REQUEST_URI'],"manage/device")!==false) || ($node->type=='profile') || (strpos($_SERVER['REQUEST_URI'],"manage/owndevice")!==false)){
-
-  $id=arg(1);
-  if(strpos($_SERVER['REQUEST_URI'],"user/".$user->uid."/edit")!==false) $act2=' class="active"';
-  if(strpos($_SERVER['REQUEST_URI'],"node/add/device")!==false) $act3=' class="active"';
-  if(strpos($_SERVER['REQUEST_URI'], "user/".$user->uid)!==false && arg(2)=='') $act1=' class="active"';
-  if(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
-  if(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
-
-  $user_fields = user_load($user->uid);
-  //if($user_fields->roles[3]=='Sales Rep')
-  $device_url1="manage/owndevice";
-  //else
-  if($user_fields->roles[3]=='Sales Rep')
-    $device_url="manage/device";
-  else
-    $device_url="managedevice";
-
-  echo '<ul class="tabs primary"><li'.$act1.'><a href="'.$base_path.'user/'.$user->uid.'">View</a></li><li'.$act2.'><a href="'.$base_path.'user/'.$user->uid.'/edit">Update Profile</a></li>';
-  if($user_fields->roles[3]=='Sales Rep') echo '<li'.$act5.'><a href="'.$base_path.$device_url1.'">Approve Devices</a></li>';
-  echo '<li'.$act3.'><a href="'.$base_path.'node/add/device">Add Devices</a></li><li'.$act4.'><a href="'.$base_path.$device_url.'">Manage Devices</a></li></ul></div>';
-  }else{?>
-
-          <?php if ($tabs): print '<ul class="tabs primary">'. $tabs .'</ul></div>'; endif; ?>
-          <?php //if ($tabs2): print '<ul class="tabs secondary">'. $tabs2 .'</ul>'; endif; ?>
-          <?php }?>
-          <?php //if ($show_messages && $messages): echo "<br><br>";print $messages; endif; ?>
-          <?php print $help; ?>
 
      <?php //print $content;?>
       <?php

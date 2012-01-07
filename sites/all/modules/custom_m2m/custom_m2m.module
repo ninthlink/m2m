@@ -20,6 +20,53 @@ function custom_m2m_form_alter(&$form, $form_state, $form_id) {
   }
 }
 
+function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks[0]['info'] = t('Logged In User Options');
+      return $blocks;
+    case 'view':
+      global $user;
+      //if(arg(0) == 'node'){
+      //  $node = node_load(arg(1));
+      //}
+      $block[0]['content'] = '';
+      //if((arg(0)=='user') || (arg(0)=='user' && arg(1)==$user->uid && $user->uid!=0) || (strpos($_SERVER['REQUEST_URI'],"manage/device")!==false) || (!empty($node) && $node->type=='profile') || (strpos($_SERVER['REQUEST_URI'],"manage/owndevice")!==false)){
+        if(strpos($_SERVER['REQUEST_URI'], "user/".$user->uid."/edit")!==false) $act2=' class="active"';
+        if(strpos($_SERVER['REQUEST_URI'], "node/add/device")!==false) $act3=' class="active"';
+        if((strpos($_SERVER['REQUEST_URI'], "user/".$user->uid)!==false || strpos($_SERVER['REQUEST_URI'], "user")!==false) && arg(2)=='') $act1=' class="active"';
+        if(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
+        if(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
+
+        $user_fields = user_load($user->uid);
+        //if($user_fields->roles[3]=='Sales Rep')
+        $device_url1="manage/owndevice";
+        //else
+        //if($user_fields->roles[3]=='Sales Rep'){
+        //  $device_url="manage/device";
+        //}else{
+        //  $device_url="managedevice";
+        //}
+        $block[0]['content'] .= '<ul class="tabs primary"><li'.$act1.'>'.l('View', 'user/'.$user->uid).'</li><li'.$act2.'>'.l('Update Profile', 'user/'.$user->uid.'/edit').'</li>';
+        if($user_fields->roles[3]=='Sales Rep'){
+          $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', $device_url1).'</li>';
+          $device_url="manage/device";
+        }else{
+          $device_url="managedevice";
+        }
+        $block[0]['content'] .= '<li'.$act3.'>'.l('Add Devices', 'node/add/device').'</li><li'.$act4.'>'.l('Manage Devices', $device_url).'</li></ul>';
+        //}else{
+        //  if ($tabs): $block[0]['content'] .= '<ul class="tabs primary">'. $tabs .'</ul></div>'; endif;
+            //if ($tabs2): print '<ul class="tabs secondary">'. $tabs2 .'</ul>'; endif;
+      //}
+      //if ($show_messages && $messages): echo "<br><br>";print $messages; endif;
+      $block[0]['content'] .= $help;
+      //$block[0]['subject'] = t('New Module');
+      break;
+  }
+  return $block[$delta];
+}
+
 /*Hook into the nodewords API to add googlebot tag with the same data as the robots tag*/
 function custom_m2m_nodewords_api() {
   return array('version' => '1.13');
