@@ -22,9 +22,17 @@
   <div class="product_image">
   <?php print t($node->field_image[0]['view']); ?>
   </div>
-  <div class="product_links">
-  <?php print t($node->field_website[0]['view']); ?> | <a href="mailto:<?php print t($node->field_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
-  </div>
+<div class="product_links">
+<?php
+  if ($node->field_website[0]['view']) {
+    print t($node->field_product_link[0]['view']);
+  }
+  else {
+    print "Learn More";
+  }
+?>
+   | <a href="mailto:<?php print t($node->field_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
+</div>
 
 </div>
 
@@ -32,9 +40,18 @@
 
   <?php print $group_product_details_rendered ?>
 
-  <div class="product_links">
-    <?php print t($node->field_website[0]['view']); ?> | <a href="mailto:<?php print t($node->field_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
-  </div>
+
+<div class="product_links">
+<?php
+  if ($node->field_website[0]['view']) {
+    print t($node->field_product_link[0]['view']);
+  }
+  else {
+    print "Learn More";
+  }
+?>
+   | <a href="mailto:<?php print t($node->field_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
+</div>
 
 </div>
 
