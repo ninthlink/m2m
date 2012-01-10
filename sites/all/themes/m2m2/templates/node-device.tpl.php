@@ -25,7 +25,7 @@
 <div class="product_links">
 <?php
   if ($node->field_website[0]['view']) {
-    print t($node->field_product_link[0]['view']);
+    print t($node->field_website[0]['view']);
   }
   else {
     print "Learn More";
@@ -44,7 +44,7 @@
 <div class="product_links">
 <?php
   if ($node->field_website[0]['view']) {
-    print t($node->field_product_link[0]['view']);
+    print t($node->field_website[0]['view']);
   }
   else {
     print "Learn More";
