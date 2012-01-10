@@ -766,6 +766,10 @@ body.page-routersearch .view-router-search {
   /* For IE 5.5 - 7 */
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#999999');
 }
+.view-Search .view-empty .view-content,
+.view-router-search .view-empty .view-content {
+  padding: 20px;
+}
 
 .view-Search .view-content,
 .view-router-search .view-content {
