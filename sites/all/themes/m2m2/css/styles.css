@@ -156,7 +156,7 @@ body.node-type-router #block-menu-primary-links ul.menu li.last a  {
 #block-search-0 .form-item label  {
   color:#fff;
   font-weight: normal;
-  margin: 7px 0 0 7px;
+  padding: 7px 0 0 7px;
 }
 #block-search-0 .form-text {
   border: 1px solid #636363;
@@ -301,6 +301,8 @@ body.page-user #main_outer,
 body.node-type-profile #main_outer,
 body.page-manage #main_outer,
 body.page-managedevice #main_outer {
+  position: relative;
+  height: 1%;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -440,6 +442,8 @@ body.page-routers #content  {
 }
 body.front #content_bottom,
 body.page-routers #content_bottom  {
+  position: relative;
+  height: 1%;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -641,6 +645,8 @@ body.page-routersearch #block-views-featured_routers-block {
 
 /* featured page */
 body.page-featured #main_content .block-views {
+  position: relative;
+  height: 1%;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -774,6 +780,7 @@ body.page-routersearch .view-router-search {
 .view-Search .view-content,
 .view-router-search .view-content {
   position: relative;
+  height: 1%;
   clear: both;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
