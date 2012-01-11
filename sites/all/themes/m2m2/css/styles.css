@@ -303,6 +303,7 @@ body.page-manage #main_outer,
 body.page-managedevice #main_outer {
   position: relative;
   height: 1%;
+  border: 1px solid #ccc;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -444,6 +445,7 @@ body.front #content_bottom,
 body.page-routers #content_bottom  {
   position: relative;
   height: 1%;
+  border: 1px solid #ccc;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -461,7 +463,7 @@ body.page-routers #content_bottom  {
 #block-views-featured_routers-block {
   position: relative;
   float: right;
-  width: 246px;
+  width: 244px;
   z-index: 50;
 }
 body.page-devicesearch #block-views-featured_devices-block,
@@ -647,6 +649,7 @@ body.page-routersearch #block-views-featured_routers-block {
 body.page-featured #main_content .block-views {
   position: relative;
   height: 1%;
+  border: 1px solid #ccc;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -759,13 +762,14 @@ body.page-routersearch .view-router-search {
 .view-router-search .view-filters {
   margin: 0 0 20px;
   padding: 0 246px 0 0;
+  border: 1px solid #ccc;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  background: url(../images/bg_line.png) repeat-y 730px 0;
+  background: url(../images/bg_line.png) repeat-y 728px 0;
   min-height: 400px;
   /* For IE 8 */
   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#999999')";
@@ -782,6 +786,7 @@ body.page-routersearch .view-router-search {
   position: relative;
   height: 1%;
   clear: both;
+  border: 1px solid #ccc;
   -webkit-box-shadow: 0px 0px 4px #999;
   -moz-box-shadow: 0px 0px 4px #999;
   box-shadow: 0px 0px 4px #999;
@@ -876,7 +881,7 @@ body.page-routersearch .view-router-search {
   background: #000 url(../images/bg_subhead_black.png) repeat-x;
   height: 58px;
   line-height: 58px;
-  width: 816px;
+  width: 814px;
   padding: 0 80px;
   color:#fff;
   -moz-border-radius-topleft: 0;
