@@ -17,6 +17,8 @@ function custom_m2m_form_alter(&$form, $form_state, $form_id) {
       }
       $form['#field_info']['field_company']['allowed_values'] = $options;
     }
+  }elseif($form_id=='views_exposed_form' && arg(0) == 'node'){
+      $form['submit']['#value'] = 'Search';
   }
 }
 
