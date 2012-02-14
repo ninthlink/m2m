@@ -300,7 +300,9 @@ body.page-search #main_outer,
 body.page-user #main_outer,
 body.node-type-profile #main_outer,
 body.page-manage #main_outer,
-body.page-managedevice #main_outer {
+body.page-managedevice #main_outer,
+body.page-add-modules #main_outer
+{
   position: relative;
   height: 1%;
   border: 1px solid #ccc;
@@ -928,6 +930,17 @@ body.page-routersearch .view-router-search {
   color: #6EA202;
 }
 
+div.view-manage-devices .item-list ul.pager {
+    width: auto;
+}
+
+div.view-manage-devices .views-row-even {
+    background-color: #FAFFF0
+}
+
+div.view-manage-devices .views-row {
+    padding:10px;
+}
 /* product detail */
 
 body.node-type-device #content,
@@ -1137,4 +1150,14 @@ ul.primary li.active a:visited {
   color: #666;
   border: 1px solid #aaa;
   border-bottom: 1px solid #fff;
+}
+
+#content-profile-display-profile ul.tabs {
+  display:none;
+}
+
+div.view-Search div.attachment-after,
+div.view-connectivity-search div.attachment-after,
+div.view-router-search div.attachment-after {
+  display:none;
 }

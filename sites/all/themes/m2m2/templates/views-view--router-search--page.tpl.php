@@ -28,6 +28,26 @@
  * @ingroup views_templates
  */
 ?>
+<script type="text/javascript">
+  function toggle_devices(view_details){
+    if(view_details){
+      $('#device_details').show();
+      $('#results').hide();
+    }else{
+      $('#device_details').hide();
+      $('#results').show();
+    }
+  }
+  $(document).ready(function(){
+    $('.view-content .field-content a').click(function() {
+      $('#devicehere').load($(this).attr('href')+" #main_content", function() {
+        toggle_devices(true);
+      });
+      return false; 
+    });
+  });
+</script>
+
 <div class="<?php print $classes; ?>">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">
@@ -46,57 +66,71 @@
     </div>
   <?php endif; ?>
 
-  <?php if ($attachment_before): ?>
-    <div class="attachment attachment-before">
-      <?php print $attachment_before; ?>
+  <div id="results">
+  
+    <div class="view-display-mode-tabs">
+      <a href="#" class="list-view" onClick="$('div.view div.attachment').hide();$('div.view div.view-content:first').show();return false;">List</a>
+      <a href="#" class="grid-view" onClick="$('div.view div.view-content:first').hide();$('div.view div.attachment').show();return false;">Thumbs</a>
     </div>
-  <?php endif; ?>
 
-  <?php if ($rows): ?>
-    <div class="view-content">
+    <?php if ($attachment_before): ?>
+      <div class="attachment attachment-before">
+        <?php print $attachment_before; ?>
+      </div>
+    <?php endif; ?>
 
-  <?php if ($pager): ?>
-    <div class="pager-top">
-      <?php print $pager; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($rows): ?>
+       <div class="view-content">
+
+      <?php if ($pager): ?>
+        <div class="pager-top">
+          <?php print $pager; ?>
+        </div>
+      <?php endif; ?>
 
       <?php print $rows; ?>
 
-  <?php if ($pager): ?>
-    <div class="pager-bottom">
-      <?php print $pager; ?>
-    </div>
-  <?php endif; ?>
+      <?php if ($pager): ?>
+        <div class="pager-bottom">
+          <?php print $pager; ?>
+        </div>
+      <?php endif; ?>
 
-    </div>
-  <?php elseif ($empty): ?>
-    <div class="view-empty">
-      <?php print $empty; ?>
-    </div>
-  <?php endif; ?>
+      </div>
+    <?php elseif ($empty): ?>
+      <div class="view-empty">
+        <?php print $empty; ?>
+      </div>
+    <?php endif; ?>
 
 
-  <?php if ($attachment_after): ?>
-    <div class="attachment attachment-after">
-      <?php print $attachment_after; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($attachment_after): ?>
+      <div class="attachment attachment-after">
+        <?php print $attachment_after; ?>
+      </div>
+    <?php endif; ?>
 
-  <?php if ($more): ?>
-    <?php print $more; ?>
-  <?php endif; ?>
+    <?php if ($more): ?>
+      <?php print $more; ?>
+    <?php endif; ?>
 
-  <?php if ($footer): ?>
-    <div class="view-footer">
-      <?php print $footer; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($footer): ?>
+      <div class="view-footer">
+        <?php print $footer; ?>
+      </div>
+    <?php endif; ?>
 
-  <?php if ($feed_icon): ?>
-    <div class="feed-icon">
-      <?php print $feed_icon; ?>
-    </div>
-  <?php endif; ?>
+    <?php if ($feed_icon): ?>
+      <div class="feed-icon">
+        <?php print $feed_icon; ?>
+      </div>
+    <?php endif; ?>
+
+  </div>
+
+  <div id="device_details" style="display:none;">
+    <a href="#" onClick="toggle_devices(false);return false;">Back to Results</a>
+    <div id="devicehere"></div>
+  </div>
 
 </div> <?php /* class view */ ?>

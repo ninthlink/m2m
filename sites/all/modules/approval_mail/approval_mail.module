@@ -11,7 +11,7 @@ function approval_mail_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
 	 global $base_path;
   switch ($op) {
     case 'insert':	
-	if($node->type=='device' && !$node->status){
+	if(in_array($node->type, array('device', 'connectivity-module', 'featured-product', 'router')) && !$node->status){
 		$company_name='';
 		foreach($node->field_company as $com_key=>$com_val) { $company_name .= rtrim(implode(", ",$com_val),", ") .", ";}
 		$company_name = rtrim($company_name,", ");
@@ -51,7 +51,7 @@ M2M Search Admin<br>
 	}
     break;
     case update:
-	if($node->type=='device'){
+	if(in_array($node->type, array('device', 'connectivity-module', 'featured-product', 'router'))){
 	 	global $user;
 	 	$node_edit=node_load($node->nid);
 	 	if($node_edit->status==0 && $node->status && ($node_edit->uid!=$user->uid)){
