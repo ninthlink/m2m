@@ -43,7 +43,7 @@
       $('#devicehere').load($(this).attr('href')+" #main_content", function() {
         toggle_devices(true);
       });
-      return false; 
+      return false;
     });
   });
 </script>
@@ -67,7 +67,7 @@
   <?php endif; ?>
 
   <div id="results">
-  
+
     <div class="view-display-mode-tabs">
       <a href="#" class="list-view" onClick="$('div.view div.attachment').hide();$('div.view div.view-content:first').show();return false;">List</a>
       <a href="#" class="grid-view" onClick="$('div.view div.view-content:first').hide();$('div.view div.attachment').show();return false;">Thumbs</a>
@@ -81,12 +81,6 @@
 
     <?php if ($rows): ?>
        <div class="view-content">
-
-      <?php if ($pager): ?>
-        <div class="pager-top">
-          <?php print $pager; ?>
-        </div>
-      <?php endif; ?>
 
       <?php print $rows; ?>
 
