@@ -12,26 +12,32 @@ body {
 }
 #page-layout  {
   position: relative;
-  width: 976px;
+  width: 960px;
   margin: 0 auto;
   text-align: left;
 }
 
 #header {
   position: relative;
+  width: 960px;
   height: 130px;
   z-index:50;
+  margin: 0 auto;
+  text-align: left;
 }
 #logo {
-  float: left;
-  margin: 15px 0 0;
+  position: absolute;
+  top: 10px;
+  left: -10px;
 }
 
 body.front h1,
 body.page-routers h1,
 body.page-routersearch h1,
 body.page-devicesearch h1,
-body.page-featured h1 {
+body.page-featured h1,
+body.page-cellular h1,
+body.page-connectivity h1 {
   display: none;
 }
 /* CSS DOCUMENT */
@@ -62,12 +68,121 @@ a:hover {
 }
 
 /* HEADER */
+#header_top  {
+  background: url(../images/bg_exposed_filter.png) repeat-x bottom left;
+  padding: 0 0 15px;
+  margin: -10px 0 10px;
+}
+#header_top .block-views,
+#header_top .block-block  {
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+  text-align: left;
+  z-index: 100;
+  font-size: 12px;
+}
+#header_top .block-views p,
+#header_top .block-block p  {
+  margin: 0;
+}
+.views-exposed-form .views-exposed-widget {
+  padding: 0 15px 10px 0;
+  width: 229px;
+}
+.views-exposed-form .views-exposed-widget.views-widget-filter-field_gobi_api_value_many_to_one,
+.views-exposed-form .views-exposed-widget.views-widget-filter-field_mounting_value_many_to_one,
+.views-exposed-form .views-exposed-widget.views-widget-filter-field_conn_mounting_value_many_to_one {
+  padding: 0 0 10px 0;
+  width: 228px;
+}
+.views-exposed-form button.ui-multiselect {
+  font-size: 12px;
+  color:#333;
+  font-family: arial;
+}
+.views-exposed-form button.ui-multiselect.ui-state-default {
+  background: #eee url(../images/ef_state_default.png) repeat-x;
+  border: 1px solid #999;
+  padding: 4px 4px 2px 10px;
+}
+.views-exposed-form button.ui-multiselect.ui-state-active {
+  font-weight: bold;
+}
+.ui-multiselect-menu  {
+  border-top: 0;
+  font-size: 100%;
+  color:#333;
+  font-family: arial;
+  text-align: left;
+}
+.ui-multiselect-menu .ui-widget-header  {
+  background: #0f0f0f url(../images/ef_menu_header.png) repeat-x;
+  border: 0;
+}
+.ui-multiselect-menu .ui-widget-header a  {
+  color:#fff;
+}
+.ui-multiselect-menu .ui-multiselect-header span.ui-icon  {
+  margin: 0 3px 0 0;
+}
+.ui-multiselect-menu .ui-widget-header .ui-icon {
+  background-image:  url(../images/ui-icons_ffffff_256x240.png);
+}
+.ui-multiselect-menu .ui-multiselect-checkboxes li {
+  margin: 0 0 3px;
+  font-size: 12px;
+}
+.ui-multiselect-menu .ui-multiselect-checkboxes li label {
+  background: #fefefe url(../images/ef_menu_li.png) repeat-x;
+  border: 1px solid #e1e1e1;
+  padding: 3px 4px 5px;
+}
+.ui-multiselect-menu .ui-multiselect-checkboxes li label input {
+  margin: 0 6px 0 0;
+}
+.ui-multiselect-menu .ui-multiselect-checkboxes li label.ui-state-hover {
+  border: 1px solid #686868;
+  color:#6ea304;
+  font-weight: bold;
+}
+.views-exposed-form .views-submit-button {
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+.views-exposed-form .views-submit-button input.form-submit {
+  margin: 0 18px 0 0;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Arial Rounded MT Bold", arial, helvetica;
+  background: #dfdfdf url(../images/ef_btn_reset.png) repeat-x;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #9a9a9a;
+  padding: 0 16px;
+  height: 35px;
+  line-height: 35px;
+  text-transform: uppercase;
+  float: left;
+}
+.views-exposed-form .views-submit-button input#edit-submit-Search.form-submit,
+.views-exposed-form .views-submit-button input#edit-submit-connectivity-search.form-submit {
+  border: 0;
+  font-size: 14px;
+  background: #000 url(../images/ef_btn_search.png) no-repeat top right;
+  color:#fff;
+  padding: 0 10px;
+  width: 226px;
+  text-align: left;
+}
 
 /* nav primary */
 #block-menu-primary-links   {
   position: absolute;
-  top: 46px;
-  left: 206px;
+  top: 59px;
+  right: 0px;
   z-index: 50;
 }
 #block-menu-primary-links ul.menu  {
@@ -78,9 +193,10 @@ a:hover {
   float: left;
   list-style: none;
   display: inline;
-  margin: 0 7px 0 0;
+  margin: 0 3px 0 0;
   padding: 0;
   border: 0;
+  font-size: 13px;
 }
 #block-menu-primary-links ul.menu li a:link,
 #block-menu-primary-links ul.menu li a:visited  {
@@ -88,26 +204,54 @@ a:hover {
   display: block;
   float: left;
   text-decoration:none;
-  padding: 0 50px;
+  padding: 0;
   color:#fff;
   height: 78px;
-  line-height: 64px;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-topright: 5px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-radius: 5px 5px 0px 0px;
-  border-radius: 5px 5px 0px 0px;
+  line-height: 51px;
+  text-align: center;
   background: url(../images/bg_nav.png) repeat-x 0 -78px;
 }
-#block-menu-primary-links ul.menu li a:hover  {}
-#block-menu-primary-links ul.menu li.active-trail a.active,
-body.page-devicesearch #block-menu-primary-links ul.menu li.first a,
-body.page-routersearch #block-menu-primary-links ul.menu li.last a,
-body.node-type-device #block-menu-primary-links ul.menu li.first a,
-body.node-type-router #block-menu-primary-links ul.menu li.last a  {
-  background: url(../images/bg_nav.png) repeat-x;
-  color: #000;
+#block-menu-primary-links ul.menu li a.item_cellular:link,
+#block-menu-primary-links ul.menu li a.item_cellular:visited  {
+  width: 172px;
+}
+#block-menu-primary-links ul.menu li a.item_connectivity:link,
+#block-menu-primary-links ul.menu li a.item_connectivity:visited  {
+  background: url(../images/bg_nav.png) repeat-x -172px -78px;
+  width: 202px;
+}
+#block-menu-primary-links ul.menu li a.item_wireless:link,
+#block-menu-primary-links ul.menu li a.item_wireless:visited  {
+  background: url(../images/bg_nav.png) repeat-x -374px -78px;
+  width: 233px;
+}
+#block-menu-primary-links ul.menu li a.item_featured:link,
+#block-menu-primary-links ul.menu li a.item_featured:visited  {
+  background: url(../images/bg_nav.png) repeat-x -607px -78px;
+  width: 167px;
+}
+
+
+#block-menu-primary-links ul.menu li a.active:link,
+#block-menu-primary-links ul.menu li a.active:visited  {
+  color:#000;
+}
+
+#block-menu-primary-links ul.menu li a.item_cellular.active:link,
+#block-menu-primary-links ul.menu li a.item_cellular.active:visited  {
+  background: url(../images/bg_nav.png) repeat-x 0 0px;
+}
+#block-menu-primary-links ul.menu li a.item_connectivity.active:link,
+#block-menu-primary-links ul.menu li a.item_connectivity.active:visited  {
+  background: url(../images/bg_nav.png) repeat-x -172px 0px;
+}
+#block-menu-primary-links ul.menu li a.item_wireless.active:link,
+#block-menu-primary-links ul.menu li a.item_wireless.active:visited  {
+  background: url(../images/bg_nav.png) repeat-x -374px 0px;
+}
+#block-menu-primary-links ul.menu li a.item_featured.active:link,
+#block-menu-primary-links ul.menu li a.item_featured.active:visited  {
+  background: url(../images/bg_nav.png) repeat-x -607px 0px;
 }
 
 /* secondary links */
@@ -147,8 +291,8 @@ body.node-type-router #block-menu-primary-links ul.menu li.last a  {
 /*search */
 #block-search-0 {
   position: absolute;
-  top: 60px;
-  right: 5px;
+  top: 15px;
+  right: 0;
 }
 #block-search-0 .form-item  {
   margin: 0;
@@ -156,23 +300,23 @@ body.node-type-router #block-menu-primary-links ul.menu li.last a  {
 #block-search-0 .form-item label  {
   color:#fff;
   font-weight: normal;
-  padding: 7px 0 0 7px;
+  padding: 4px 0 0 7px;
 }
 #block-search-0 .form-text {
-  border: 1px solid #636363;
+  border: 1px solid #414141;
   padding: 5px;
   font-size: 13px;
   font-family: arial, helvetica, sans-serif;
   color:#fff;
   width: 244px;
-  height: 22px;
+  height: 16px;
   background: url(../images/bg_search.png) no-repeat;
 }
 #block-search-0 .form-submit {
   position: absolute;
   top: 1px;
   right: 1px;
-  height: 32px;
+  height: 26px;
   width: 32px;
   border: 0;
   text-indent: -9999px;
@@ -357,11 +501,33 @@ body.no-sidebars #main_content {
 #content p a  {
   text-decoration: underline;
 }
+#footer_outer {
+  position: relative;
+  border-top: 1px solid #ccc;
+  padding: 20px 0;
+}
+#footer_top {
+  position: relative;
+  width: 960px;
+  margin: 0 auto 30px;
+  text-align: left;
+  clear: both;
+  font-size: 12px;
+  line-height: 16px;
+  color:#333;
+}
+#footer_top p {
+  float: left;
+  width: 450px;
+  margin: 0 30px 0 0;
+
+}
 #footer {
   position: relative;
+  width: 960px;
+  margin: 0 auto;
+  text-align: left;
   clear: both;
-  padding: 48px 0 45px 200px;
-  background: url(../images/logo_qualcomm.png) no-repeat 40px 40px;
 }
 #footer .block  {
   float: left;
@@ -369,8 +535,16 @@ body.no-sidebars #main_content {
   color:#666;
   line-height: 14px;
 }
+#footer #block-block-6.block  {
+  float: right;
+  text-align: right;
+}
+
 #footer .block-menu {
   margin: 0 30px 0 0;
+  padding: 6px 0 0 160px;
+  height: 40px;
+  background: url(../images/logo_qualcomm.png) no-repeat;
 }
 #footer .block-menu ul.menu {
   margin: 0;
@@ -407,15 +581,15 @@ div.node-edit-link  {
 
 /* banners */
 body.page-routers {}
-#block-block-4,
-#block-block-5  {
+.banner-cellular,
+.banner-connectivity  {
   position: relative;
   height: 300px;
-  padding: 30px 20px 20px;
-  margin-right: -20px;
+  padding: 30px 0 20px;
   background: url(../images/img_h_device.png) no-repeat top right;
+  font-family: "Gotham Rounded", arial, helvetica;
 }
-#block-block-5  {
+.banner-connectivity  {
   background: url(../images/img_h_router.png) no-repeat top right;
 }
 .banner-subtitle  {
@@ -428,14 +602,16 @@ body.page-routers {}
   padding: 10px 0 0 10px;
 }
 .banner-title {
-  font-size: 35px;
+  font-size: 32px;
   line-height: 40px;
-  margin: 0 0 10px 10px;
+  margin: 0 0 10px;
+  color:#6ea304;
 }
 .banner-text {
-  font-size: 12px;
-  width: 350px;
-  margin: 0 0 0 10px;
+  font-size: 13px;
+  width: 400px;
+  margin: 0;
+  line-height: 20px;
 }
 
 /* featured and exposed search */
@@ -551,7 +727,7 @@ body.page-routersearch #block-views-featured_routers-block {
   line-height: 14px;
 }
 
-/* block headers */
+/* block headers
 #block-block-8,
 #block-block-9  {
   float: left;
@@ -590,9 +766,9 @@ body.page-routersearch #block-views-featured_routers-block {
 #block-block-9 .content {
   display: inline;
 }
+*/
 
-
-/* exposed */
+/* exposed
 #block-views--exp-Search-block_1,
 #block-views--exp-router_search-block_1 {
   position: relative;
@@ -636,15 +812,12 @@ body.page-routersearch #block-views-featured_routers-block {
   text-align: left;
   cursor: pointer;
 }
-
+ */
 
 
 #block-block-2,
 #block-block-3  {
   position: relative;
-  float: left;
-  width: 640px;
-  margin: 20px;
 }
 
 /* featured page */

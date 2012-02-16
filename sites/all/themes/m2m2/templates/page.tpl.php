@@ -18,7 +18,7 @@
 <body class="<?php print $body_classes;?>">
 
   <div id="bg">
-  <div id="page-layout">
+
   <div id="header">
     <div id="logo">
         <?php
@@ -35,6 +35,13 @@
     <?php print $header; ?>
 
   </div><!-- END: header -->
+      <?php if ($header_top): ?>
+        <div id="header_top">
+          <?php print $header_top ?>
+          <div class="clear"></div>
+        </div><!-- END: header_top -->
+      <?php endif; ?>
+  <div id="page-layout">
 
 <div id="main_outer">
   <div id="main">
@@ -93,13 +100,22 @@
 
     <div class="clear"></div>
     </div></div><!-- END: main -->
-      <?php if ($footer): ?>
-      <div id="footer">
-        <?php print $footer ?>
-        <div class="clear"></div>
-      </div>
-      <?php endif; ?>
   </div><!-- END: page layout -->
+
+      <div id="footer_outer">
+      <?php if ($footer_top): ?>
+        <div id="footer_top">
+          <?php print $footer_top ?>
+          <div class="clear"></div>
+        </div>
+      <?php endif; ?>
+      <?php if ($footer): ?>
+        <div id="footer">
+          <?php print $footer ?>
+          <div class="clear"></div>
+        </div>
+      <?php endif; ?>
+      </div><!-- END: footer_outer -->
 </div><!-- END: bg -->
 
 
