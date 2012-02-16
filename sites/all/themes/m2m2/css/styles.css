@@ -87,14 +87,8 @@ a:hover {
   margin: 0;
 }
 .views-exposed-form .views-exposed-widget {
-  padding: 0 15px 10px 0;
-  width: 229px;
-}
-.views-exposed-form .views-exposed-widget.views-widget-filter-field_gobi_api_value_many_to_one,
-.views-exposed-form .views-exposed-widget.views-widget-filter-field_mounting_value_many_to_one,
-.views-exposed-form .views-exposed-widget.views-widget-filter-field_conn_mounting_value_many_to_one {
-  padding: 0 0 10px 0;
-  width: 228px;
+  padding: 0 10px 10px 0;
+  width: 230px;
 }
 .views-exposed-form button.ui-multiselect {
   font-size: 12px;
@@ -150,25 +144,20 @@ a:hover {
   margin: 0;
   padding: 0;
   width: auto;
+  clear: both;
 }
 .views-exposed-form .views-submit-button input.form-submit {
-  margin: 0 18px 0 0;
+  margin: 0 14px 0 0;
   font-size: 12px;
   font-weight: bold;
   font-family: "Arial Rounded MT Bold", arial, helvetica;
-  background: #dfdfdf url(../images/ef_btn_reset.png) repeat-x;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  border: 1px solid #9a9a9a;
-  padding: 0 16px;
   height: 35px;
   line-height: 35px;
   text-transform: uppercase;
   float: left;
-}
-.views-exposed-form .views-submit-button input#edit-submit-Search.form-submit,
-.views-exposed-form .views-submit-button input#edit-submit-connectivity-search.form-submit {
   border: 0;
   font-size: 14px;
   background: #000 url(../images/ef_btn_search.png) no-repeat top right;
@@ -176,6 +165,13 @@ a:hover {
   padding: 0 10px;
   width: 226px;
   text-align: left;
+}
+.views-exposed-form .views-submit-button input#edit-reset.form-submit {
+  border: 1px solid #9a9a9a;
+  background: #dfdfdf url(../images/ef_btn_reset.png) repeat-x;
+  width: auto;
+  color: #000;
+  padding: 0 16px;
 }
 
 /* nav primary */
@@ -436,36 +432,6 @@ ul.secondary li.active a:hover {
 #main_outer{
   height: 1%;
   z-index:100;
-}
-body.page-resources #main_outer,
-body.node-type-device #main_outer,
-body.node-type-router #main_outer,
-body.page-search #main_outer,
-body.page-user #main_outer,
-body.node-type-profile #main_outer,
-body.page-manage #main_outer,
-body.page-managedevice #main_outer,
-body.page-add-modules #main_outer
-{
-  position: relative;
-  height: 1%;
-  border: 1px solid #ccc;
-  -webkit-box-shadow: 0px 0px 4px #999;
-  -moz-box-shadow: 0px 0px 4px #999;
-  box-shadow: 0px 0px 4px #999;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  /* For IE 8 */
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#999999')";
-  /* For IE 5.5 - 7 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#999999');
-}
-body.page-user #content,
-body.node-type-profile #content,
-body.page-manage #content,
-body.page-managedevice #content {
-  padding: 20px;
 }
 #section_title  {
   background: #000 url(../images/bg_subhead_black.png) repeat-x;
