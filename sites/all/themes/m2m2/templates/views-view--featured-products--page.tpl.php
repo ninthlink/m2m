@@ -28,16 +28,7 @@
  * @ingroup views_templates
  */
 ?>
-<script type="text/javascript">
-  function toggle_devices(view_details){
-    if(view_details){
-      $('#device_details').show();
-      $('#results').hide();
-    }else{
-      $('#device_details').hide();
-      $('#results').show();
-    }
-  }
+<script>
   $(document).ready(function(){
     $('.view-content .field-content a').click(function() {
       $('#devicehere').load($(this).attr('href')+" #main_content", function() {
@@ -47,7 +38,6 @@
     });
   });
 </script>
-
 <div class="<?php print $classes; ?>">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">

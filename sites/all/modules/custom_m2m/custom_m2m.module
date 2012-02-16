@@ -46,7 +46,7 @@ function custom_m2m_form_alter(&$form, $form_state, $form_id) {
 
 function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
     if($form['#id'] == 'views-exposed-form-featured-products-page-1'){
-        $form['fake_all_checkbox'] = array('#type' => 'checkbox', '#title' => t('All'), '#attributes' => array('onClick' => '$(".bef-checkboxes input:checkbox").attr("checked", false);'));
+        $form['fake_all_checkbox'] = array('#type' => 'checkbox', '#title' => t('All'));
         if(empty($form_state['input']['field_featured_product_category_value_many_to_one'])){
             $form['fake_all_checkbox']['#attributes']['checked'] = TRUE;
         }else{
@@ -54,7 +54,7 @@ function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
         }
     }else{
         $form['submit']['#value'] = 'Search for Device';
-        $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="edit-reset" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
+        $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
         drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/jquery.multiselect.min.js', 'theme');
         drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/multiselect_init.js', 'theme');
     }
