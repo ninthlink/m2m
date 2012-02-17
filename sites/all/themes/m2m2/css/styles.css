@@ -1599,3 +1599,7 @@ ul.link_sections li.link_wireless  {
 #block-menu-menu-footer li ul {
   display:none;
 }
+
+.site-map-menus h2 {
+  display:none;
+}
