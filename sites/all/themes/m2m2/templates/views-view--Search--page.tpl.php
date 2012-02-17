@@ -69,8 +69,8 @@
   <div id="results">
 
     <div class="view-display-mode-tabs">
-      <a href="#" class="list-view" onClick="$('div.view div.attachment').hide();$('div.view div.view-content:first').show();return false;">List</a>
-      <a href="#" class="grid-view" onClick="$('div.view div.view-content:first').hide();$('div.view div.attachment').show();return false;">Thumbs</a>
+      <a href="#" id="list-view-link" class="list-view active" onClick="if(!$(this).hasClass('active')){$('div.view div.attachment').hide();$('div.view div.view-content:first').show();$(this).toggleClass('active').next().toggleClass('active');}return false;">List</a>
+      <a href="#" id="grid-view-link" class="grid-view" onClick="if(!$(this).hasClass('active')){$('div.view div.view-content:first').hide();$('div.view div.attachment').show();$(this).toggleClass('active').prev().toggleClass('active');}return false;">Thumbs</a>
     </div>
 
     <?php if ($attachment_before): ?>
