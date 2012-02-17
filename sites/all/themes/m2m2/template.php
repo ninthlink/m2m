@@ -100,3 +100,23 @@ function phptemplate_get_ie_styles() {
 
   return $iecss;
 }
+
+/**
+ * This is a one by one clone of the core theme_menu_item() function that allows
+ * custom theming of the site map page items.
+ *
+ * Generate the HTML output for a menu item and submenu.
+ *
+ * @ingroup themeable
+ */
+function phptemplate_site_map_menu_item($link, $has_children, $menu = '', $in_active_trail = FALSE, $extra_class = NULL) {
+  $class = ($menu ? 'expanded' : ($has_children ? 'collapsed' : 'leaf'));
+  if (!empty($extra_class)) {
+    $class .= ' '. $extra_class;
+  }
+  if ($in_active_trail) {
+      return;
+    //$class .= ' active-trail';
+  }
+  return '<li class="'. $class .'">'. $link . $menu ."</li>\n";
+}
