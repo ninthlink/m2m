@@ -1595,3 +1595,7 @@ ul.link_sections li.link_connectivity  {
 ul.link_sections li.link_wireless  {
   background: url(../images/img_link_sections.png) no-repeat -640px 0;
 }
+
+#block-menu-menu-footer li ul {
+  display:none;
+}
