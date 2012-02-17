@@ -45,6 +45,9 @@
     </div>
   </div>
 </div>
+<style>
+    #views-exposed-form-featured-products-page-1 .bef-checkboxes {margin-top:150px;}
+</style>
 <script>
   function toggle_devices(view_details){
     if(view_details){
@@ -56,15 +59,19 @@
     }
   }
   $(document).ready(function(){
-    $('#edit-fake-all-checkbox').unbind('click');
-    $('#edit-fake-all-checkbox').click(function(){
+    if($('#views-exposed-form-featured-products-page-1 .bef-checkboxes input:checked').length == 0){
+        $('#edit-field-featured-product-category-value-many-to-one-all').attr('checked', 'checked');
+    }
+    $('#edit-field-featured-product-category-value-many-to-one-all').unbind('click');
+    $('#edit-field-featured-product-category-value-many-to-one-all').removeAttr('name');
+    $('#edit-field-featured-product-category-value-many-to-one-all').click(function(){
         var form = $('#views-exposed-form-featured-products-page-1');
-        form.find('.bef-checkboxes input:checkbox:checked').removeAttr("checked");
+        form.find('.bef-checkboxes input[id != "edit-field-featured-product-category-value-many-to-one-all"]:checkbox:checked').removeAttr("checked");
         form.submit();
     });
-    $('#views-exposed-form-featured-products-page-1 .bef-checkboxes input:checkbox').change(function(){
+    $('#views-exposed-form-featured-products-page-1 .bef-checkboxes input[id != "edit-field-featured-product-category-value-many-to-one-all"]:checkbox').change(function(){
         if($(this).attr('checked')){
-            $('#edit-fake-all-checkbox').removeAttr('checked');
+            $('#edit-field-featured-product-category-value-many-to-one-all').removeAttr('checked');
         }
     });
   });

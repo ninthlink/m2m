@@ -46,12 +46,13 @@ function custom_m2m_form_alter(&$form, $form_state, $form_id) {
 
 function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
     if($form['#id'] == 'views-exposed-form-featured-products-page-1'){
-        $form['fake_all_checkbox'] = array('#type' => 'checkbox', '#title' => t('All'));
-        if(empty($form_state['input']['field_featured_product_category_value_many_to_one'])){
-            $form['fake_all_checkbox']['#attributes']['checked'] = TRUE;
-        }else{
-            $form_state['input']['fake_all_checkbox'] = 0;
-        }
+        //$form['fake_all_checkbox'] = array('#type' => 'checkbox', '#title' => t('All'), '#weight' => -50);
+        //if(empty($form_state['input']['field_featured_product_category_value_many_to_one'])){
+            //$form['fake_all_checkbox']['#attributes']['checked'] = TRUE;
+        //}else{
+            //$form_state['input']['fake_all_checkbox'] = 0;
+        //}
+        $form['field_featured_product_category_value_many_to_one']['#options'] = array_merge(array('all' => 'All'), $form['field_featured_product_category_value_many_to_one']['#options']);
     }else{
         $form['submit']['#value'] = 'Search for Device';
         $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
