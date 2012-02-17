@@ -12,8 +12,6 @@
     <span class="submitted"><?php print $submitted; ?></span>
   <?php endif; ?>
 
-<div class="backtosearch"><?php echo l('Back to Search Results', 'routersearch', array('attributes' => array('title' =>"Back to search results"), 'html' => TRUE));?></div>
-
 <div class="product_column1">
 
   <div class="product_title">
@@ -22,7 +20,6 @@
   <div class="product_image">
   <?php print t($node->field_image[0]['view']); ?>
   </div>
-
 <div class="product_links">
 <?php
   if ($node->field_product_link[0]['view']) {
@@ -34,7 +31,6 @@
 ?>
    | <a href="mailto:<?php print t($node->field_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
 </div>
-
 
 </div>
 

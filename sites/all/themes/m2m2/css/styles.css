@@ -37,7 +37,7 @@ body.page-routersearch h1,
 body.page-devicesearch h1,
 body.page-featured h1,
 body.page-cellular h1,
-body.page-connectivity h1 {
+body.page-connectivitysearch h1 {
   display: none;
 }
 /* CSS DOCUMENT */
@@ -1054,9 +1054,10 @@ body.page-routersearch .view-router-search {
 .view-connectivity-search .view-content .views-row div.views-field-field-connectivity-image-fid {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 0px;
   height: 90px;
-  width: 170px;
+  width: 210px;
+  text-align: center;
 }
 .view-Search .view-content .views-row div.views-field-field-image-fid .img,
 .view-router-search .view-content .views-row div.views-field-field-rout-image-fid img,
@@ -1068,8 +1069,8 @@ body.page-routersearch .view-router-search {
 .view-connectivity-search .view-content .views-row div.views-field-view-node {
   position: absolute;
   top: 140px;
-  left: 20px;
-  width: 170px;
+  left: 0;
+  width: 210px;
 }
 .view-Search .view-content .views-row div.views-field-view-node .field-content,
 .view-router-search .view-content .views-row div.views-field-view-node .field-content,
@@ -1186,7 +1187,7 @@ body.page-routersearch .view-router-search {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  font-family: "Arial Rounded", helvetica, sans-serif;
+  font-family: "Arial Rounded MT Bold", helvetica, sans-serif;
   text-align: center;
   display: block;
   text-decoration: none;
@@ -1282,7 +1283,7 @@ body.node-type-router h1  {
 }
 .product_column2 {
   float: right;
-  width: 600px;
+  width: 670px;
   margin: 0;
   font-size: 13px;
   color:#333;
@@ -1295,6 +1296,10 @@ body.node-type-router h1  {
 }
 .product_column1 .product_image {
   margin: 0 0 30px;
+}
+.product_column1 .product_links,
+.product_column2 .product_links {
+  font-family: "Arial Rounded MT Bold", arial, sans-serif;
 }
 
 .fieldgroup.group-product-details .content {
@@ -1309,36 +1314,28 @@ body.node-type-router h1  {
   display: inline;
 }
 .backtosearch {
-  background: #000 url(../images/bg_subhead_black.png) repeat-x;
-  font-size: 18px;
-  height: 56px;
-  line-height: 56px;
-  margin: -30px -50px 30px -20px;
-  color:#fff;
-  -moz-border-radius-topleft: 10px;
-  -moz-border-radius-topright: 10px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-radius: 10px 10px 0px 0px;
-  border-radius: 10px 10px 0px 0px;
+  font-size: 16px;
+  margin: 0 0 30px;
+  font-family: "Arial Rounded MT Bold", arial, sans-serif;
+  text-transform: uppercase;
 }
 .backtosearch a {
+  color:#fff;
   display: inline-block;
   background: url(../images/btn_back.png) no-repeat;
-  height: 48px;
-  line-height: 48px;
-  margin: 4px 0 0 4px;
-  color:#fff;
-  -moz-border-radius-topleft: 10px;
-  -moz-border-radius-topright: 10px;
-  -moz-border-radius-bottomright: 10px;
-  -moz-border-radius-bottomleft: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  padding: 0 20px 0 40px;
+  height: 37px;
+  line-height: 37px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 0 20px 0 35px;
+  width: 170px;
 }
 
-/* search page */
+/* search page
 body.page-search #content  {
   background: url(../images/bg_subhead_green.png) repeat-x;
   -moz-border-radius-topleft: 10px;
@@ -1347,7 +1344,6 @@ body.page-search #content  {
   border-radius: 10px 10px 0px 0px;
 }
 body.page-search h1  {
-  display: none;
 }
 body.page-search .box h2  {
   font-size: 18px;
@@ -1414,7 +1410,7 @@ body.page-search .box dd {
 }
 body.page-search .box dd p {
   margin: 0;
-}
+}*/
 
 #tabs-wrapper {
   display: none;

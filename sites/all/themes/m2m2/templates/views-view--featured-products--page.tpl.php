@@ -34,7 +34,7 @@
       $('#devicehere').load($(this).attr('href')+" #main_content", function() {
         toggle_devices(true);
       });
-      return false; 
+      return false;
     });
   });
 </script>
@@ -103,7 +103,7 @@
   </div>
 
   <div id="device_details" style="display:none;">
-    <a href="#" onClick="toggle_devices(false);return false;">Back to Results</a>
+    <div class="backtosearch"><a href="#" onClick="toggle_devices(false);return false;">Back to Results</a></div>
     <div id="devicehere"></div>
   </div>
 

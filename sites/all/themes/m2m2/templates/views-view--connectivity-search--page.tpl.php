@@ -123,7 +123,7 @@
   </div>
 
   <div id="device_details" style="display:none;">
-    <a href="#" onClick="toggle_devices(false);return false;">Back to Results</a>
+    <div class="backtosearch"><a href="#" onClick="toggle_devices(false);return false;">Back to Results</a></div>
     <div id="devicehere"></div>
   </div>
 
