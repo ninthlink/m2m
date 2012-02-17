@@ -57,18 +57,18 @@
   }
   $(document).ready(function(){
     if($('#views-exposed-form-featured-products-page-1 .bef-checkboxes input:checked').length == 0){
-        $('#edit-field-featured-product-category-value-many-to-one-all').attr('checked', 'checked').addClass('highlight');
+        $('#edit-field-featured-product-category-value-many-to-one-all').attr('checked', 'checked').parent().addClass('highlight');
     }
     $('#edit-field-featured-product-category-value-many-to-one-all').unbind('click');
     $('#edit-field-featured-product-category-value-many-to-one-all').removeAttr('name');
     $('#edit-field-featured-product-category-value-many-to-one-all').click(function(){
         var form = $('#views-exposed-form-featured-products-page-1');
-        form.find('.bef-checkboxes input[id != "edit-field-featured-product-category-value-many-to-one-all"]:checkbox:checked').removeAttr("checked").removeClass('highlight');
+        form.find('.bef-checkboxes input[id != "edit-field-featured-product-category-value-many-to-one-all"]:checkbox:checked').removeAttr("checked").parent().removeClass('highlight');
         form.submit();
     });
     $('#views-exposed-form-featured-products-page-1 .bef-checkboxes input[id != "edit-field-featured-product-category-value-many-to-one-all"]:checkbox').change(function(){
         if($(this).attr('checked')){
-            $('#edit-field-featured-product-category-value-many-to-one-all').removeAttr('checked').removeClass('highlight');
+            $('#edit-field-featured-product-category-value-many-to-one-all').removeAttr('checked').parent().removeClass('highlight');
         }
     });
   });

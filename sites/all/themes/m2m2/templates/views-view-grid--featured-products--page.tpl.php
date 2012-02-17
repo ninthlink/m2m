@@ -14,7 +14,7 @@
   <div class="featured_search_header">
     <h3><?php print $title; ?></h3>
   <?php if(!(count($view->exposed_input['field_featured_product_category_value_many_to_one']) == 1 && $view->exposed_input['field_featured_product_category_value_many_to_one'][0] == $title)){?>
-    <a href="#" onClick="var form = $('#views-exposed-form-featured-products-page-1'); form.find('input:checkbox[value!=\'<?php echo str_replace('&', '&amp;', $title);?>\']').attr('checked', false).removeClass('highlight');form.find('.bef-checkboxes input[value=\'<?php echo str_replace('&', '&amp;', $title);?>\']').attr('checked', true).addClass('highlight');form.submit();return false;">View All</a>
+    <a href="#" onClick="var form = $('#views-exposed-form-featured-products-page-1'); form.find('input:checkbox[value!=\'<?php echo str_replace('&', '&amp;', $title);?>\']').attr('checked', false).parent().removeClass('highlight');form.find('.bef-checkboxes input[value=\'<?php echo str_replace('&', '&amp;', $title);?>\']').attr('checked', true).parent().addClass('highlight');form.submit();return false;">View All</a>
     <?php $display_none = TRUE;?>
   <?php }else{
       $display_none = FALSE;
