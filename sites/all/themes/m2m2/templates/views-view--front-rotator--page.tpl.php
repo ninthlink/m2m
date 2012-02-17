@@ -87,7 +87,4 @@
       <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
-  <?php echo l('Cellular Module Search', 'cellular-modules');?>
-  <?php echo l('Connectivity Module Search', 'connectivity-modules');?>
-  <?php echo l('Wireless Gateway/Router Search', 'routers');?>
 </div> <?php /* class view */ ?>
