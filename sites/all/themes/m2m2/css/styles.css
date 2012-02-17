@@ -37,6 +37,7 @@ body.page-routersearch h1,
 body.page-devicesearch h1,
 body.page-featured h1,
 body.page-cellular h1,
+body.page-connectivity h1,
 body.page-connectivitysearch h1 {
   display: none;
 }
@@ -99,6 +100,8 @@ a:hover {
   background: #eee url(../images/ef_state_default.png) repeat-x;
   border: 1px solid #999;
   padding: 4px 4px 2px 10px;
+  width: 230px !important;
+  overflow: hidden;
 }
 .views-exposed-form button.ui-multiselect.ui-state-active {
   font-weight: bold;
@@ -147,8 +150,7 @@ a:hover {
   clear: both;
 }
 .views-exposed-form .views-submit-button input.form-submit {
-  margin: 0 14px 0 0;
-  font-size: 12px;
+  margin: 0 10px 0 0;
   font-weight: bold;
   font-family: "Arial Rounded MT Bold", arial, helvetica;
   -webkit-border-radius: 5px;
@@ -163,7 +165,7 @@ a:hover {
   background: #000 url(../images/ef_btn_search.png) no-repeat top right;
   color:#fff;
   padding: 0 10px;
-  width: 226px;
+  width: 230px;
   text-align: left;
 }
 .views-exposed-form .views-submit-button input#view-all.form-submit {
@@ -172,6 +174,7 @@ a:hover {
   width: auto;
   color: #000;
   padding: 0 16px;
+  font-size: 12px;
 }
 
 #views-exposed-form-featured-products-page-1 .views-exposed-form  {}
@@ -548,6 +551,7 @@ body.no-sidebars #main_content {
 #footer #block-block-6.block  {
   float: right;
   text-align: right;
+  margin: 7px 0 0;
 }
 
 #footer .block-menu {
