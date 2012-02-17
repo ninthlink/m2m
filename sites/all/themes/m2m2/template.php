@@ -110,8 +110,8 @@ function phptemplate_get_ie_styles() {
  * @ingroup themeable
  */
 function phptemplate_site_map_menu_item($link, $has_children, $menu = '', $in_active_trail = FALSE, $extra_class = NULL) {
-  if($class=='active'){
-      return;
+  if(preg_match('/^<[^>]+active/', $link)){
+    return;
   }
   $class = ($menu ? 'expanded' : ($has_children ? 'collapsed' : 'leaf'));
   if (!empty($extra_class)) {
