@@ -45,9 +45,6 @@
     </div>
   </div>
 </div>
-<style>
-    #views-exposed-form-featured-products-page-1 .bef-checkboxes {margin-top:150px;}
-</style>
 <script>
   function toggle_devices(view_details){
     if(view_details){
