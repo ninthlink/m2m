@@ -71,7 +71,7 @@ a:hover {
 #header_top  {
   background: url(../images/bg_exposed_filter.png) repeat-x bottom left;
   padding: 0 0 15px;
-  margin: -10px 0 10px;
+  margin: -10px 0 20px;
 }
 #header_top .block-views,
 #header_top .block-block  {
@@ -173,6 +173,39 @@ a:hover {
   color: #000;
   padding: 0 16px;
 }
+
+#views-exposed-form-featured-products-page-1 .views-exposed-form  {}
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget  {
+  width: auto;
+  margin: 0;
+  float: none;
+}
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget .form-checkboxes {}
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget .form-checkboxes .form-item,
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget.views-submit-button .form-item  {
+  background: #eee url(../images/ef_state_default.png) repeat-x;
+  border: 1px solid #9a9a9a;
+  padding: 3px 4px 2px 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  width: 290px;
+  float: left;
+  margin: 0 15px 10px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget .form-checkboxes .form-item.highlight,
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget.views-submit-button .form-item.highlight  {
+  border: 1px solid #676767;
+}
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget .form-checkboxes .form-item.highlight label,
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget.views-submit-button .form-item.highlight label  {
+  font-weight: bold;
+}
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget .form-checkboxes .form-item input  {}
+
+#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget.views-submit-button  {}
 
 /* nav primary */
 #block-menu-primary-links   {
@@ -559,7 +592,8 @@ div.node-edit-link  {
 /* banners */
 body.page-routers {}
 .banner-cellular,
-.banner-connectivity  {
+.banner-connectivity,
+.banner-wireless  {
   position: relative;
   height: 300px;
   padding: 30px 0 20px;
@@ -568,6 +602,10 @@ body.page-routers {}
 }
 .banner-connectivity  {
   background: url(../images/img_h_router.png) no-repeat top right;
+}
+.banner-wireless  {
+  background: url(../images/img_h_router.png) no-repeat top right;
+  height: ;
 }
 .banner-subtitle  {
   height: 40px;
@@ -953,6 +991,16 @@ body.page-routersearch .view-router-search {
   line-height: 34px;
   padding: 0 15px 0 35px;
   color:#666;
+  border: 1px solid #fff;
+  border-width: 1px 1px 0;
+}
+.view-display-mode-tabs a.list-view {
+  background: url(../images/icon_list.png) no-repeat 15px 13px;
+}
+.view-display-mode-tabs a.grid-view {
+  background: url(../images/icon_grid.png) no-repeat 15px 11px;
+}
+.view-display-mode-tabs a.active {
   border: 1px solid #ccc;
   border-width: 1px 1px 0;
   -moz-border-radius-topleft: 5px;
@@ -961,12 +1009,13 @@ body.page-routersearch .view-router-search {
   -moz-border-radius-bottomleft: 0px;
   -webkit-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
+  color:#6da101;
 }
-.view-display-mode-tabs a.list-view {
-  background: #fff url(../images/icon_list.png) no-repeat 15px 13px;
+.view-display-mode-tabs a.list-view.active {
+  background: #fff url(../images/icon_list.png) no-repeat 15px -37px;
 }
-.view-display-mode-tabs a.grid-view {
-  background: #fff url(../images/icon_grid.png) no-repeat 15px 11px;
+.view-display-mode-tabs a.grid-view.active {
+  background: #fff url(../images/icon_grid.png) no-repeat 15px -39px;
 }
 
 .view-Search .view-content .views-row,
@@ -1062,23 +1111,27 @@ body.page-routersearch .view-router-search {
 .view-connectivity-search .view-content .views-row .field-content {
   width: auto;
 }
-
 .view-Search .view-content table.views-view-grid,
 .view-router-search .view-content table.views-view-grid,
-.view-connectivity-search .view-content table.views-view-grid {
+.view-connectivity-search .view-content table.views-view-grid,
+.view-featured-products .view-content table.views-view-grid {
   border: 0;
   border-collapse: separate;
   border-spacing: 10px;
-  margin: 0;
+  margin: 0 -10px 20px;
+  clear: both;
+  width: 980px;
 }
 .view-Search .view-content table.views-view-grid tr,
 .view-router-search .view-content table.views-view-grid tr,
-.view-connectivity-search .view-content table.views-view-grid tr {
+.view-connectivity-search .view-content table.views-view-grid tr,
+.view-featured-products .view-content table.views-view-grid tr {
   border: 0;
 }
 .view-Search .view-content table.views-view-grid td,
 .view-router-search .view-content table.views-view-grid td,
-.view-connectivity-search .view-content table.views-view-grid td {
+.view-connectivity-search .view-content table.views-view-grid td,
+.view-featured-products .view-content table.views-view-grid td {
   border: 1px solid #ccc;
   padding: 10px;
   font-size: 13px;
@@ -1086,31 +1139,41 @@ body.page-routersearch .view-router-search {
 }
 .view-Search .view-content table.views-view-grid td label,
 .view-router-search .view-content table.views-view-grid td label,
-.view-connectivity-search .view-content table.views-view-grid td label {
+.view-connectivity-search .view-content table.views-view-grid td label,
+.view-featured-products .view-content table.views-view-grid td label {
   color:#6da101;
   font-weight: bold;
   display: inline-block;
 }
 .view-Search .view-content table.views-view-grid td .field-content,
 .view-router-search .view-content table.views-view-grid td .field-content,
-.view-connectivity-search .view-content table.views-view-grid td .field-content {
+.view-connectivity-search .view-content table.views-view-grid td .field-content,
+.view-featured-products .view-content table.views-view-grid td .field-content,
+.view-Search .view-content table.views-view-grid td .field-content .field-item,
+.view-router-search .view-content table.views-view-grid td .field-content .field-item,
+.view-connectivity-search .view-content table.views-view-grid td .field-content .field-item,
+.view-featured-products .view-content table.views-view-grid td .field-content .field-item {
   display: inline;
+  margin: 0 3px 0 0;
 }
 .view-Search .view-content table.views-view-grid td .views-field-field-image-fid,
 .view-router-search .view-content table.views-view-grid td .views-field-field-rout-image-fid,
-.view-connectivity-search .view-content table.views-view-grid td .views-field-field-connectivity-image-fid {
+.view-connectivity-search .view-content table.views-view-grid td .views-field-field-connectivity-image-fid,
+.view-featured-products .view-content table.views-view-grid td .views-field-field-featured-image-fid {
   text-align: center;
 }
 
 .view-Search .view-content table.views-view-grid td .views-field-view-node .field-content,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node .field-content,
-.view-connectivity-search .view-content table.views-view-grid td .views-field-view-node .field-content {
+.view-connectivity-search .view-content table.views-view-grid td .views-field-view-node .field-content,
+.view-featured-products .view-content table.views-view-grid td .views-field-view-node .field-content {
   display: block;
   padding: 10px 0 0;
 }
 .view-Search .view-content table.views-view-grid td .views-field-view-node a,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node a,
-.view-connectivity-search .view-content table.views-view-grid td .views-field-view-node a {
+.view-connectivity-search .view-content table.views-view-grid td .views-field-view-node a,
+.view-featured-products .view-content table.views-view-grid td .views-field-view-node a {
   font-size: 15px;
   font-weight: bold;
   color:#fff;
@@ -1127,6 +1190,29 @@ body.page-routersearch .view-router-search {
   text-align: center;
   display: block;
   text-decoration: none;
+}
+
+.view-featured-products #results .featured_search_header  {
+  position: relative;
+  clear: both;
+  padding: 0 3px;
+}
+.view-featured-products #results .featured_search_header h3  {
+  padding: 0;
+  margin: 0;
+  font-family: "Arial Rounded MT Bold";
+  font-weight: bold;
+  font-size: 16px;
+  color:#78a51e;
+}
+.view-featured-products #results .featured_search_header a  {
+  position: absolute;
+  bottom: 0;
+  right: 3px;
+  color:#333;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 12px;
 }
 
 .item-list ul.pager {

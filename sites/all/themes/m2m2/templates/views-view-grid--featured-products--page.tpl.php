@@ -11,13 +11,15 @@
  */
 ?>
 <?php if (!empty($title)) : ?>
-  <h3><?php print $title; ?></h3>
+  <div class="featured_search_header">
+    <h3><?php print $title; ?></h3>
   <?php if(!(count($view->exposed_input['field_featured_product_category_value_many_to_one']) == 1 && $view->exposed_input['field_featured_product_category_value_many_to_one'][0] == $title)){?>
     <a href="#" onClick="var form = $('#views-exposed-form-featured-products-page-1'); form.find('input:checkbox[value!=\'<?php echo str_replace('&', '&amp;', $title);?>\']').attr('checked', false);form.find('.bef-checkboxes input[value=\'<?php echo str_replace('&', '&amp;', $title);?>\']').attr('checked', true);form.submit();return false;">View All</a>
     <?php $display_none = TRUE;?>
   <?php }else{
       $display_none = FALSE;
   }?>
+  </div>
 <?php endif; ?>
 <table class="<?php print $class; ?>"<?php print $attributes; ?>>
   <tbody>
