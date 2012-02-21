@@ -1306,6 +1306,9 @@ body.node-type-router h1  {
   font-family: "Arial Rounded MT Bold", arial, sans-serif;
 }
 
+.fieldgroup.group-product-details {
+  margin: 0;
+}
 .fieldgroup.group-product-details .content {
   padding: 0;
 }
