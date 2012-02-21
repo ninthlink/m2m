@@ -18,7 +18,7 @@
   <h2><?php print $title; ?></h2>
   </div>
   <div class="product_image">
-  <?php print t($node->field_image[0]['view']); ?>
+  <?php print t($node->field_featured_image[0]['view']); ?>
   </div>
 <div class="product_links">
 <?php
