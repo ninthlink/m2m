@@ -1141,6 +1141,7 @@ body.page-routersearch .view-router-search {
   padding: 10px;
   font-size: 13px;
   width: 25%;
+  overflow: hidden;
 }
 .view-Search .view-content table.views-view-grid td label,
 .view-router-search .view-content table.views-view-grid td label,
@@ -1168,12 +1169,32 @@ body.page-routersearch .view-router-search {
   text-align: center;
 }
 
-.view-Search .view-content table.views-view-grid td .views-field-view-node .field-content,
-.view-router-search .view-content table.views-view-grid td .views-field-view-node .field-content,
-.view-connectivity-search .view-content table.views-view-grid td .views-field-view-node .field-content,
-.view-featured-products .view-content table.views-view-grid td .views-field-view-node .field-content {
-  display: block;
-  padding: 10px 0 0;
+.view-Search .view-content table.views-view-grid td .fields_outer,
+.view-router-search .view-content table.views-view-grid td .fields_outer,
+.view-connectivity-search .view-content table.views-view-grid td .fields_outer,
+.view-featured-products .view-content table.views-view-grid td .fields_outer {
+  position: relative;
+  height: 325px;
+  min-height: 325px;
+  padding: 0 0 47px;
+}
+.view-Search .view-content table.views-view-grid td .views-field-view-node,
+.view-router-search .view-content table.views-view-grid td .views-field-view-node,
+.view-connectivity-search .view-content table.views-view-grid td .views-field-view-node,
+.view-featured-products .view-content table.views-view-grid td .views-field-view-node {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 37px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .view-Search .view-content table.views-view-grid td .views-field-view-node,
+  .view-router-search .view-content table.views-view-grid td .views-field-view-node,
+  .view-connectivity-search .view-content table.views-view-grid td .views-field-view-node,
+  .view-featured-products .view-content table.views-view-grid td .views-field-view-node {
+    bottom: 20px;
+  }
 }
 .view-Search .view-content table.views-view-grid td .views-field-view-node a,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node a,
