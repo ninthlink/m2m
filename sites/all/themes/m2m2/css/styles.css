@@ -601,8 +601,8 @@ body.page-routers {}
   position: relative;
   height: 300px;
   padding: 30px 0 20px;
-  background: url(../images/img_h_device.png) no-repeat top right;
-  font-family: "Gotham Rounded", arial, helvetica;
+  background: url(../images/img_h_device.png) no-repeat top right;/*
+  font-family: "Gotham Rounded", Arial, Sans-serif;*/
 }
 .banner-connectivity  {
   background: url(../images/img_h_router.png) no-repeat top right;
@@ -1573,8 +1573,8 @@ div.view-router-search div.attachment-after {
 .view-front-rotator .views_slideshow_slide .views-field-title  {
   position: relative;
   font-size: 36px;
-  line-height: 36px;
-  font-family: "Gotham Rounded", Arial, Sans-serif;
+  line-height: 36px;/*
+  font-family: "Gotham Rounded", Arial, Sans-serif;*/
   color:#6da304;
   z-index: 50;
   width: 430px;
@@ -1605,8 +1605,8 @@ ul.link_sections li  {
   float: left;
   width: 320px;
   background: url(../images/img_link_sections.png) no-repeat;
-  height: 140px;
-  font-family: "Gotham Rounded", Arial, Sans-serif;
+  height: 140px;/*
+  font-family: "Gotham Rounded", Arial, Sans-serif;*/
   font-size: 16px;
 }
 ul.link_sections li a  {
