@@ -1167,6 +1167,7 @@ body.page-routersearch .view-router-search {
 .view-connectivity-search .view-content table.views-view-grid td .views-field-field-connectivity-image-fid,
 .view-featured-products .view-content table.views-view-grid td .views-field-field-featured-image-fid {
   text-align: center;
+  max-width: 210px;
 }
 
 .view-Search .view-content table.views-view-grid td .fields_outer,
@@ -1622,6 +1623,16 @@ ul.link_sections li.link_connectivity  {
 }
 ul.link_sections li.link_wireless  {
   background: url(../images/img_link_sections.png) no-repeat -640px 0;
+}
+ul.link_sections li a:hover  {
+  background: url(../images/img_link_sections.png) no-repeat 0 -140px;
+  text-decoration: none;
+}
+ul.link_sections li.link_connectivity a:hover  {
+  background: url(../images/img_link_sections.png) no-repeat -320px -140px;
+}
+ul.link_sections li.link_wireless a:hover  {
+  background: url(../images/img_link_sections.png) no-repeat -640px -140px;
 }
 
 #block-menu-menu-footer li ul {
