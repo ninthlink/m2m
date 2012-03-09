@@ -91,8 +91,9 @@ a:hover {
   padding: 0 10px 10px 0;
   width: 230px;
 }
-.views-exposed-form .views-exposed-widget.views-widget-filter-field_gps_capabilities_value_many_to_one,
-.views-exposed-form .views-exposed-widget.views-widget-filter-field_rout_chipset_model_value_many_to_one {
+.views-exposed-form .views-exposed-widget.views-widget-filter-field_operator_certifications_value_many_to_one,
+.views-exposed-form .views-exposed-widget.views-widget-filter-field_rout_chipset_model_value_many_to_one,
+.views-exposed-form .views-exposed-widget.views-widget-filter-field_conn_electrical_interface_value_many_to_one {
   clear: left;
 }
 .views-exposed-form button.ui-multiselect {
