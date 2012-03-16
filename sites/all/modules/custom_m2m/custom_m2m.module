@@ -54,7 +54,7 @@ function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
     if(isset($form['field_company_value_many_to_one'])){
         $filters = $form_state['view']->display_handler->get_option('filters');
         $node_type = reset($filters['type']['value']);
-        $companies = db_query('SELECT DISTINCT(field_company_value) FROM {content_field_company} company INNER JOIN {node} node ON company.vid=node.vid WHERE node.type="%s" AND node.status=1;', $node_type);
+        $companies = db_query('SELECT DISTINCT(field_company_value) FROM {content_field_company} company INNER JOIN {node} node ON company.vid=node.vid WHERE node.type="%s" AND node.status=1 ORDER BY field_company_value;', $node_type);
         $form['field_company_value_many_to_one']['#options'] = array();
         while ($val = db_fetch_array($companies)) {
             $form['field_company_value_many_to_one']['#options'][$val['field_company_value']] = $val['field_company_value'];
