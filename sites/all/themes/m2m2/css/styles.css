@@ -1298,7 +1298,7 @@ div.view-manage-devices .views-row {
 
 body.node-type-device #content,
 body.node-type-router #content  {
-  padding: 30px 50px 70px 20px;
+  padding: 30px 20px 70px;
 }
 body.node-type-device h1,
 body.node-type-router h1  {
