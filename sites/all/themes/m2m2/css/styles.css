@@ -610,11 +610,10 @@ body.page-routers {}
   font-family: "Gotham Rounded", Arial, Sans-serif;*/
 }
 .banner-connectivity  {
-  background: url(../images/img_h_router.png) no-repeat top right;
+  background: url(../images/img_h_connectivity.png) no-repeat top right;
 }
 .banner-wireless  {
   background: url(../images/img_h_router.png) no-repeat top right;
-  height: ;
 }
 .banner-subtitle  {
   height: 40px;
