@@ -121,12 +121,20 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
         $block[0]['content'] .= '<li'.$act4.'>'.l('Manage Devices', $device_url).'</li></ul>';
         
         if($display_content_tabs == TRUE){
-          $block[0]['content'] .= '<ul class="tabs secondary">
-            <li'.$act3.'>'.l('Add Cellular Module', 'node/add/device').'</li>
-            <li'.$act6.'>'.l('Add Connectivity Module', 'node/add/connectivity-module').'</li>
-            <li'.$act7.'>'.l('Add Wireless Gateway/Router', 'node/add/router').'</li>
-            <li'.$act8.'>'.l('Add Featured Product', 'node/add/featured-product').'</li>
-          </ul>';
+          $block[0]['content'] .= '<ul class="tabs secondary">';
+          if(node_access('create', 'device', $user)){
+            $block[0]['content'] .= '<li'.$act3.'>'.l('Add Cellular Module', 'node/add/device').'</li>';
+          }
+          if(node_access('create', 'connectivity-module', $user)){
+            $block[0]['content'] .= '<li'.$act6.'>'.l('Add Connectivity Module', 'node/add/connectivity-module').'</li>';
+          }
+          if(node_access('create', 'router', $user)){
+            $block[0]['content'] .= '<li'.$act7.'>'.l('Add Wireless Gateway/Router', 'node/add/router').'</li>';
+          }
+          if(in_array('administrator', $user->roles)){
+            $block[0]['content'] .= '<li'.$act8.'>'.l('Add Featured Product', 'node/add/featured-product').'</li>';
+          }
+          $block[0]['content'] .= '</ul>';
         }
         //}else{
         //  if ($tabs): $block[0]['content'] .= '<ul class="tabs primary">'. $tabs .'</ul></div>'; endif;
