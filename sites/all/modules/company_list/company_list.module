@@ -58,10 +58,11 @@ function x_form_after_build($form, &$form_state){
   }
   if($form['#node']->type != 'profile'){
     $module_companies = variable_get('m2m_company_list_'. $form['#node']->type, array());
-    $option_companies = array_intersect($module_companies, $allowed_companies, $options);
+    $option_companies = array_intersect($module_companies, $allowed_companies);
   }else{
     $option_companies = $allowed_companies;
   }
+  $option_companies = array_intersect($option_companies, $options);
   if(!empty($option_companies)){
     sort($option_companies);
     $option_companies = array_combine($option_companies, $option_companies);
