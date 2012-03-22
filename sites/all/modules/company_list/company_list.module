@@ -11,11 +11,11 @@ function company_list_form_alter(&$form, $form_state, $form_id) {
       //if($user_fields->roles[3]=='Sales Rep'){
       $form['#after_build'][] = 'x_form_after_build';
       //}  
-      break;  
+      break;
     case 'search_theme_form':
       //$form['#action'] ='/search/device_list';
       //$form_state['redirect'] = "search/device_list/". trim($form_state['values'][$form_id]);
-      $form['#submit'] = array('search_all_special_submit');  
+      $form['#submit'] = array('search_all_special_submit');
       break;                    
     /*case 'user_login':
     case 'user_login_block':
@@ -36,11 +36,7 @@ function company_list_form_alter(&$form, $form_state, $form_id) {
           '#title' => t('Select the companies that can create modules of this type'),
           '#default_value' => variable_get('m2m_company_list_'. $form['#node_type']->type, array()),
         );
-        $result = db_query('SELECT global_settings FROM {content_node_field} WHERE field_name="field_company";');
-        $field_data_raw = unserialize(db_result($result));
-        $field_data = explode("\r\n", $field_data_raw['allowed_values']);
-        sort($field_data);
-        $form['m2m_company']['m2m_company_list']['#options'] = array_combine($field_data, $field_data);
+        $form['m2m_company']['m2m_company_list']['#options'] = content_allowed_values(content_fields('field_company'));
       }
       break;
   }
@@ -62,7 +58,7 @@ function x_form_after_build($form, &$form_state){
   }
   if($form['#node']->type != 'profile'){
     $module_companies = variable_get('m2m_company_list_'. $form['#node']->type, array());
-    $option_companies = array_intersect($module_companies, $allowed_companies);
+    $option_companies = array_intersect($module_companies, $allowed_companies, $options);
   }else{
     $option_companies = $allowed_companies;
   }
