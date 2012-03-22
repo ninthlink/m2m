@@ -9,9 +9,7 @@ function company_list_form_alter(&$form, $form_state, $form_id) {
       $user_fields = user_load($user->uid);
       //code to display only assigned companies
       //if($user_fields->roles[3]=='Sales Rep'){
-      if(!in_array('administrator', $user_fields->roles)){
-        $form['#after_build'][] = 'x_form_after_build';
-      }
+      $form['#after_build'][] = 'x_form_after_build';
       //}  
       break;  
     case 'search_theme_form':
@@ -23,24 +21,56 @@ function company_list_form_alter(&$form, $form_state, $form_id) {
     case 'user_login_block':
       $form['#action'] = 'user/login?destination=manage/owndevice';
       break;*/
+    case 'node_type_form':
+      if (in_array($form['#node_type']->type, array('connectivity_module', 'device', 'router'))) {
+        $form['m2m_company'] = array(
+          '#type' => 'fieldset',
+          '#title' => t('Company Options'),
+          '#group' => 'additional_settings',
+          '#collapsible' => TRUE,
+          '#collapsed' => FALSE,
+          '#weight' => 32,
+        );
+        $form['m2m_company']['m2m_company_list'] = array(
+          '#type' => 'checkboxes',
+          '#title' => t('Select the companies that can create modules of this type'),
+          '#default_value' => variable_get('m2m_company_list_'. $form['#node_type']->type, array()),
+        );
+        $result = db_query('SELECT global_settings FROM {content_node_field} WHERE field_name="field_company";');
+        $field_data_raw = unserialize(db_result($result));
+        $field_data = explode("\r\n", $field_data_raw['allowed_values']);
+        sort($field_data);
+        $form['m2m_company']['m2m_company_list']['#options'] = array_combine($field_data, $field_data);
+      }
+      break;
   }
 }
 
 function x_form_after_build($form, &$form_state){
   global $user;
-  
-  $sql=db_query("select field_company_value from {node} n, {content_field_company} c where n.uid='$user->uid' AND n.type='profile' AND n.nid=c.nid ORDER BY field_company_value");
-  $option_company=array();
-  while($row=db_fetch_array($sql)){
-    $option_company[$row['field_company_value']]=$row['field_company_value'];  
-  }
+  $option_companies = array();
   if(isset($form['group_product_details']['field_company'])){
-    $form['group_product_details']['field_company']['value']['#options']= $option_company;
-    $form['group_product_details']['field_company']['#default_value']= $form['group_product_details']['field_company']['#default_value'];
-  }elseif(isset($form['field_company'])){
-    $form['field_company']['value']['#options']= $option_company;
-    $form['field_company']['#default_value']= $form['field_company']['#default_value'];
+    $options =& $form['group_product_details']['field_company']['value']['#options'];
+  }else{
+    $options =& $form['field_company']['value']['#options'];
   }
+  if(!in_array('administrator', $user->roles)){
+    $profile = content_profile_load('profile', $user->uid);
+    $allowed_companies = array_map(create_function('$c', 'return $c["value"];'), $profile->field_company);
+  }else{
+    $allowed_companies = $options;
+  }
+  if($form['#node']->type != 'profile'){
+    $module_companies = variable_get('m2m_company_list_'. $form['#node']->type, array());
+    $option_companies = array_intersect($module_companies, $allowed_companies);
+  }else{
+    $option_companies = $allowed_companies;
+  }
+  if(!empty($option_companies)){
+    sort($option_companies);
+    $option_companies = array_combine($option_companies, $option_companies);
+  }
+  $options = $option_companies;
   return $form;
 }
 

@@ -23,25 +23,6 @@ function custom_m2m_add_module_page(){
     return "Please select the type of module you'd like to create.";
 }
 
-/**
- * Implementation of hook_form_alter().
- */
-function custom_m2m_form_alter(&$form, $form_state, $form_id) {
-  if($form_id == 'device_node_form'){
-    global $user;
-    if($user->uid){
-      $query = db_query("SELECT cc.field_company_value FROM {node} n
-                                          LEFT JOIN {content_field_company} cc ON n.nid = cc.nid
-                                          WHERE uid = %d AND type = '%s'", $user->uid, 'profile');
-      while($res = db_fetch_object($query)){
-          $options .= $res->field_company_value.'
-            ';
-      }
-      $form['#field_info']['field_company']['allowed_values'] = $options;
-    }
-  }
-}
-
 function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
     if($form['#id'] == 'views-exposed-form-featured-products-page-1'){
         $form['field_featured_product_category_value_many_to_one']['#options'] = array_merge(array('all' => 'All'), $form['field_featured_product_category_value_many_to_one']['#options']);
@@ -76,69 +57,76 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       $block[0]['content'] = '';
       //if((arg(0)=='user') || (arg(0)=='user' && arg(1)==$user->uid && $user->uid!=0) || (strpos($_SERVER['REQUEST_URI'],"manage/device")!==false) || (!empty($node) && $node->type=='profile') || (strpos($_SERVER['REQUEST_URI'],"manage/owndevice")!==false)){
       $display_content_tabs = FALSE;
-        if(strpos($_SERVER['REQUEST_URI'], "user/".$user->uid."/edit")!==false) $act2=' class="active"';
-        if(strpos($_SERVER['REQUEST_URI'], "node/add/device")!==false){
-            $display_content_tabs = TRUE;
-            $act3=' class="active"';
-        }
-        if(strpos($_SERVER['REQUEST_URI'], "node/add/connectivity-module")!==false){
-            $display_content_tabs = TRUE;
-            $act6=' class="active"';
-        }
-        if(strpos($_SERVER['REQUEST_URI'], "node/add/router")!==false){
-            $display_content_tabs = TRUE;
-            $act7=' class="active"';
-        }
-        if(strpos($_SERVER['REQUEST_URI'], "node/add/featured-product")!==false){
-            $display_content_tabs = TRUE;
-            $act8=' class="active"';
-        }
-        if(strpos($_SERVER['REQUEST_URI'], "add_modules")!==false){
-            $display_content_tabs = TRUE;
-            $act9=' class="active"';
-        }
-        if((strpos($_SERVER['REQUEST_URI'], "user/".$user->uid)!==false || strpos($_SERVER['REQUEST_URI'], "user")!==false) && arg(2)=='') $act1=' class="active"';
-        if(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
-        if(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
+      if(strpos($_SERVER['REQUEST_URI'], "user/".$user->uid."/edit")!==false) $act2=' class="active"';
+      if(strpos($_SERVER['REQUEST_URI'], "node/add/device")!==false){
+        $display_content_tabs = TRUE;
+        $act3=' class="active"';
+      }
+      if(strpos($_SERVER['REQUEST_URI'], "node/add/connectivity-module")!==false){
+        $display_content_tabs = TRUE;
+        $act6=' class="active"';
+      }
+      if(strpos($_SERVER['REQUEST_URI'], "node/add/router")!==false){
+        $display_content_tabs = TRUE;
+        $act7=' class="active"';
+      }
+      if(strpos($_SERVER['REQUEST_URI'], "node/add/featured-product")!==false){
+        $display_content_tabs = TRUE;
+        $act8=' class="active"';
+      }
+      if(strpos($_SERVER['REQUEST_URI'], "add_modules")!==false){
+        $display_content_tabs = TRUE;
+        $act9=' class="active"';
+      }
+      if((strpos($_SERVER['REQUEST_URI'], "user/".$user->uid)!==false || strpos($_SERVER['REQUEST_URI'], "user")!==false) && arg(2)=='') $act1=' class="active"';
+      if(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
+      if(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
 
-        $user_fields = user_load($user->uid);
-        //if($user_fields->roles[3]=='Sales Rep')
-        $device_url1="manage/owndevice";
-        //else
-        //if($user_fields->roles[3]=='Sales Rep'){
-        //  $device_url="manage/device";
-        //}else{
-        //  $device_url="managedevice";
-        //}
-        $block[0]['content'] .= '<ul class="tabs primary"><li'.$act1.'>'.l('View', 'user/'.$user->uid).'</li><li'.$act2.'>'.l('Update Profile', 'user/'.$user->uid.'/edit').'</li>';
-        if($user_fields->roles[3]=='Sales Rep'){
-          $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', $device_url1).'</li>';
-          $device_url="manage/device";
-        }else{
-          $device_url="managedevice";
-        }
-        $block[0]['content'] .= '<li'.$act9.'>'.l('Add Devices', 'add_modules').'</li>';
-        $block[0]['content'] .= '<li'.$act4.'>'.l('Manage Devices', $device_url).'</li></ul>';
+      $user_fields = user_load($user->uid);
+      //if($user_fields->roles[3]=='Sales Rep')
+      $device_url1="manage/owndevice";
+      //else
+      //if($user_fields->roles[3]=='Sales Rep'){
+      //  $device_url="manage/device";
+      //}else{
+      //  $device_url="managedevice";
+      //}
+      $block[0]['content'] .= '<ul class="tabs primary"><li'.$act1.'>'.l('View', 'user/'.$user->uid).'</li><li'.$act2.'>'.l('Update Profile', 'user/'.$user->uid.'/edit').'</li>';
+      if($user_fields->roles[3]=='Sales Rep'){
+        $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', $device_url1).'</li>';
+        $device_url="manage/device";
+      }else{
+        $device_url="managedevice";
+      }
+      $block[0]['content'] .= '<li'.$act9.'>'.l('Add Devices', 'add_modules').'</li>';
+      $block[0]['content'] .= '<li'.$act4.'>'.l('Manage Devices', $device_url).'</li></ul>';
         
-        if($display_content_tabs == TRUE){
-          $block[0]['content'] .= '<ul class="tabs secondary">';
-          if(node_access('create', 'device', $user)){
-            $block[0]['content'] .= '<li'.$act3.'>'.l('Add Cellular Module', 'node/add/device').'</li>';
-          }
-          if(node_access('create', 'connectivity-module', $user)){
-            $block[0]['content'] .= '<li'.$act6.'>'.l('Add Connectivity Module', 'node/add/connectivity-module').'</li>';
-          }
-          if(node_access('create', 'router', $user)){
-            $block[0]['content'] .= '<li'.$act7.'>'.l('Add Wireless Gateway/Router', 'node/add/router').'</li>';
-          }
-          if(in_array('administrator', $user->roles)){
-            $block[0]['content'] .= '<li'.$act8.'>'.l('Add Featured Product', 'node/add/featured-product').'</li>';
-          }
-          $block[0]['content'] .= '</ul>';
+      if($display_content_tabs == TRUE){
+        $profile = content_profile_load('profile', $user->uid);
+        $user_companies = array_map(create_function('$c', 'return $c["value"];'), $profile->field_company);
+        $is_admin = in_array('administrator', $user->roles);
+        $add_devices_ul = '';
+        if($is_admin || array_intersect($user_companies, variable_get('m2m_company_list_device', array()))){
+          $add_devices_ul .= '<li'.$act3.'>'.l('Add Cellular Module', 'node/add/device').'</li>';
         }
-        //}else{
-        //  if ($tabs): $block[0]['content'] .= '<ul class="tabs primary">'. $tabs .'</ul></div>'; endif;
-            //if ($tabs2): print '<ul class="tabs secondary">'. $tabs2 .'</ul>'; endif;
+        if($is_admin || array_intersect($user_companies, variable_get('m2m_company_list_connectivity_module', array()))){
+          $add_devices_ul .= '<li'.$act6.'>'.l('Add Connectivity Module', 'node/add/connectivity-module').'</li>';
+        }
+        if($is_admin || array_intersect($user_companies, variable_get('m2m_company_list_router', array()))){
+          $add_devices_ul .= '<li'.$act7.'>'.l('Add Wireless Gateway/Router', 'node/add/router').'</li>';
+        }
+        if($is_admin){
+          $add_devices_ul .= '<li'.$act8.'>'.l('Add Featured Product', 'node/add/featured-product').'</li>';
+        }
+        if(!empty($add_devices_ul)){
+          $block[0]['content'] .= '<ul class="tabs secondary">'.$add_devices_ul.'</ul>';
+        }else{
+          $block[0]['content'] .= '<div style="color:#4D7204;font-style:italic;padding:10px 0;">No device types are currently available to you.  Please contact M2M for assistance.';
+        }
+      }
+      //}else{
+      //  if ($tabs): $block[0]['content'] .= '<ul class="tabs primary">'. $tabs .'</ul></div>'; endif;
+          //if ($tabs2): print '<ul class="tabs secondary">'. $tabs2 .'</ul>'; endif;
       //}
       //if ($show_messages && $messages): echo "<br><br>";print $messages; endif;
       $block[0]['content'] .= $help;
