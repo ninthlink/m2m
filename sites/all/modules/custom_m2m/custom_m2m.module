@@ -73,43 +73,55 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       $block[0]['content'] = '';
       //if((arg(0)=='user') || (arg(0)=='user' && arg(1)==$user->uid && $user->uid!=0) || (strpos($_SERVER['REQUEST_URI'],"manage/device")!==false) || (!empty($node) && $node->type=='profile') || (strpos($_SERVER['REQUEST_URI'],"manage/owndevice")!==false)){
       $display_content_tabs = FALSE;
-      if(strpos($_SERVER['REQUEST_URI'], "user/".$user->uid."/edit")!==false) $act2=' class="active"';
-      if(strpos($_SERVER['REQUEST_URI'], "node/add/device")!==false){
+      
+      if(in_array('Sales Rep', $user->roles)){
+        $device_url="manage/device";
+      }else{
+        $device_url="managedevice";
+      }
+      $arg0 = arg(0);
+      if(in_array('administrator', $user->roles) && $arg0 == 'user'){
+        drupal_goto($device_url);
+      }
+      
+      elseif(strpos($_SERVER['REQUEST_URI'], "node/add/device")!==false){
         $display_content_tabs = TRUE;
         $act3=' class="active"';
       }
-      if(strpos($_SERVER['REQUEST_URI'], "node/add/connectivity-module")!==false){
+      elseif(strpos($_SERVER['REQUEST_URI'], "node/add/connectivity-module")!==false){
         $display_content_tabs = TRUE;
         $act6=' class="active"';
       }
-      if(strpos($_SERVER['REQUEST_URI'], "node/add/router")!==false){
+      elseif(strpos($_SERVER['REQUEST_URI'], "node/add/router")!==false){
         $display_content_tabs = TRUE;
         $act7=' class="active"';
       }
-      if(strpos($_SERVER['REQUEST_URI'], "node/add/featured-product")!==false){
+      elseif(strpos($_SERVER['REQUEST_URI'], "node/add/featured-product")!==false){
         $display_content_tabs = TRUE;
         $act8=' class="active"';
       }
-      if(strpos($_SERVER['REQUEST_URI'], "add_modules")!==false){
+      elseif(strpos($_SERVER['REQUEST_URI'], "add_modules")!==false){
         $display_content_tabs = TRUE;
         $act9=' class="active"';
       }
-      if((strpos($_SERVER['REQUEST_URI'], "user/".$user->uid)!==false || strpos($_SERVER['REQUEST_URI'], "user")!==false) && arg(2)=='') $act1=' class="active"';
-      if(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
-      if(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
-
-      $user_fields = user_load($user->uid);
+      //elseif((strpos($_SERVER['REQUEST_URI'], "user/".$user->uid)!==false || strpos($_SERVER['REQUEST_URI'], "user")!==false) && arg(2)=='') $act1=' class="active"';
+      elseif(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
+      elseif(strpos($_SERVER['REQUEST_URI'], "managedevice")!==false && arg(1)=='') $act4=' class="active"';
+      elseif(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
+      
       //if($user_fields->roles[3]=='Sales Rep')
-      $device_url1="manage/owndevice";
+      //$device_url1="manage/owndevice";
       //else
       //if($user_fields->roles[3]=='Sales Rep'){
       //  $device_url="manage/device";
       //}else{
       //  $device_url="managedevice";
       //}
-      $block[0]['content'] .= '<ul class="tabs primary"><li'.$act1.'>'.l('View', 'user/'.$user->uid).'</li><li'.$act2.'>'.l('Update Profile', 'user/'.$user->uid.'/edit').'</li>';
-      if($user_fields->roles[3]=='Sales Rep'){
-        $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', $device_url1).'</li>';
+      //$block[0]['content'] .= '<ul class="tabs primary"><li'.$act1.'>'.l('View', 'user/'.$user->uid).'</li><li'.$act2.'>'.l('Update Profile', 'user/'.$user->uid.'/edit').'</li>';
+      $block[0]['content'] .= '<ul class="tabs primary">';
+
+      if(in_array('Sales Rep', $user->roles)){
+        $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', 'manage/owndevice').'</li>';
         $device_url="manage/device";
       }else{
         $device_url="managedevice";

@@ -1,9 +1,11 @@
 <?php 
 function salesrep_redirect_user($type, & $edit, & $user, $category= NULL) {
-    if ($type == 'login') {
-      //check if the user has the parent role
-      if(in_array("Sales Rep", $user->roles)) {
-         drupal_goto("manage/owndevice");
-      }
+  if ($type == 'login') {
+    //check if the user has the parent role
+    if(in_array("Sales Rep", $user->roles)) {
+      drupal_goto("manage/owndevice");
+    }else{
+      drupal_goto("managedevice");
     }
+  }
 }
