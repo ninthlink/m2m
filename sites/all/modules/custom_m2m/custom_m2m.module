@@ -126,6 +126,9 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       }else{
         $device_url="managedevice";
       }
+      if($display_content_tabs == TRUE){
+        $act9=' class="active"';
+      }
       $block[0]['content'] .= '<li'.$act9.'>'.l('Add Devices', 'add_modules').'</li>';
       $block[0]['content'] .= '<li'.$act4.'>'.l('Manage Devices', $device_url).'</li></ul>';
         
