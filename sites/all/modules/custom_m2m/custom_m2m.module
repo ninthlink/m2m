@@ -80,7 +80,7 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
         $device_url="managedevice";
       }
       $arg0 = arg(0);
-      if(in_array('administrator', $user->roles) && $arg0 == 'user'){
+      if(!in_array('administrator', $user->roles) && $arg0 == 'user'){
         drupal_goto($device_url);
       }
       
