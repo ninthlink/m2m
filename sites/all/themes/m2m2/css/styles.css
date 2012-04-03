@@ -60,7 +60,7 @@ a img {
 
 a:link,
 a:visited {
-  color: #6ea202;
+  color: #FF8200;
   text-decoration: none;
 }
 a:hover {
@@ -145,7 +145,7 @@ a:hover {
 }
 .ui-multiselect-menu .ui-multiselect-checkboxes li label.ui-state-hover {
   border: 1px solid #686868;
-  color:#6ea304;
+  color:#FF8200;
   font-weight: bold;
 }
 .views-exposed-form .views-submit-button {
@@ -332,7 +332,7 @@ body.page-routersearch #block-menu-primary-links ul.menu li a.item_wireless:visi
   color:#ccc;
 }
 #block-menu-secondary-links ul.menu li.active-trail a.active  {
-  color: #6ea202;
+  color: #FF8200;
 }
 
 /*search */
@@ -345,16 +345,16 @@ body.page-routersearch #block-menu-primary-links ul.menu li a.item_wireless:visi
   margin: 0;
 }
 #block-search-0 .form-item label  {
-  color:#fff;
+  color:#000;
   font-weight: normal;
   padding: 4px 0 0 7px;
 }
 #block-search-0 .form-text {
-  border: 1px solid #414141;
+  border: 1px solid #515151;
   padding: 5px;
   font-size: 13px;
   font-family: arial, helvetica, sans-serif;
-  color:#fff;
+  color:#000;
   width: 244px;
   height: 16px;
   background: url(../images/bg_search.png) no-repeat;
@@ -474,7 +474,7 @@ ul.secondary li.active a:hover {
 }
 .sidebar ul.menu li a.active:link,
 .sidebar ul.menu li a.active:visited {
-  color:#6ea202;
+  color:#FF8200;
 }
 /* content */
 #content_top  {
@@ -628,7 +628,7 @@ body.page-routers {}
   font-size: 32px;
   line-height: 40px;
   margin: 0 0 10px;
-  color:#6ea304;
+  color:#FF8200;
 }
 .banner-text {
   font-size: 13px;
@@ -755,7 +755,7 @@ body.page-routersearch #block-views-featured_routers-block {
 #block-block-9  {
   float: left;
   width: 690px;
-  background: #6da101 url(../images/bg_subhead_green.png) repeat-x;
+  background: #FF8200 url(../images/bg_subhead_green.png) repeat-x;
   font-size: 18px;
   font-weight: normal;
   height: 56px;
@@ -807,7 +807,7 @@ body.page-routersearch #block-views-featured_routers-block {
   padding: 0;
 }
 .views-exposed-form .views-exposed-widget label {
-  color: #6ea202;
+  color: #FF8200;
   font-size: 13px;
   text-transform: uppercase;
 }
@@ -861,7 +861,7 @@ body.page-featured #main_content .block-views {
   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#999999');
 }
 body.page-featured #main_content .block-views h2  {
-  background: #6da101 url(../images/bg_subhead_green.png) repeat-x;
+  background: #FF8200 url(../images/bg_subhead_green.png) repeat-x;
   font-size: 18px;
   font-weight: normal;
   height: 56px;
@@ -925,7 +925,7 @@ body.page-routersearch .view-router-search {
 }
 .view-Search .view-header,
 .view-router-search .view-header {
-  background: #6da101 url(../images/bg_subhead_green.png) repeat-x;
+  background: #FF8200 url(../images/bg_subhead_green.png) repeat-x;
   font-size: 18px;
   font-weight: normal;
   height: 56px;
@@ -1017,7 +1017,7 @@ body.page-routersearch .view-router-search {
   -moz-border-radius-bottomleft: 0px;
   -webkit-border-radius: 5px 5px 0px 0px;
   border-radius: 5px 5px 0px 0px;
-  color:#6da101;
+  color:#FF8200;
 }
 .view-display-mode-tabs a.list-view.active {
   background: #fff url(../images/icon_list.png) no-repeat 15px -37px;
@@ -1111,7 +1111,7 @@ body.page-routersearch .view-router-search {
 .view-connectivity-search .view-content .views-row label {
   display: block;
   margin: 0 0 3px;
-  color:#6EA202;
+  color:#FF8200;
   font-weight: bold;
   font-size: 14px;
 }
@@ -1151,7 +1151,7 @@ body.page-routersearch .view-router-search {
 .view-router-search .view-content table.views-view-grid td label,
 .view-connectivity-search .view-content table.views-view-grid td label,
 .view-featured-products .view-content table.views-view-grid td label {
-  color:#6da101;
+  color:#FF8200;
   font-weight: bold;
   display: inline-block;
 }
@@ -1280,7 +1280,7 @@ body.page-routersearch .view-router-search {
   right: 10px;
 }
 .item-list ul.pager li.pager-current {
-  color: #6EA202;
+  color: #FF8200;
 }
 
 div.view-manage-devices .item-list ul.pager {
@@ -1579,7 +1579,7 @@ div.view-router-search div.attachment-after {
   font-size: 36px;
   line-height: 36px;/*
   font-family: "Gotham Rounded", Arial, Sans-serif;*/
-  color:#6da304;
+  color:#FF8200;
   z-index: 50;
   width: 430px;
   padding: 60px 0 20px;
