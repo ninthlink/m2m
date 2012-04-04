@@ -1179,8 +1179,8 @@ body.page-routersearch .view-router-search {
 .view-connectivity-search .view-content table.views-view-grid td .fields_outer,
 .view-featured-products .view-content table.views-view-grid td .fields_outer {
   position: relative;
-  height: 325px;
-  min-height: 325px;
+  min-height: 200px;
+  _height: 200px;
   padding: 0 0 47px;
 }
 .view-Search .view-content table.views-view-grid td .views-field-view-node,
