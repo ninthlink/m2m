@@ -43,7 +43,7 @@ function company_list_get_company_types(){
   $content_device_types = array(
     'device' => 'Cellular Modules',
     'connectivity_module' => 'Connectivity Modules',
-    'router' => 'Wireless/Gateway Routers'
+    'router' => 'Wireless Gateway/Routers'
   );
   return $content_device_types;
 }
