@@ -13,7 +13,7 @@ function custom_m2m_menu(){
 }
 
 function custom_m2m_content_allowed_values_alter(&$allowed_values, $field) {
-  if($field['field_name'] == 'field_featured_chipset_model'){
+  if($field['field_name'] == 'field_featured_cell_chipset' || $field['field_name'] == 'field_featured_conn_chipset'){
     $chipset_fields = array(
       'field_chipset_model',
       'field_conn_chipset_model',
