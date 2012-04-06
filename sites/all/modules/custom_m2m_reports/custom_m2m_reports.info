@@ -1,0 +1,4 @@
+name = Custom M2M Reports
+description = Export M2M reports
+package = custom m2m
+core = 6.x

@@ -1,0 +1,22 @@
+<?php
+// $Id: custom_m2m.module,v 1.236.2.3 2011/04/14 10:09:19 Tanzeel Exp $
+function custom_m2m_reports_menu(){
+  $items['export_device_reports'] = array(
+    'description' => 'Export Devices',
+    'page callback' => 'custom_m2m_reports_export_devices',
+    'access arguments' => array('administer access control'),
+    'type' => MENU_CALLBACK,
+    'title' => 'Export Devices'
+  );
+  return $items;
+}
+
+function custom_m2m_reports_export_devices(){
+  $content = '<p>Select the type of report you would like to export below:</p><ul>';
+  $content .= '<li>'.l('Cellular Modules', 'export_device_reports/cellular').'</li>';
+  $content .= '<li>'.l('Connectivity Modules', 'export_device_reports/connectivity').'</li>';
+  $content .= '<li>'.l('Wireless Gateway/Routers', 'export_device_reports/routers').'</li>';
+  $content .= '<li>'.l('Featured Products', 'export_device_reports/featured').'</li>';
+  $content .= '</ul>';
+  return $content;
+}
