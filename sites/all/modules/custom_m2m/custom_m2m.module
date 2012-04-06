@@ -36,7 +36,7 @@ function custom_m2m_views_api(){
 }
 
 function custom_m2m_add_module_page(){
-    return "Please select the type of module you'd like to create.";
+    return "Please select the type of device you'd like to create.";
 }
 
 function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {

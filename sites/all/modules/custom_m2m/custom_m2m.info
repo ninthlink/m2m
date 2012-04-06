@@ -1,11 +1,4 @@
-; $Id: custom_m2m.info,v 1.4 2011/04/14 05:50:55 Tanzeel Exp $
 name = M2M custom
 description = Custom module to interact with other modules.
-package = Other
-version = VERSION
+package = custom m2m
 core = 6.x
-
-; Information added by drupal.org packaging script on 2011-04-14
-version = "6.9"
-project = "drupal"
-datestamp = "1231976413"

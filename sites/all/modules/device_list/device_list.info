@@ -2,4 +2,4 @@
 name = Device list
 description = Device list
 core = 6.x
-package = Device list
+package = custom m2m

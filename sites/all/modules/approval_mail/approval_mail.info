@@ -2,4 +2,4 @@
 name = Approval mail
 description = Approval mail
 core = 6.x
-package = Approval mail
+package = custom m2m

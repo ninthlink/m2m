@@ -2,4 +2,4 @@
 name = paging
 description = paging
 core = 6.x
-package = paging
+package = custom m2m

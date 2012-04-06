@@ -2,4 +2,4 @@
 name = Node publish
 description = Node publish
 core = 6.x
-package = Node publish
+package = custom m2m

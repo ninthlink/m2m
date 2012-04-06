@@ -2,4 +2,4 @@
 name = Salesrep redirect
 description = Salesrep redirect 
 core = 6.x
-package = Salesrep redirect
+package = custom m2m
