@@ -108,7 +108,13 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       elseif(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
       elseif(strpos($_SERVER['REQUEST_URI'], "managedevice")!==false && arg(1)=='') $act4=' class="active"';
       elseif(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
-      
+      elseif(strpos($_SERVER['REQUEST_URI'], "company_module_options")!==false){
+        $company_list_device_type = arg(1);
+        if(!empty($company_list_device_type)){
+          ${'act'.$company_list_device_type} = ' class="active"';
+        }
+      }
+
       //if($user_fields->roles[3]=='Sales Rep')
       //$device_url1="manage/owndevice";
       //else
@@ -130,7 +136,11 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
         $act9=' class="active"';
       }
       $block[0]['content'] .= '<li'.$act9.'>'.l('Add Devices', 'add_modules').'</li>';
-      $block[0]['content'] .= '<li'.$act4.'>'.l('Manage Devices', $device_url).'</li></ul>';
+      $block[0]['content'] .= '<li'.$act4.'>'.l('Manage Devices', $device_url).'</li>';
+      if(in_array('administrator', $user->roles)){
+        $block[0]['content'] .= '<li'.$act10.'>'.l('Company Options', 'company_module_options').'</li>';
+      }
+      $block[0]['content'] .= '</ul>';
         
       if($display_content_tabs == TRUE){
         $profile = content_profile_load('profile', $user->uid);
@@ -154,6 +164,14 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
         }else{
           $block[0]['content'] .= '<div style="color:#4D7204;font-style:italic;padding:10px 0;">No device types are currently available to you.  Please contact M2M for assistance.';
         }
+      }
+      if(isset($company_list_device_type) && !empty($company_list_device_type)){
+        $block[0]['content'] .= '<ul class="tabs secondary">';
+        $company_list_types = company_list_get_company_types();
+        foreach($company_list_types as $company_value => $company_name){
+          $block[0]['content'] .= '<li'.${'act'.$company_value}.'>'.l($company_name, 'company_module_options/'.$company_value).'</li>';
+        }
+        $block[0]['content'] .= '</ul>';
       }
       //}else{
       //  if ($tabs): $block[0]['content'] .= '<ul class="tabs primary">'. $tabs .'</ul></div>'; endif;

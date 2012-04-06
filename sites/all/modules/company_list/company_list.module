@@ -1,4 +1,98 @@
 <?php 
+
+function company_list_menu(){
+  $items['company_module_options/%company_list_module_types'] = array(
+    'description' => 'Company Options',
+    'page callback' => 'company_list_export_devices',
+    'page arguments' => array(1),
+    'access arguments' => array('administer access control'),
+    'type' => MENU_CALLBACK,
+    'title callback' => 'company_list_set_title',
+    'title arguments' => array(1)
+  );
+  $items['company_module_options'] = array(
+    'description' => 'Company Options',
+    'page callback' => 'company_list_module_page',
+    'access arguments' => array('administer access control'),
+    'type' => MENU_CALLBACK,
+    'title' => 'Company Options',
+  );
+  return $items;
+}
+
+function company_list_module_page(){
+  $content = '<p>Please select the type of module you would like to set the allowed companies for:</p><ul>';
+  $companies = company_list_get_company_types();
+  foreach($companies as $company_value => $company_name){
+    $content .= '<li>'.l($company_name, 'company_module_options/'.$company_value).'</li>';
+  }
+  $content .= '</ul>';
+  return $content;
+}
+
+function company_list_set_title($device_type){
+  $device_name = company_list_valid_type($device_type);
+  if($device_name){
+    return 'Company Options for '.$device_name;
+  }else{
+    return false;
+  }
+}
+
+function company_list_get_company_types(){
+  $content_device_types = array(
+    'device' => 'Cellular Modules',
+    'connectivity_module' => 'Connectivity Modules',
+    'router' => 'Wireless/Gateway Routers'
+  );
+  return $content_device_types;
+}
+
+function company_list_valid_type($device_type){
+  $content_device_types = company_list_get_company_types();
+  if(isset($content_device_types[$device_type])){
+    return $content_device_types[$device_type];
+  }else{
+    return false;
+  }
+}
+
+function company_list_module_type_form(&$form_state, $device_type){
+  $form['m2m_company_list'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Please select the companies that can create ' . company_list_valid_type($device_type)),
+    '#default_value' => variable_get('m2m_company_list_'. $device_type, array()),
+    '#options' => content_allowed_values(content_fields('field_company'))
+  );
+  $form['device_type'] = array(
+    '#type' => 'hidden',
+    '#value' => $device_type
+  );
+  $form['actions']['submit'] = array('#value' => 'Submit', '#type' => 'submit');
+  $form['#submit'] = array('company_list_module_type_form_submit');
+  return $form;
+}
+
+function company_list_module_type_form_submit($form, $form_values){
+  if(isset($form_values['values']['device_type']) && company_list_valid_type($form_values['values']['device_type']) && isset($form_values['values']['m2m_company_list'])){
+    variable_set('m2m_company_list_' . $form_values['values']['device_type'], array_filter($form_values['values']['m2m_company_list']));
+  }
+  drupal_set_message('The allowed companies for '.$form_values['values']['device_type'].' have been saved.');
+}
+
+function company_list_module_types_load($device_type){
+  if(company_list_set_title($device_type)){
+    return $device_type;
+  }else{
+    return false;
+  }
+}
+
+function company_list_export_devices($device_type){
+  $content .= drupal_get_form('company_list_module_type_form', $device_type);
+  return $content;
+}
+
 function company_list_form_alter(&$form, $form_state, $form_id) { 
   global $user;
   switch($form_id) {
@@ -21,7 +115,7 @@ function company_list_form_alter(&$form, $form_state, $form_id) {
     case 'user_login_block':
       $form['#action'] = 'user/login?destination=manage/owndevice';
       break;*/
-    case 'node_type_form':
+    /*case 'node_type_form':
       if (in_array($form['#node_type']->type, array('connectivity_module', 'device', 'router'))) {
         $form['m2m_company'] = array(
           '#type' => 'fieldset',
@@ -37,7 +131,7 @@ function company_list_form_alter(&$form, $form_state, $form_id) {
           '#default_value' => variable_get('m2m_company_list_'. $form['#node_type']->type, array()),
         );
         $form['m2m_company']['m2m_company_list']['#options'] = content_allowed_values(content_fields('field_company'));
-      }
+      }*/
       break;
   }
 }
