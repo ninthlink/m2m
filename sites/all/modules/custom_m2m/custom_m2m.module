@@ -109,6 +109,7 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       elseif(strpos($_SERVER['REQUEST_URI'], "managedevice")!==false && arg(1)=='') $act4=' class="active"';
       elseif(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
       elseif(strpos($_SERVER['REQUEST_URI'], "company_module_options")!==false){
+        $act10 = ' class="active"';
         $company_list_device_type = arg(1);
         if(!empty($company_list_device_type)){
           ${'act'.$company_list_device_type} = ' class="active"';
