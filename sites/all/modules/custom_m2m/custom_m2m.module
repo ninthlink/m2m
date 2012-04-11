@@ -108,6 +108,7 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       elseif(strpos($_SERVER['REQUEST_URI'], "manage/device")!==false && arg(2)=='') $act4=' class="active"';
       elseif(strpos($_SERVER['REQUEST_URI'], "managedevice")!==false && arg(1)=='') $act4=' class="active"';
       elseif(strpos($_SERVER['REQUEST_URI'], "manage/owndevice")!==false && arg(2)=='') $act5=' class="active"';
+      elseif(strpos($_SERVER['REQUEST_URI'], "manage/featured")!==false && arg(2)=='') $act11=' class="active"';
       elseif(strpos($_SERVER['REQUEST_URI'], "company_module_options")!==false){
         $act10 = ' class="active"';
         $company_list_device_type = arg(1);
@@ -126,7 +127,7 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       //}
       //$block[0]['content'] .= '<ul class="tabs primary"><li'.$act1.'>'.l('View', 'user/'.$user->uid).'</li><li'.$act2.'>'.l('Update Profile', 'user/'.$user->uid.'/edit').'</li>';
       $block[0]['content'] .= '<ul class="tabs primary">';
-
+      
       if(in_array('Sales Rep', $user->roles)){
         $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', 'manage/owndevice').'</li>';
         $device_url="manage/device";
@@ -139,6 +140,7 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       $block[0]['content'] .= '<li'.$act9.'>'.l('Add Devices', 'add_modules').'</li>';
       $block[0]['content'] .= '<li'.$act4.'>'.l('Manage Devices', $device_url).'</li>';
       if(in_array('administrator', $user->roles)){
+        $block[0]['content'] .= '<li'.$act11.'>'.l('Manage Featured Products', 'manage/featured').'</li>';
         $block[0]['content'] .= '<li'.$act10.'>'.l('Company Options', 'company_module_options').'</li>';
       }
       $block[0]['content'] .= '</ul>';
