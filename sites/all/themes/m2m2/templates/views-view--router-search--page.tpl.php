@@ -38,7 +38,27 @@
       $('#results').show();
     }
   }
+  function show_grid(){
+    $('div.view-content').hide();
+    $('div.view div.attachment').show();
+    $('div.view div.attachment div.view-content').show();
+    $('.grid-view').addClass('active');
+    $('.list-view').removeClass('active');
+    view_type = 'thumbs';
+  }
+  function hide_grid(){
+    $('div.view div.attachment').hide();
+    $('div.view-content').show();
+    $('.grid-view').removeClass('active');
+    $('.list-view').addClass('active');
+    view_type = 'list';
+  }
   $(document).ready(function(){
+    if(view_type == 'thumbs'){
+      show_grid();
+    }else{
+      hide_grid();
+    }
     $('.view-content .field-content a').click(function() {
       $('#devicehere').load($(this).attr('href')+" #main_content", function() {
         toggle_devices(true);
@@ -69,8 +89,8 @@
   <div id="results">
 
     <div class="view-display-mode-tabs">
-      <a href="#" id="list-view-link" class="list-view active" onClick="if(!$(this).hasClass('active')){$('div.view div.attachment').hide();$('div.view div.view-content:first').show();$(this).toggleClass('active').next().toggleClass('active');}return false;">List</a>
-      <a href="#" id="grid-view-link" class="grid-view" onClick="if(!$(this).hasClass('active')){$('div.view div.view-content:first').hide();$('div.view div.attachment').show();$(this).toggleClass('active').prev().toggleClass('active');}return false;">Thumbs</a>
+      <a href="#" id="list-view-link" class="list-view" onClick="if(!$(this).hasClass('active')){hide_grid();}return false;">List</a>
+      <a href="#" id="grid-view-link" class="grid-view" onClick="if(!$(this).hasClass('active')){show_grid();}return false;">Thumbs</a>
     </div>
 
     <?php if ($attachment_before): ?>
