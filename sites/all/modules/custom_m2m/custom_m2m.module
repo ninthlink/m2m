@@ -13,17 +13,24 @@ function custom_m2m_menu(){
 }
 
 function custom_m2m_content_allowed_values_alter(&$allowed_values, $field) {
-  if($field['field_name'] == 'field_featured_cell_chipset' || $field['field_name'] == 'field_featured_conn_chipset'){
+  if($field['field_name'] == 'field_featured_cell_chipset'){
     $chipset_fields = array(
       'field_chipset_model',
-      'field_conn_chipset_model',
       'field_rout_chipset_model'
     );
     $values = array();
     foreach($chipset_fields as $chip){
       $values = array_merge(content_allowed_values(content_fields($chip)), $values);
     }
-    asort($values);
+    $allowed_values = $values;
+  }elseif($field['field_name'] == 'field_featured_conn_chipset'){
+      $chipset_fields = array(
+      'field_conn_chipset_model'
+    );
+    $values = array();
+    foreach($chipset_fields as $chip){
+      $values = array_merge(content_allowed_values(content_fields($chip)), $values);
+    }
     $allowed_values = $values;
   }
 }
@@ -40,14 +47,10 @@ function custom_m2m_add_module_page(){
 }
 
 function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
-  if($form['#id'] == 'views-exposed-form-featured-products-page-1'){
-    $form['field_featured_product_category_value_many_to_one']['#options'] = array_merge(array('all' => 'All'), $form['field_featured_product_category_value_many_to_one']['#options']);
-  }else{
     $form['submit']['#value'] = 'Search for Device';
     $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
     drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/jquery.multiselect.min.js', 'theme');
     drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/multiselect_init.js', 'theme');
-  }
   if(isset($form['field_company_value_many_to_one'])){
     $filters = $form_state['view']->display_handler->get_option('filters');
     $node_type = reset($filters['type']['value']);
