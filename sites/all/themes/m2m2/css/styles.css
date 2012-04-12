@@ -1646,3 +1646,6 @@ ul.link_sections li.link_wireless a:hover  {
 .site-map-menus h2 {
   display:none;
 }
+
+span.views-throbbing{ display: none !important;}
+a.views-throbbing{ padding-right: 0 !important;background-image:none !important;}
