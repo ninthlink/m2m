@@ -22,7 +22,7 @@
   </div>
 <div class="product_links">
 <?php
-  if ($node->field_website[0]['view']) {
+  if ($node->field_featured_url[0]['view']) {
     print t($node->field_featured_url[0]['view']);
   }
   else {
@@ -40,7 +40,7 @@
 
 <div class="product_links">
 <?php
-  if ($node->field_website[0]['view']) {
+  if ($node->field_featured_url[0]['view']) {
     print t($node->field_featured_url[0]['view']);
   }
   else {
