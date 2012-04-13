@@ -183,11 +183,6 @@ a:hover {
 }
 
 #views-exposed-form-featured-products-page-1 .views-exposed-form  {}
-#views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget  {
-  width: auto;
-  margin: 0;
-  float: none;
-}
 #views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget .form-checkboxes {}
 #views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget .form-checkboxes .form-item,
 #views-exposed-form-featured-products-page-1 .views-exposed-form .views-exposed-widget.views-submit-button .form-item  {
