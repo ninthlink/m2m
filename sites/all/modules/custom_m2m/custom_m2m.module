@@ -13,25 +13,10 @@ function custom_m2m_menu(){
 }
 
 function custom_m2m_content_allowed_values_alter(&$allowed_values, $field) {
-  if($field['field_name'] == 'field_featured_cell_chipset'){
-    $chipset_fields = array(
-      'field_chipset_model',
-      'field_rout_chipset_model'
-    );
-    $values = array();
-    foreach($chipset_fields as $chip){
-      $values = array_merge(content_allowed_values(content_fields($chip)), $values);
-    }
-    $allowed_values = $values;
+  if($field['field_name'] == 'field_featured_cell_chipset' || $field['field_name'] == 'field_rout_chipset_model'){
+    $allowed_values = content_allowed_values(content_fields('field_chipset_model'));
   }elseif($field['field_name'] == 'field_featured_conn_chipset'){
-      $chipset_fields = array(
-      'field_conn_chipset_model'
-    );
-    $values = array();
-    foreach($chipset_fields as $chip){
-      $values = array_merge(content_allowed_values(content_fields($chip)), $values);
-    }
-    $allowed_values = $values;
+    $allowed_values = content_allowed_values(content_fields('field_conn_chipset_model'));
   }
 }
 
