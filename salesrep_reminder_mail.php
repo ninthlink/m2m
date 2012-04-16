@@ -13,7 +13,7 @@ $headers = array(
 				'CC'						=> 'm2msearch@qualcomm.com'  
 	 );
 global $base_path;
-$sql_com="select c.nid, c.field_company_value,n.created from {content_field_company} c, {node} n where c.nid=n.nid AND n.type='device' AND n.status='0' AND n.mailstatus='0' order by n.nid ASC";	 
+$sql_com="select c.nid, c.field_company_value,n.created from {content_field_company} c, {node} n where c.nid=n.nid AND n.type IN ('device', 'router', 'connectivity_module') AND n.status='0' AND n.mailstatus='0' order by n.nid ASC";	 
 $res_com=db_query($sql_com); 
 while($row_com=db_fetch_object($res_com)){
 	
@@ -52,7 +52,7 @@ foreach($user_email1 as $key =>$val){
 	$node_url=$base_url."/manage/owndevice";
 	$message ="Dear $arr_res[0],<br><bR>
 
-This is your final reminder notifying you that <b>$company_name</b> has uploaded a new module, <b>$node_info->title</b>, to the online M2M module database. It requires your verification and approval for it to post publically; to review the module, Please <a href='".$login_url."'> Login </a> into the site to approve the devices waiting your approval.. <br><br><br>
+This is your final reminder notifying you that <b>$company_name</b> has uploaded a new module, <b>$node_info->title</b>, to the online M2M module database. It requires your verification and approval for it to post publically; to review the module, Please <a href='".$login_url."'> Login </a> into the site to approve the devices waiting your approval. <br><br><br>
 
 Thank you,<br>
 M2M Search Admin";
