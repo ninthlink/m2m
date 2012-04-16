@@ -1644,6 +1644,3 @@ ul.link_sections li.link_wireless a:hover  {
 
 span.views-throbbing{ display: none !important;}
 html.js a.views-throbbing{ padding-right: 0 !important;background-image:none;}
-.ui-multiselect-checkboxes {
-  overflow: scroll;
-}
