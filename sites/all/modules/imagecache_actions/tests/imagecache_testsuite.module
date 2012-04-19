@@ -1,0 +1,173 @@
+<?php
+// $Id: imagecache_testsuite.module,v 1.1.2.1 2009/12/29 16:09:37 dman Exp $
+
+/**
+ * @file An admin-only utility to demo and check a number of imagecache presets
+ * and actions.
+ * 
+ * It provides a tab in Home > Administer > Site Building > Imagecache
+ * 
+ * that lists a whole bunch of sample presets.
+ * 
+ * @author dman http://coders.co.nz/
+ *
+ *
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function imagecache_testsuite_menu() {
+  $items = array();
+  $items['admin/build/imagecache/test'] = array(
+    'title' => 'Test Suite',
+    'page callback' => 'imagecache_testsuite_generate',
+    'access arguments' => array('administer imagecache'),
+    'type' => MENU_LOCAL_TASK,
+  );
+  $items['admin/build/imagecache/test/%'] = array(
+    'title' => 'Test Suite Image',
+    'page callback' => 'imagecache_testsuite_generate',
+    'page arguments' => array(4,5),
+    'access arguments' => array('administer imagecache'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+function imagecache_testsuite_form_alter(&$form, &$form_state, $form_id) {
+}
+
+/**
+ * Either returns the whole testsuite page or generates the requested
+ * image+preset
+ * 
+ * Flushes the entire test cache every time anything is done.
+ */
+function imagecache_testsuite_generate($test_id = '', $toolkit = 'gd') {
+
+  $sample_path = drupal_get_path('module' , 'imagecache_testsuite') ;
+  $src = $sample_path .'/sample.jpg'; 
+  $tests = imagecache_testsuite_get_tests();
+  $testsuite_dir = imagecache_create_path('testsuite', '');
+  
+  if (empty($test_id)) {
+    // Firstly, remove any previous images
+    if (is_dir(realpath($testsuite_dir))) {
+      _imagecache_recursive_delete(realpath($testsuite_dir));
+    }
+    
+    // Draw the admin table
+    $test_table = array();
+    foreach ($tests as $testname => $preset) {
+      $row = array();
+      $row_class = 'test';
+      $details = '';
+      // Render the details
+      foreach ($preset['actions'] as $i => $action) {
+        $definition = imagecache_action_definition($action['action']);
+        if ($definition) {
+          $description = "<b>{$definition['name']}</b> ";
+          $description .= theme($action['action'], array('#value' => $action['data']));
+          $details = "<div>$description</div>";
+        }
+        else {
+          // probably an action that requires a module that is not installed.
+          $details = t("<div><b>Action %action Unavailable</b></div>", array('%action' => $action['action']));
+          $row_class = 'error';
+          break;
+        }
+      }
+      $row['details'] = "<h3>$testname</h3><p>$details</p>";
+
+      // look for a sample image. May also be defined by the definition itself, 
+      // but normally assume a file named after the presetname
+      if (file_exists("{$sample_path}/{$testname}.png")) {
+        $preset['sample'] = "{$testname}.png";
+      }
+      elseif (file_exists("{$sample_path}/{$testname}.jpg")) {
+        $preset['sample'] = "{$testname}.jpg";
+      }
+      if (isset($preset['sample']) && file_exists("{$sample_path}/{$preset['sample']}") ) {
+        $sample_img = theme('image', "{$sample_path}/{$preset['sample']}");
+        // I was having trouble with permissions on an OSX dev machine
+        if (! is_readable("{$sample_path}/{$preset['sample']}")) { 
+          $sample_img = "FILE UNREADABLE: {$preset['sample']}"; 
+        }
+      }
+      else {
+        $sample_img = "[no sample]";
+      }
+      $row['sample'] = $sample_img;
+
+      foreach (array('gd', 'imagemagick') as $toolkit) {
+        if (module_exists('imageapi_'. $toolkit)) {
+          $test_url = "admin/build/imagecache/test/$testname/$toolkit";
+          $test_img = theme('image', $test_url, "$testname/$toolkit", NULL, NULL, FALSE);
+          $row[$toolkit] = l($test_img, $test_url, array('html' => TRUE));
+        }
+        else {
+          $row[$toolkit] = 'Disabled';
+        }
+      }
+      $test_table[$testname] = array('data' => $row, 'class' => $row_class);
+    }
+    $header = array('test', 'sample', 'gd', 'imagemagick');
+    $output = theme('table', $header, $test_table, array('id' => 'imagecache-testsuite'));
+    
+    // Default system zebra-striping fails to show my transparency on white
+    drupal_set_html_head('<style  type="text/css" >#imagecache-testsuite tr.even{background-color:#EEEEEE !important;} #imagecache-testsuite td{vertical-align:top;}  #imagecache-testsuite tr.error{background-color:#FFCCCC !important;}</style>');
+    
+    return $output;
+  }
+  else {
+    // run the process and return the image
+    // @see imagecache_cache ...imagecache_build_derivative ... 
+
+    $preset = $tests[$test_id];
+    $actions = $preset['actions'];
+    if (! $preset) {
+      trigger_error("Unknown test preset '$test_id' ", E_USER_ERROR);
+      return FALSE;
+    }
+    if (!$image = imageapi_image_open($src, 'imageapi_'. $toolkit)) {
+      trigger_error("Failed to open original image $src with toolkit $toolkit", E_USER_ERROR);
+      return FALSE;
+    }
+  
+    foreach ($actions as $action) {
+      #dpm(array('applying action' => $action, 'on image' => $image));
+      if (!_imagecache_apply_action($action, $image)) {
+        watchdog('imagecache', 'action: %action failed for %src', array('%action' => $action['action'], '%src' => $src), WATCHDOG_ERROR);
+        return FALSE;
+      }
+    }
+    // Need to save the result before returning it - to stay compatible with imagemagick
+    $filename = "$test_id-$toolkit.{$image->info['extension']}";
+    if (!file_check_directory($testsuite_dir, FILE_CREATE_DIRECTORY)) {
+      mkdir($testsuite_dir, 0775, TRUE);
+    }
+    
+    $dst = $testsuite_dir .'/'. $filename;
+    imageapi_image_close($image, $dst);
+    imagecache_transfer($dst);
+  }
+}
+
+/**
+ * Retrieve the list of presets, each of which contain actions and action
+ * definitions.
+ */
+function imagecache_testsuite_get_tests() {
+  $presets = array();
+  $filepath = drupal_get_path('module', 'imagecache_testsuite');
+  // The $filepath MAY be used by some of the presets to locate extra images like overlays.
+  // It is present in scope when these incs are evaluated.
+
+  $preset_files = file_scan_directory($filepath, ".*.imagecache_preset.inc");
+  foreach($preset_files as $preset_file) {
+    include_once($preset_file->filename);
+  }
+  uasort($presets, 'element_sort');
+  return $presets;
+}

@@ -1,0 +1,13 @@
+; $Id: imagecache_textrender.info,v 1.1.2.1 2009/12/29 16:01:40 dman Exp $
+name = Imagecache Text Rendering
+description = Display simple or dynamic captions on images, with formatting and layout.
+dependencies[] = imagecache
+dependencies[] = imageapi_text
+package = ImageCache
+core = 6.x
+; Information added by drupal.org packaging script on 2010-05-25
+version = "6.x-2.0"
+core = "6.x"
+project = "imagecache_actions"
+datestamp = "1274793007"
+
