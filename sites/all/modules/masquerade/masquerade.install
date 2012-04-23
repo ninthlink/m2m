@@ -1,24 +1,23 @@
 <?php
 
 /**
- * @file
- * masquerade.install
+ * @file masquerade.install
  *
  * Install, uninstall and update hooks for the Masquarade module.
  */
 
 /**
- * Implements hook_schema().
+ * Implementation of hook_schema().
  *
  * @return array
  */
 function masquerade_schema() {
   return array(
     'masquerade' => array(
-      'description' => 'Each masquerading user has their session recorded into the masquerade table. Each record represents a masquerading user.',
+      'description' => "Each masquerading user has their session recorded into the masquerade table. Each record represents a masquerading user.",
       'fields' => array(
         'sid' => array(
-          'description' => 'The current session for this masquerading user corresponding to their {sessions}.sid.',
+          'description' => "The current session for this masquerading user corresponding to their {sessions}.sid.",
           'type' => 'varchar',
           'length' => '64',
           'not null' => TRUE,
@@ -34,12 +33,12 @@ function masquerade_schema() {
           'type' => 'int',
           'not null' => TRUE,
           'default' => 0,
-          'disp-width' => '10'),
+          'disp-width' => '10')
       ),
       'indexes' => array(
         'sid' => array('sid', 'uid_from'),
-        'sid_2' => array('sid', 'uid_as'),
-      ),
+        'sid_2' => array('sid', 'uid_as')
+      )
     ),
     'masquerade_users' => array(
       'description' => 'Per-user permission table granting permissions to switch as a specific user.',
@@ -47,14 +46,14 @@ function masquerade_schema() {
         'uid_from' => array(
           'description' => 'The {users}.uid that can masquerade as {masquerade_users}.uid_to.',
           'type' => 'int',
-          'not null' => TRUE,
+          'not null' => true,
           'default' => 0,
           'disp-width' => 10,
         ),
         'uid_to' => array(
           'description' => 'The {users}.uid that {masquerade_users}.uid_from can masquerade as.',
           'type' => 'int',
-          'not null' => TRUE,
+          'not null' => true,
           'default' => 0,
           'disp-width' => 10,
         ),
@@ -65,45 +64,63 @@ function masquerade_schema() {
 }
 
 /**
- * Implements hook_install().
+ * Implementation of hook_install().
  */
 function masquerade_install() {
-  db_update('system')
-    ->fields(array('weight' => -10))
-    ->condition('name', 'masquerade')
-    ->execute();
+  drupal_install_schema('masquerade');
+  db_query("UPDATE {system} SET weight = -10 WHERE name = 'masquerade'");
 }
 
 /**
- * Implements hook_uninstall().
+ * Implementation of hook_uninstall().
  */
 function masquerade_uninstall() {
+  drupal_uninstall_schema('masquerade');
   variable_del('masquerade_test_user');
   variable_del('masquerade_admin_roles');
   variable_del('masquerade_quick_switches');
 }
 
 /**
- * Reformat variable value.
+ * Implementation of hook_update_N().
+ *
+ * Update for http://drupal.org/node/281468
+ * Adding support for multiple quick links in the Masquerade block.
+ */
+function masquerade_update_5000() {
+  // If test user was previously configured, add that as the first quick switch user.
+  $masquerade_test_user = variable_get('masquerade_test_user', '');
+  $masquerade_test_uid = db_result(db_query("SELECT uid FROM {users} WHERE name = '%s'", $masquerade_test_user));
+  if ($masquerade_test_uid) {
+    variable_set('masquerade_quick_switches', array($masquerade_test_uid => $masquerade_test_uid));
+  }
+  return array();
+}
+
+/**
+ * Implementation of hook_update_N().
  */
 function masquerade_update_6001() {
   variable_set('masquerade_quick_switches', implode(',', variable_get('masquerade_quick_switches', array())));
+  return array();
 }
 
 /**
  * Make the sid column match the length of the core sessions table (64 characters).
  */
 function masquerade_update_6002() {
-  db_drop_index('masquerade', 'sid');
-  db_drop_index('masquerade', 'sid_2');
-  db_change_field('masquerade', 'sid', 'sid', array(
+  $ret = array();
+  db_drop_index($ret, 'masquerade', 'sid');
+  db_drop_index($ret, 'masquerade', 'sid_2');
+  db_change_field($ret, 'masquerade', 'sid', 'sid', array(
     'type' => 'varchar',
     'length' => '64',
     'not null' => TRUE,
     'default' => '')
   );
-  db_add_index('masquerade', 'sid', array('sid', 'uid_from'));
-  db_add_index('masquerade', 'sid_2', array('sid', 'uid_as'));
+  db_add_index($ret, 'masquerade', 'sid', array('sid', 'uid_from'));
+  db_add_index($ret, 'masquerade', 'sid_2', array('sid', 'uid_as'));
+  return $ret;
 }
 
 /**
@@ -121,6 +138,7 @@ function masquerade_update_6003() {
   else {
     variable_del('masquerade_quick_switches');
   }
+  return array();
 }
 
 /**
@@ -128,28 +146,28 @@ function masquerade_update_6003() {
  * previously been changed.
  */
 function masquerade_update_6004() {
-  db_update('system')
-    ->fields(array('weight' => -10))
-    ->condition('name', 'masquerade')
-    ->execute();
+  $ret = array();
+  $ret[] = update_sql("UPDATE {system} SET weight = -10 WHERE name = 'masquerade' AND weight = 0");
+  return $ret;
 }
 
 /**
  * Add a table storing specific user pairings a user can masquerade as.
  */
 function masquerade_update_6005() {
+  $ret = array();
   $schema = array(
     'masquerade_users' => array(
       'fields' => array(
         'uid_from' => array(
           'type' => 'int',
-          'not null' => TRUE,
+          'not null' => true,
           'default' => 0,
           'disp-width' => 10,
         ),
         'uid_to' => array(
           'type' => 'int',
-          'not null' => TRUE,
+          'not null' => true,
           'default' => 0,
           'disp-width' => 10,
         ),
@@ -157,27 +175,15 @@ function masquerade_update_6005() {
       'primary key' => array('uid_from', 'uid_to'),
     )
   );
-  db_create_table('masquerade_users', $schema['masquerade_users']);
-}
-
-/**
- * Update masquerade block delta.
- */
-function masquerade_update_7000() {
-  db_update('block')
-    ->fields(array('delta' => 'masquerade'))
-    ->condition('module', 'masquerade')
-    ->condition('delta', 0)
-    ->execute();
+  db_create_table($ret, 'masquerade_users', $schema['masquerade_users']);
+  return $ret;
 }
 
 /**
  * Update masquerade block caching.
  */
-function masquerade_update_7001() {
-  db_update('block')
-    ->fields(array('cache' => DRUPAL_NO_CACHE))
-    ->condition('module', 'masqurade')
-    ->condition('delta', 'masquerade')
-    ->execute();
+function masquerade_update_6006() {
+  $ret = array();
+  $ret[] = update_sql("UPDATE {blocks} SET cache = -1 WHERE module = 'masquerade'");
+  return $ret;
 }

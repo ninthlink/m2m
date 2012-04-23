@@ -8,26 +8,39 @@ switch back to the previous account.
 
 To install the Masquerade module, extract the module to your modules folder,
 such as sites/all/modules. After enabling the module, it can be configured
-under Administer > Configuration > People > Masquerade. To enable users to
+under Administer > Site configuration > Masquerade. To enable users to
 masquerade, assign the appropriate "masquerade module" permissions to the roles
 available on your site. For example:
 
  * To allow members of the 'customer support' role to masquerade as any
    non-admin user, add the 'masquerade as user' permission to the role. In the
-   Masquerade configuration, set 'administrator' as an administrator role
+   Masquerade configuration, set 'site administrators' as an administrator role
    to prevent customer support users from masquerading as those users.
 
- * To allow members of the 'tech support' role to masquerade as 'administrator', add the 'masquerade as admin' permission to the role. Then,
-   in the Masquerade configuration, set 'administrator' as an
+ * To allow members of the 'tech support' role to masquerade as 'site
+   administrators', add the 'masquerade as admin' permission to the role. Then,
+   in the Masquerade configuration, set 'site administrators' as an
    administrator role.
 
-== Quick Switch Menu ==
+== Module Weights ==
 
-By default, when a user is selected for the 'Menu Quick Switch user', the Masquerade module adds two menu items to the 'Navigation' menu:
+Some modules may conflict with Masquerade depending on their weights. Modules
+known to conflict include:
 
- * Masquerade as 'the user selected': When clicked, the user can quick switch to the user selected.
+ * [Organic Groups](http://drupal.org/project/og)
+ * [Global Redirect](http://drupal.org/project/globalredirect)
 
- * Switch back: This menu item appears while masquerading so that you can switch back to your original user.
+By default, the weight of Masquerade is set to -10. If there are conflicts with
+other modules, you can change the weights of modules on your site by:
+
+1. Installing the [Weight](http://drupal.org/project/weight) or
+[Utility](http://drupal.org/project/util) modules to configure the weights of
+modules on your site.
+
+2. Running the following SQL query in your database to change the weight of the
+Organic Groups (for example) module:
+
+    UPDATE system SET weight = 1 WHERE name = 'og'; 
 
 == Help and Support ==
 
