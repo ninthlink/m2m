@@ -47,7 +47,10 @@ M2M Search Admin<br>
 		}
 		//$message="All new devices require approval. Please allow for a delay in your device to be publish to the site.";
 		$message="All new devices require Qualcomm Sales approval. Please allow for a small delay in your device to be published publicly to the site";
-		drupal_set_message($message);		
+		drupal_set_message($message);
+		// add ADD ANOTHER DEVICE message?
+		$message = l('Click Here', 'add_modules') .' to add another Device';
+		drupal_set_message($message); 	
 	}
     break;
     case update:
