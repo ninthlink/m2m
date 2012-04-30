@@ -12,6 +12,7 @@ stylesheets[all][] = css/html-elements.css
 stylesheets[all][] = css/styles.css
 stylesheets[print][] = css/print.css
 
+scripts[] = js/m2m_devicelist.js
 scripts[] = js/m2mlcd.js
 
 regions[header] = Header
