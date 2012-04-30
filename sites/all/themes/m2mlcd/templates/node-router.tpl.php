@@ -22,7 +22,7 @@
   </div>
 <div class="product_links">
 <?php
-  if ($node->field_rout_product_link[0]['view']) {
+ /* if ($node->field_rout_product_link[0]['view']) {
     print t($node->field_rout_product_link[0]['view']);
   }
   else {
@@ -33,7 +33,8 @@
      <a href="mailto:<?php print t($node->field_rout_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
    <?php }else{ ?>
      Contact Vendor
-   <?php }?>
+   <?php }*/
+   ?>
 </div>
 
 </div>
@@ -44,7 +45,7 @@
 
 <div class="product_links">
 <?php
-  if ($node->field_rout_product_link[0]['view']) {
+ /* if ($node->field_rout_product_link[0]['view']) {
     print t($node->field_rout_product_link[0]['view']);
   }
   else {
@@ -55,7 +56,7 @@
      <a href="mailto:<?php print t($node->field_rout_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
    <?php }else{ ?>
      Contact Vendor
-   <?php }?>
+   <?php }*/?>
 </div>
 
 </div>

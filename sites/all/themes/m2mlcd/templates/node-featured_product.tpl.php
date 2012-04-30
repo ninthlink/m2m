@@ -22,7 +22,7 @@
   </div>
 <div class="product_links">
 <?php
-  if ($node->field_featured_url[0]['view']) {
+ /* if ($node->field_featured_url[0]['view']) {
     print t($node->field_featured_url[0]['view']);
   }
   else {
@@ -30,6 +30,7 @@
   }
 ?>
    | <a href="mailto:<?php print t($node->field_featured_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
+   */?>
 </div>
 
 </div>
@@ -40,7 +41,7 @@
 
 <div class="product_links">
 <?php
-  if ($node->field_featured_url[0]['view']) {
+  /*if ($node->field_featured_url[0]['view']) {
     print t($node->field_featured_url[0]['view']);
   }
   else {
@@ -48,6 +49,7 @@
   }
 ?>
    | <a href="mailto:<?php print t($node->field_featured_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
+	*/ ?>
 </div>
 
 </div>
