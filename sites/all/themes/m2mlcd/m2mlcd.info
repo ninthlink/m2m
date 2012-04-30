@@ -12,6 +12,8 @@ stylesheets[all][] = css/html-elements.css
 stylesheets[all][] = css/styles.css
 stylesheets[print][] = css/print.css
 
+scripts[] = js/m2mlcd.js
+
 regions[header] = Header
 regions[header_top] = Header Top
 regions[left]  = First sidebar
