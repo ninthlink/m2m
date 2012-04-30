@@ -122,3 +122,16 @@ function phptemplate_site_map_menu_item($link, $has_children, $menu = '', $in_ac
   }
   return '<li class="'. $class .'">'. $link . $menu ."</li>\n";
 }
+
+function phptemplate_content_view_multiple_field($items, $field, $values) {
+  $output = '';
+  $i = 0;
+  foreach ($items as $item) {
+    if (!empty($item) || $item == '0') {
+	  if ( $i > 0 ) $output .= ', ';
+      $output .= '<div class="field-item field-item-'. $i .'">'. $item .'</div>';
+      $i++;
+    }
+  }
+  return $output;
+}
