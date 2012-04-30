@@ -28,17 +28,7 @@
  * @ingroup views_templates
  */
 ?>
-<script>
-  $(document).ready(function(){
-    $('.view-content .field-content a').click(function() {
-      $('#devicehere').load($(this).attr('href')+" #main_content", function() {
-        toggle_devices(true);
-      });
-      return false;
-    });
-  });
-</script>
-<div class="<?php print $classes; ?>">
+<div class="<?php print $classes; ?> devicelist">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">
       <?php print $admin_links; ?>

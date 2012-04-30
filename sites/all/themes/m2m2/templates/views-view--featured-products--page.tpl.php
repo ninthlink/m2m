@@ -27,6 +27,7 @@
  *
  * @ingroup views_templates
  */
+ /*
 ?>
 <script type="text/javascript">
   function toggle_devices(view_details){
@@ -47,7 +48,8 @@
     });
   });
 </script>
-<div class="<?php print $classes; ?>">
+*/ ?>
+<div class="<?php print $classes; ?> devicelist">
   <?php if ($admin_links): ?>
     <div class="views-admin-links views-hide">
       <?php print $admin_links; ?>
