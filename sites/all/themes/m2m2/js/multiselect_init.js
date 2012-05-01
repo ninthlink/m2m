@@ -1,11 +1,18 @@
 $jq(document).ready(function(){
-  $jq("select[multiple='multiple']").each(function(){
+	var mults = $jq("select[multiple='multiple']");
+	m2mmulttot = mults.size();
+  mults.each(function(i){
     var filter_label = $jq('label[for="'+$jq(this).attr('id')+'"]').html();
-    $jq(this).multiselect({
+    $jq(this).data('m2mcount',i).multiselect({
       checkAllText: "Select All",
       uncheckAllText: "None",
       noneSelectedText: filter_label,
-      selectedText: filter_label+' (# of #)'
+      selectedText: filter_label+' (# of #)',
+	  open: function(event, ui) {
+		  var m2mc = $jq(this).data('m2mcount');
+		  console.log('clicked on #'+ m2mc);
+		  m2m_mult_fx(m2mc, $jq(this).attr('id'));
+	  }
     });
   });
 });
