@@ -10,8 +10,12 @@ engine = phptemplate
 ;-------------------------------------------------------------------------------
 stylesheets[all][] = css/html-elements.css
 stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/jquery.jscrollpane.css
 stylesheets[print][] = css/print.css
 
+scripts[] = js/jquery.mousewheel.js
+scripts[] = js/mwheelIntent.js
+scripts[] = js/jquery.jscrollpane.js
 scripts[] = js/m2m_devicelist.js
 scripts[] = js/m2mlcd.js
 

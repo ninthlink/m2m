@@ -2,16 +2,13 @@ var m2mmulttot = 0, m2mmultcount = 0;
 
 function m2m_mult_fx(i, id) {
 	var m2msel = jQuery('#'+id);
-	console.log('opened? #'+ i);
 	if ( m2msel.data('m2msfx') != 'ready') {
 		jQuery('.ui-multiselect-checkboxes:eq('+i+')').jScrollPane();
 		m2msel.data('m2msfx', 'ready');
 	}
-//	wha.jScrollPane();
 }
 function m2m_mult_created() {
 	m2mmultcount++;
-	console.log('multi_select #'+ m2mmultcount +' of '+ m2mmulttot +' created');
 	if ( m2mmultcount == m2mmulttot ) m2m_mult_fx();
 }
 

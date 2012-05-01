@@ -1,3 +1,17 @@
+var m2mmulttot = 0, m2mmultcount = 0;
+
+function m2m_mult_fx(i, id) {
+	var m2msel = jQuery('#'+id);
+	if ( m2msel.data('m2msfx') != 'ready') {
+		jQuery('.ui-multiselect-checkboxes:eq('+i+')').jScrollPane();
+		m2msel.data('m2msfx', 'ready');
+	}
+}
+function m2m_mult_created() {
+	m2mmultcount++;
+	if ( m2mmultcount == m2mmulttot ) m2m_mult_fx();
+}
+
 if((typeof view_type === 'undefined')) {
 	var view_type = 'list';
 }

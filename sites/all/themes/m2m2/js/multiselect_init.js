@@ -10,7 +10,6 @@ $jq(document).ready(function(){
       selectedText: filter_label+' (# of #)',
 	  open: function(event, ui) {
 		  var m2mc = $jq(this).data('m2mcount');
-		  console.log('clicked on #'+ m2mc);
 		  m2m_mult_fx(m2mc, $jq(this).attr('id'));
 	  }
     });
