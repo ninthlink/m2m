@@ -89,7 +89,7 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysqli://qcomqctsd_ei:7268844@localhost/qcomqctsd_ei';
+$db_url = 'mysqli://ninthlin_m2m:e3w2q1@localhost/ninthlin_m2m';
 $db_prefix = 'drpl_';
 
 /**
@@ -122,7 +122,7 @@ $update_free_access = FALSE;
  * It is not allowed to have a trailing slash; Drupal will add it
  * for you.
  */
- $base_url = 'http://www.m2msearch.com';  // NO trailing slash!
+ #$base_url = '';  // NO trailing slash!
 
 /**
  * PHP settings:
@@ -237,3 +237,8 @@ ini_set('url_rewriter.tags',        '');
 #   'forum'      => 'Discussion board',
 #   '@count min' => '@count minutes',
 # );
+
+/**
+ * Add the domain module setup routine.
+ */
+include './sites/all/modules/domain/settings.inc';
