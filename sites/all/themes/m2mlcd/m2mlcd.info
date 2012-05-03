@@ -17,6 +17,7 @@ scripts[] = js/jquery.mousewheel.js
 scripts[] = js/mwheelIntent.js
 scripts[] = js/jquery.jscrollpane.js
 scripts[] = js/m2m_devicelist.js
+scripts[] = js/jquery.shuffle.js
 scripts[] = js/m2mlcd.js
 
 regions[header] = Header

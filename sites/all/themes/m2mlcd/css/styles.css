@@ -1644,3 +1644,17 @@ ul.link_sections li.link_wireless a:hover  {
 
 span.views-throbbing{ display: none !important;}
 html.js a.views-throbbing{ padding-right: 0 !important;background-image:none;}
+
+.view-homeslides { display: none }
+ul.hdevices { float: left; width: 1920px; height: 1080px; overflow: hidden; margin: 0; padding: 0; list-style: none }
+ul.hdevices li { float: left; padding: 0; width: 384px; height: 360px; margin: 0; background: none; position: relative; overflow: hidden; list-style: none; background: none }
+ul.hdevices li img { float: left; width: 384px; height: 360px; position: absolute; top: 0; left: 0 }
+ul.hdevices li.views-row-6 { margin-right: 60% }
+#hcats { position: absolute; top: 360px; left: 384px; width: 1152px; height: 360px }
+#hcats ul { display: none; width: 1920px; height: 100%; list-style: none; margin: 0; padding: 0; position: absolute; top: 0; left: -384px; float:left }
+#hcats ul li { float: left; width: 480px; height: 100%; margin: 0; padding: 0; background: none; list-style: none }
+#hcats ul li a { display: none; float: left; width: 100%; height: 70px; font-size: 24px; line-height: 30px; padding: 290px 0 0; color: #fff; text-align: center; background: url(../images/home/4sections.jpg) no-repeat 0 0 }
+#hcats ul li.c1 a { background-position: -480px 0 }
+#hcats ul li.c2 a { background-position: -960px 0 }
+#hcats ul li.c3 a { background-position: 100% 0 }
+#m2mhcv { display: block; width: 100%; height: 100%; text-indent: -999em; text-align: left; background: url(../images/home/discover.jpg) no-repeat 0 0; z-index: 1 }
