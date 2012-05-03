@@ -15,7 +15,7 @@
     <?php print $styles ?>
     <?php print $scripts ?>
   </head>
-<body class="<?php print $body_classes;?>">
+<body class="<?php print $body_classes;?> qlcd">
 
   <div id="bg">
 
