@@ -1659,3 +1659,6 @@ ul.hdevices li.views-row-6 { margin-right: 60% }
 #hcats ul li.c2 a { background-position: -960px 0 }
 #hcats ul li.c3 a { background-position: 100% 0 }
 #m2mhcv { display: block; width: 100%; height: 100%; text-indent: -999em; text-align: left; background: url(../images/home/discover.jpg) no-repeat 0 0; z-index: 1 }
+
+#footer #block-menu-primary-links ul.menu li a { width: auto !important; background: none !important; line-height: 15px !important; color: #333 !important; height: auto !important; font-size: 11px !important }
+#footer #block-menu-primary-links { position: relative; top: 0 }
