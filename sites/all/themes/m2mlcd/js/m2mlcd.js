@@ -2,27 +2,22 @@ var qcyc, qar = new Array(), qhbx = 384, qhby = 360, qww = 1920, hcycms = 1500, 
 
 // helper function to reshuffle array
 function qdevice_restock(l) {
-	console.log('restocking '+ l );
 	for(j=0; j<l; j++) {
 		qar[j] = j;
 	}
 	qar = $jq.shuffle(qar);
-	console.log('rsok?');
 }
 
 // function for shuffling homepage devices
 function qdevice_hcyc() {
-	console.log('cyc');
 	var d = $jq('.hdevices'); // actual 10 devices shown on the homepage screen
 	var ds = d.children().size();
 	var l = $jq('.view-homeslides .view-content ul'); // actual views results, however many that is
 	// qar = array of positions of homepage devices to swap out
 	// if it is empty, reshuffle...
 	if ( qar.length == 0 ) {
-		console.log('need restock');
 		qdevice_restock(ds);
 	}
-	console.log('qar '+ qar.toSource());
 	// pop the first # off, that is where we're shufflin
 	var di = qar.shift();
 	var dl = d.children().eq(di);
