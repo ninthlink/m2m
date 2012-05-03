@@ -110,7 +110,7 @@
         </div>
       <?php endif; ?>
       <?php if ($footer): ?>
-        <div id="footer">
+        <div id="footer" class="flcd">
           <?php print $footer ?>
           <div class="clear"></div>
         </div>
