@@ -39,7 +39,15 @@ function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
   if(isset($form['field_company_value_many_to_one'])){
     $filters = $form_state['view']->display_handler->get_option('filters');
     $node_type = reset($filters['type']['value']);
-    $companies = db_query('SELECT DISTINCT(field_company_value) FROM {content_field_company} company INNER JOIN {node} node ON company.vid=node.vid WHERE node.type="%s" AND node.status=1 ORDER BY field_company_value;', $node_type);
+    if($node_type == 'featured_product'){
+      $node_type_additional = 'router';
+    }
+    $company_query = 'SELECT DISTINCT(field_company_value) FROM {content_field_company} company INNER JOIN {node} node ON company.vid=node.vid WHERE node.type IN ('.(isset($node_type_additional) ? '"%s", ' : "").'"%s") AND node.status=1 ORDER BY field_company_value;';
+    if(isset($node_type_additional)){
+      $companies = db_query($company_query, $node_type, $node_type_additional);
+    }else{
+      $companies = db_query($company_query, $node_type);
+    }
     $form['field_company_value_many_to_one']['#options'] = array();
     while ($val = db_fetch_array($companies)) {
       $form['field_company_value_many_to_one']['#options'][$val['field_company_value']] = $val['field_company_value'];
