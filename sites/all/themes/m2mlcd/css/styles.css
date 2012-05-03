@@ -1664,20 +1664,20 @@ ul.hdevices li.views-row-6 { margin-right: 60% }
 #footer #block-menu-primary-links { position: relative; top: 0 }
 
 .ui-multiselect-checkboxes { overflow-y: auto }
-::-webkit-scrollbar {
+.ui-multiselect-checkboxes::-webkit-scrollbar {
 	width: 18px;
 }
-::-webkit-scrollbar-track {
+.ui-multiselect-checkboxes::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 }
-::-webkit-scrollbar-thumb {
+.ui-multiselect-checkboxes::-webkit-scrollbar-thumb {
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	background: rgba(102,102,102,0.8);
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
-::-webkit-scrollbar-thumb:window-inactive {
+.ui-multiselect-checkboxes::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(102,102,102,0.4);
 }
