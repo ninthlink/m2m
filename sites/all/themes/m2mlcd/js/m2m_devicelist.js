@@ -19,6 +19,10 @@ function toggle_devices(view_details) {
 		$('#device_details').hide();
 		$('#results').show();
 	}
+	var jspApi = $('body').data('jsp');
+	if ( jspApi ) {
+		jspApi.reinitialise();
+	}
 }
 function show_grid() {
 	$('div.view-content').hide();
@@ -51,6 +55,7 @@ function hide_grid() {
 				return false;
 			});
 			$('body').css({'width':1920,'height':1080}).jScrollPane();
+//			$('body').css({'width':1360,'height':768}).jScrollPane();//{showArrows:true});
 		}
 	};
 })(jQuery);
