@@ -50,6 +50,7 @@ function hide_grid() {
 				});
 				return false;
 			});
+			$('body').css({'width':1920,'height':1080}).jScrollPane();
 		}
 	};
 })(jQuery);
