@@ -307,9 +307,14 @@
 									positionDragY(e.pageY - startY, false);
 								}
 							).bind('mouseup.jsp mouseleave.jsp', cancelDrag);
+							
 							return false;
 						}
 					);
+					verticalTrack.bind('mouseleave.jsp', function(e) {
+						$('html').unbind('mousemove.jsp');
+						cancelDrag();
+					});
 					sizeVerticalScrollbar();
 				}
 			}
