@@ -1693,3 +1693,9 @@ body.not-logged-in * {
   -webkit-user-select: none;
   user-select: none;
 }
+body.page-user.not-logged-in * {
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  user-select: text;
+}
