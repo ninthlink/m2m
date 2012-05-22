@@ -94,5 +94,5 @@ $jq(document).ready(function(){
 			qdevice_hreveal();
 			return false;
 		});
-	}
+	} //else { $jq('body').jScrollPane(); }
 });
