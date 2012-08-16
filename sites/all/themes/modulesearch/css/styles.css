@@ -8,6 +8,9 @@ body {
   background: #fff;
 }
 #bg {
+	float:left;
+	width: 100%;
+	min-width: 980px;
   background: url(../images/bg.png) repeat-x;
 }
 #page-layout  {
