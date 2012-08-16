@@ -1,0 +1,27 @@
+name = ModuleSearch
+description = Theme for ModuleSearch.com based off M2Msearch.com
+base theme = m2m2
+core   = 6.x
+engine = phptemplate
+
+; STYLESHEETS
+;-------------------------------------------------------------------------------
+stylesheets[all][] = css/html-elements.css
+stylesheets[all][] = css/styles.css
+stylesheets[all][] = css/jquery.jscrollpane.css
+stylesheets[print][] = css/print.css
+
+scripts[] = js/jquery.mousewheel.js
+scripts[] = js/mwheelIntent.js
+scripts[] = js/jquery.jscrollpane.js
+scripts[] = js/m2m_devicelist.js
+
+regions[header] = Header
+regions[header_top] = Header Top
+regions[left]  = First sidebar
+regions[right] = Second sidebar
+regions[content_top]    = Content top
+regions[content] = Content
+regions[content_bottom] = Content bottom
+regions[footer_top] = Footer Top
+regions[footer] = Footer
