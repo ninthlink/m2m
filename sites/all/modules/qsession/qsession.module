@@ -1,0 +1,59 @@
+<?php
+
+define('QSESSION_COOKIE_NAME', 'QUSERNAME');
+
+function qsession_init() {
+  global $user;
+  qsession_set_cookie($user);
+
+  if (variable_get('qsession_ack_check', TRUE)) {
+    if ($user->uid > 1) {
+      if (empty($_COOKIE['QTI_ACK'])) {
+        module_load_include('inc', 'user', 'user.pages');
+        user_logout();
+      }
+    }
+  }
+}
+
+
+function qsession_menu() {
+  $items = array();
+
+  $items['admin/settings/qsession'] = array(
+      'title' => t('QSESSION configuration'),
+      'description' => t('QSESSION configuration'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('qsession_settings_form'),
+      'access callback' => 'user_access',
+      'access arguments' => array('change config settings'),
+      'file' => 'qsession.admin.inc',
+      'file path' => drupal_get_path('module', 'qsession'),
+    );
+
+  return $items;
+}
+
+
+function qsession_user($op, &$edit, &$account, $category = NULL) {
+  if ($op == 'login' || $op == 'logout') {
+    $edit_obj = (object)$edit;
+    if ($edit_obj->name) {
+      $edit_obj->mail = $edit_obj->name;
+    }
+    qsession_set_cookie($edit_obj);
+  }
+}
+
+
+function qsession_set_cookie($account) {
+  $cookie_domain = variable_get('qsession_cookie_domain', $GLOBALS['cookie_domain']);
+  if ($account->mail && !isset($_COOKIE[QSESSION_COOKIE_NAME]) && $account->uid != 1) {
+    $_COOKIE[QSESSION_COOKIE_NAME] = $account->mail;
+    setcookie(QSESSION_COOKIE_NAME, $account->mail, time() + 15, '/', $cookie_domain);
+  }
+  else if (!isset($account->mail) && isset($_COOKIE[QSESSION_COOKIE_NAME])) {
+    setcookie(QSESSION_COOKIE_NAME, '', time() - 3600, '/', $cookie_domain);
+    unset($_COOKIE[QSESSION_COOKIE_NAME]);
+  }
+}

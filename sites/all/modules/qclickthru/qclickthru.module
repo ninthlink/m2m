@@ -1,0 +1,44 @@
+<?php
+/**
+ * Implementation of hook_init()
+ *
+ * Redirect authenticated users if they don't have the q click thru cookie
+ *
+ */
+function qclickthru_init() {
+	if (variable_get('qclickthru_ack_check', true)) {
+		global $user;
+		$qti_cookie = "QTI_ACK";
+		
+		if ($user->uid > 1) {
+			//check to see if q username cookie is set and the qti is not, if so, redirect to qti_ack
+			$url = $_SERVER['REQUEST_URI'];
+			$base_url = 'http://' .$_SERVER['HTTP_HOST'];
+			$redirect_url = variable_get('qclickthru_redirect_url', "http://qtiack12.iskoot.com/ack/agreement/review?referer=$base_url");
+			if (!empty($_COOKIE['QUSERNAME'])  && empty($_COOKIE[$qti_cookie])) { 
+				drupal_goto($redirect_url . $url, array('external' => TRUE));
+			} elseif (empty($_COOKIE['QUSERNAME']) && empty($_COOKIE[$qti_cookie])) {
+				// Destroy the current session, and reset $user to the anonymous user.
+				module_invoke_all('user_logout', $user);
+		 	 	session_destroy();
+			}
+		}
+	}
+}
+
+function qclickthru_menu() {
+  $items = array();
+
+  $items['admin/settings/qclickthru'] = array(
+      'title' => t('qclickthru configuration'),
+      'description' => t('qclickthru configuration'),
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('qclickthru_settings_form'),
+      'access callback' => 'user_access',
+      'access arguments' => array('change config settings'),
+      'file' => 'qclickthru.admin.inc',
+      'file path' => drupal_get_path('module', 'qclickthru'),
+    );
+
+  return $items;
+}
