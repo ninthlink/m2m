@@ -32,7 +32,7 @@ function approval_mail_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
 							$login_url="http://www.m2msearch.com"."/user/login";
 							//$node_url="http://".$_SERVER['HTTP_HOST']."/node/".$node->nid."/edit?destination=manage/owndevice";
 							$node_url="http://www.m2msearch.com"."/manage/owndevice";
-							$message ="Dear $row->name,<br><bR>
+							$message ="Dear $row->name,<br><br>
  
 <b>$company_name</b> has uploaded a new module, <b>$node->title</b> , to the online M2M module database. It requires your verification and approval for it to post publically; to review the module, Please <a href='".$login_url."'> Login </a> into the site to approve the devices waiting your approval.<br><br><br>  
  
@@ -40,6 +40,10 @@ Thank you,<br>
 M2M Search Admin<br>
 "; 					
 							//mail($row->mail, $subject, $message) or die("error in mail function");
+							if ( function_exists('watchdog') ) {
+								watchdog('approval_mail', "company $company_name created '$node->title'. Emailing $row->name for approval...<br /><br />$message");
+							}
+							
 							drupal_mail_send(array('to'=>$row->mail, 'body' => $message, 'subject' => $subject, 'headers' => $headers));
 						}
 					}				
@@ -67,9 +71,12 @@ M2M Search Admin<br>
 			 $message = "Dear $user_owner->name,<br><br>
 	We are pleased to notify you that your recently uploaded module, <b>$node->title</b>, has been approved by Qualcomm Sales and is now publicly listed on the online M2M module database.<br><br><br>
 	 
-	Thank you,<bR>
-	Qualcomm Sales and M2M Team<bR>
+	Thank you,<br>
+	Qualcomm Sales and M2M Team<br>
 	";    
+			if ( function_exists('watchdog') ) {
+				watchdog('approval_mail', "approved : '$node->title'. Emailing $mailto ...<br /><br />$message");
+			}
 			 drupal_mail_send(array('to'=>$mailto, 'body' => $message, 'subject' => $subject, 'headers' => $headers));
 	 	}
 		
