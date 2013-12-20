@@ -241,62 +241,16 @@ a:hover {
   text-decoration:none;
   padding: 0;
   color:#fff;
+	width: 150px;
   height: 78px;
   line-height: 51px;
   text-align: center;
-  background: url(../images/bg_nav.png) repeat-x 0 -78px;
+  background: url(../images/bg_nav1.png) no-repeat 0 -78px;
 }
-#block-menu-primary-links ul.menu li a.item_cellular:link,
-#block-menu-primary-links ul.menu li a.item_cellular:visited  {
-  width: 172px;
-}
-#block-menu-primary-links ul.menu li a.item_connectivity:link,
-#block-menu-primary-links ul.menu li a.item_connectivity:visited  {
-  background: url(../images/bg_nav.png) repeat-x -172px -78px;
-  width: 202px;
-}
-#block-menu-primary-links ul.menu li a.item_wireless:link,
-#block-menu-primary-links ul.menu li a.item_wireless:visited  {
-  background: url(../images/bg_nav.png) repeat-x -374px -78px;
-  width: 233px;
-}
-#block-menu-primary-links ul.menu li a.item_featured:link,
-#block-menu-primary-links ul.menu li a.item_featured:visited  {
-  background: url(../images/bg_nav.png) repeat-x -607px -78px;
-  width: 167px;
-}
-
-
 #block-menu-primary-links ul.menu li a.active:link,
 #block-menu-primary-links ul.menu li a.active:visited  {
   color:#000;
-}
-
-body.page-devicesearch #block-menu-primary-links ul.menu li a.item_cellular:link,
-body.page-devicesearch #block-menu-primary-links ul.menu li a.item_cellular:visited,
-#block-menu-primary-links ul.menu li a.item_cellular.active:link,
-#block-menu-primary-links ul.menu li a.item_cellular.active:visited  {
-  background: url(../images/bg_nav.png) repeat-x 0 0px;
-  color:#000;
-}
-body.page-connectivity-search #block-menu-primary-links ul.menu li a.item_connectivity:link,
-body.page-connectivity-search #block-menu-primary-links ul.menu li a.item_connectivity:visited,
-#block-menu-primary-links ul.menu li a.item_connectivity.active:link,
-#block-menu-primary-links ul.menu li a.item_connectivity.active:visited  {
-  background: url(../images/bg_nav.png) repeat-x -172px 0px;
-  color:#000;
-}
-body.page-routersearch #block-menu-primary-links ul.menu li a.item_wireless:link,
-body.page-routersearch #block-menu-primary-links ul.menu li a.item_wireless:visited,
-#block-menu-primary-links ul.menu li a.item_wireless.active:link,
-#block-menu-primary-links ul.menu li a.item_wireless.active:visited  {
-  background: url(../images/bg_nav.png) repeat-x -374px 0px;
-  color:#000;
-}
-#block-menu-primary-links ul.menu li a.item_featured.active:link,
-#block-menu-primary-links ul.menu li a.item_featured.active:visited  {
-  background: url(../images/bg_nav.png) repeat-x -607px 0px;
-  color:#000;
+	background-position: 0 0;
 }
 
 /* secondary links */
