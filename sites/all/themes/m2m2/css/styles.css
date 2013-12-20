@@ -248,7 +248,9 @@ a:hover {
   background: url(../images/bg_nav1.png) no-repeat 0 -78px;
 }
 #block-menu-primary-links ul.menu li a.active:link,
-#block-menu-primary-links ul.menu li a.active:visited  {
+#block-menu-primary-links ul.menu li a.active:visited,
+#block-menu-primary-links ul.menu li.active-trail a:link,
+#block-menu-primary-links ul.menu li.active-trail a:visited  {
   color:#000;
 	background-position: 0 0;
 }
