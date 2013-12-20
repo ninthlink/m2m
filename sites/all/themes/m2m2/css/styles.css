@@ -569,6 +569,9 @@ body.page-routers {}
 .banner-wireless  {
   background: url(../images/img_h_router.png) no-repeat top right;
 }
+.banner-wireless.banner-automotive  {
+  background: url(../images/img_h_auto.jpg) no-repeat top right;
+}
 .banner-subtitle  {
   height: 40px;
   width: 200px;
