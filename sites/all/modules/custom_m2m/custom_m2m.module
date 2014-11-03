@@ -32,10 +32,10 @@ function custom_m2m_add_module_page(){
 }
 
 function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
-    $form['submit']['#value'] = 'Search for Device';
-    $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
-    drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/jquery.multiselect.min.js', 'theme');
-    drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/multiselect_init.js', 'theme');
+  $form['submit']['#value'] = 'Search for Device';
+  $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
+  drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/jquery.multiselect.min.js', 'theme');
+  drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/multiselect_init.js', 'theme');
   if(isset($form['field_company_value_many_to_one'])){
     $filters = $form_state['view']->display_handler->get_option('filters');
     $node_type = reset($filters['type']['value']);
@@ -202,6 +202,30 @@ function custom_m2m_nodewords_tags_alter(&$output, $parameters) {
   }
   if (empty($output['abstract']) && $parameters['type'] == NODEWORDS_TYPE_PAGE) {
     $output['abstract'] = t('Node content');
+  }
+}
+
+function custom_m2m_form_content_field_edit_form_alter(&$form, &$form_state) {
+  $form['#submit'][] = 'custom_m2m_content_field_edit_form_submit';
+}
+
+function custom_m2m_content_field_edit_form_submit($form, &$form_state) {
+  if(isset($form_state['#field_info']['field_company'])){
+    if($form_state['#field_info']['field_company']['allowed_values'] != $form_state['values']['allowed_values']){
+      $old_vals = explode("\r\n", $form_state['#field_info']['field_company']['allowed_values']);
+      $new_vals = explode("\r\n", $form_state['values']['allowed_values']);
+      $added_vals = array_diff($new_vals, $old_vals);
+      if(!empty($added_vals)){
+        $device_types = company_list_get_company_types();
+        foreach($device_types as $t => $d){
+          $companies_device = variable_get('m2m_company_list_'. $t, array());
+          foreach($added_vals as $v){
+            $companies_device[$v] = $v;
+          }
+          variable_set('m2m_company_list_' . $t, array_filter($companies_device));
+        }
+      }
+    }
   }
 }
 
