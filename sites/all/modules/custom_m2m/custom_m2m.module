@@ -217,7 +217,7 @@ function custom_m2m_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'webform_client_form_668') {
     if ($node = menu_get_object() && empty($form_state['post'])) {
       if(empty($form['submitted']['subject']['#value'])){
-        $form['submitted']['subject']['#value'] = 'Inquiry from M2MSearch.com Regarding '.$node->title;
+        $form['submitted']['subject']['#value'] = 'M2MSearch.com Inquiry: '.$node->title;
       }
       if(empty($form['submitted']['vendor_email']['#value'])){
         switch($node->type){
