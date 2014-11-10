@@ -32,7 +32,11 @@ function custom_m2m_add_module_page(){
 }
 
 function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
-  $form['submit']['#value'] = 'Search for Device';
+  if(in_array($form['#id'], array('views-exposed-form-router-search-page-1', 'views-exposed-form-featured-products-page-1'))){
+    $form['submit']['#value'] = 'Search for Device';
+  }else{
+    $form['submit']['#value'] = 'Search for Module';
+  }
   $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
   drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/jquery.multiselect.min.js', 'theme');
   drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/multiselect_init.js', 'theme');
@@ -207,6 +211,38 @@ function custom_m2m_nodewords_tags_alter(&$output, $parameters) {
 
 function custom_m2m_form_content_field_edit_form_alter(&$form, &$form_state) {
   $form['#submit'][] = 'custom_m2m_content_field_edit_form_submit';
+}
+
+function custom_m2m_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'webform_client_form_668') {
+    if ($node = menu_get_object() && empty($form_state['post'])) {
+      if(empty($form['submitted']['subject']['#value'])){
+        $form['submitted']['subject']['#value'] = 'Inquiry from M2MSearch.com Regarding '.$node->title;
+      }
+      if(empty($form['submitted']['vendor_email']['#value'])){
+        switch($node->type){
+          case 'connectivity_module':
+            $contact_email = $node->field_conn_contact_email[0]['value'];
+            break;
+          case 'auto_module':
+            $contact_email = $node->field_auto_contact_email[0]['value'];
+            break;
+          case 'device':
+            $contact_email = $node->field_contact_email[0]['value'];
+            break;
+          case 'featured_product':
+            $contact_email = $node->field_featured_contact_email[0]['value'];
+            break;
+          case 'router':
+            $contact_email = $node->field_rout_contact_email[0]['value'];
+            break;
+        }
+        if(isset($contact_email)){
+          $form['submitted']['vendor_email']['#value'] = $contact_email;
+        }
+      }
+    }
+  }
 }
 
 function custom_m2m_content_field_edit_form_submit($form, &$form_state) {
