@@ -44,8 +44,8 @@
       ?>
       |
       <?php if($node->field_conn_contact_email[0]['view']){?>
-          <?php //$block = module_invoke('webform', 'block_view', 'client-block-668');
-          echo //$block['content']; ?>
+        <?php //$block = module_invoke('webform', 'block_view', 'client-block-668');
+        //echo $block['content']; ?>
         <a href="mailto:<?php print t($node->field_conn_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
       <?php }else{ ?>
         Contact Vendor
