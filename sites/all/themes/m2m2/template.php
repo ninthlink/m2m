@@ -137,3 +137,19 @@ function phptemplate_content_view_multiple_field($items, $field, $values) {
   $output .= '</div>';
   return $output;
 }
+function m2m2_text_formatter_default($element){
+  if($element['#field_name'] == 'field_company'){
+    $company_users = array();
+    $company = $element['#item']['value'];
+    $result = db_query('SELECT n.uid, n.title FROM {node} n JOIN {users_roles} ur ON n.uid=ur.uid JOIN {content_field_company} cfc ON n.nid=cfc.nid WHERE n.type="profile" AND ur.rid=3 AND cfc.field_company_value="%s" AND n.uid <> 1;', $company);
+    while ($u = db_fetch_object($result)) {
+      $company_users[] = l($u->title, 'user/'.$u->uid);
+    }
+    $return = ($allowed = _text_allowed_values($element)) ? $allowed : $element['#item']['safe'];
+    if(!empty($company_users)){
+      $return .= theme('item_list', $company_users);
+    }
+    return $return;
+  }
+  return ($allowed = _text_allowed_values($element)) ? $allowed : $element['#item']['safe'];
+}

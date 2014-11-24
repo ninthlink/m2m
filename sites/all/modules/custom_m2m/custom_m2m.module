@@ -296,3 +296,19 @@ function custom_m2m_nodewords_tags_info() {
 
   return $tags;
 }
+
+/**
+ * Implement hook_form_alter().
+ */
+function custom_m2m_form_user_admin_account_alter(&$form, $form_state) {
+  if (!empty($form['name'])) {
+    foreach (array_keys($form['name']) as $uid) {
+      $profile = content_profile_load('profile', $uid, '', TRUE);
+      $companies = array();
+      foreach($profile->field_company as $c){
+        $companies[] = $c['value'];
+      }
+      $form['company'][$uid]['#value'] = theme('item_list', $companies);
+    }
+  }
+}
