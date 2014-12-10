@@ -163,9 +163,11 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
         if($is_admin || array_intersect($user_companies, variable_get('m2m_company_list_router', array()))){
           $add_devices_ul .= '<li'.$act7.'>'.l('Add Wireless Gateway/Router', 'node/add/router').'</li>';
         }
+        /*
         if($is_admin || array_intersect($user_companies, variable_get('m2m_company_list_computing', array()))){
           $add_devices_ul .= '<li'.$act12.'>'.l('Add Computing Module', 'node/add/computing').'</li>';
         }
+        */
         if($is_admin){
           $add_devices_ul .= '<li'.$act8.'>'.l('Add Featured Product', 'node/add/featured-product').'</li>';
         }
