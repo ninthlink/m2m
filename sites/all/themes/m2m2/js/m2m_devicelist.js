@@ -48,12 +48,14 @@ function hide_grid() {
 			} else {
 				hide_grid();
 			}
+      /*
 			$('.view-content .field-content a').click(function() {
 				$('#devicehere').load($(this).attr('href')+" #main_content", function() {
 					toggle_devices(true);
 				});
 				return false;
 			});
+      */
 		}
 	};
 })(jQuery);
