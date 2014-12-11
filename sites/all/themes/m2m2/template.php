@@ -138,7 +138,7 @@ function phptemplate_content_view_multiple_field($items, $field, $values) {
   return $output;
 }
 function m2m2_text_formatter_default($element){
-  if($element['#field_name'] == 'field_company'){
+  if(arg(0) == 'user' && $element['#field_name'] == 'field_company'){
     $company_users = array();
     $company = $element['#item']['value'];
     $result = db_query('SELECT n.uid, n.title FROM {node} n JOIN {users_roles} ur ON n.uid=ur.uid JOIN {content_field_company} cfc ON n.nid=cfc.nid WHERE n.type="profile" AND ur.rid=3 AND cfc.field_company_value="%s" AND n.uid <> 1;', $company);

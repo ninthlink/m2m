@@ -29,7 +29,7 @@
     print "Learn More";
   }
 ?>
-   | <a href="mailto:<?php print t($node->field_featured_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
+   | <a class="contactMe" href="#webform-component-name">Contact Vendor</a>
 </div>
 
 </div>
@@ -47,9 +47,9 @@
     print "Learn More";
   }
 ?>
-   | <?php //$block = module_invoke('webform', 'block_view', 'client-block-668');
-        //echo $block['content']; ?>
-   <a href="mailto:<?php print t($node->field_featured_contact_email[0]['view']); ?>?subject=Inquiry from M2MSearch.com Regarding <?php print $title;?>">Contact Vendor</a>
+   | <a class="contactMe" href="#webform-component-name">Contact Vendor</a>
+   <?php $block = module_invoke('webform', 'block_view', 'client-block-668');
+   echo $block['content']; ?>
 </div>
 
 </div>
