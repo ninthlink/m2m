@@ -46,11 +46,11 @@
     print "Learn More";
   }
 ?>
-  <?php /*if($node->field_contact_email[0]['view']){?>
+  <?php if($node->field_contact_email[0]['view']){?>
     <br /><br /><h3>Contact Vendor</h3>
-    <?php $block = module_invoke('webform', 'block_view', 'client-block-668');
+    <?php $block = module_invoke('webform', 'block_view', 'client-block-677');
     echo $block['content']; ?>
-  <?php }*/?>
+  <?php }?>
 </div>
 
 </div>
