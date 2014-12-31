@@ -43,13 +43,10 @@
         }
       ?>
       
-      <?php  if($node->field_conn_contact_email[0]['view']){?>
-        <!--a class="contactMe" href="#webform-component-name">Contact Vendor</a-->
+      <?php /*if($node->field_conn_contact_email[0]['view']){?>
         <br /><br /><h3>Contact Vendor</h3>
           <?php $block = module_invoke('webform', 'block_view', 'client-block-668');
           echo $block['content']; ?>
-      <?php }/*else{ ?>
-        Contact Vendor
       <?php }*/?>
     </div>
   </div>
