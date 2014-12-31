@@ -966,3 +966,8 @@ form#views-ui-preview-form input#preview-submit {
 .content-add-more {
   margin-bottom: 10px;
 }
+
+#user-admin-account table .item-list ul li {
+    list-style-type: none;
+    list-style-type: none;
+}
