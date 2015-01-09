@@ -40,12 +40,12 @@
 
 <div class="product_links">
 <?php
-  if ($node->field_rout_product_link[0]['view']) {
+  /*if ($node->field_rout_product_link[0]['view']) {
     print t($node->field_rout_product_link[0]['view']);
   }
   else {
     print "Learn More";
-  }
+  }*/
 ?>
   <?php if($node->field_rout_contact_email[0]['view']){?>
     <br /><br /><h3>Contact Vendor</h3>

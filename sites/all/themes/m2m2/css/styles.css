@@ -488,12 +488,12 @@ body.no-sidebars #main_content {
   line-height: 16px;
   color:#333;
 }
-#footer_top p {
+/*#footer_top p {
   float: left;
   width: 450px;
   margin: 0 30px 0 0;
 
-}
+}*/
 #footer {
   position: relative;
   width: 960px;

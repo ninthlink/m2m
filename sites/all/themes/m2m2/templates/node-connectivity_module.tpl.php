@@ -36,11 +36,11 @@
     <?php print $group_product_details_rendered ?>
     <div class="product_links">
       <?php
-        if ($node->field_conn_website[0]['view']) {
+        /*if ($node->field_conn_website[0]['view']) {
           print t($node->field_conn_website[0]['view']);
         } else {
           print "Learn More";
-        }
+        }*/
       ?>
       
       <?php if($node->field_conn_contact_email[0]['view']){?>
