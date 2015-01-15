@@ -14,9 +14,9 @@
 
 <div class="product_column1">
 
-  <div class="product_title">
-  <h2><?php print $title; ?></h2>
-  </div>
+  <!--div class="product_title">
+  <h2><?php //print $title; ?></h2>
+  </div-->
   <div class="product_image">
   <?php print t($node->field_rout_image[0]['view']); ?>
   </div>

@@ -38,9 +38,18 @@ body.page-devicesearch h1,
 body.page-featured h1,
 body.page-cellular h1,
 body.page-connectivity h1,
+body.page-automotivesearch h1,
 body.page-connectivitysearch h1 {
   display: none;
 }
+body.node-type-router h1,
+body.node-type-device h1,
+body.node-type-featured-product h1,
+body.node-type-connectivity-module h1 {
+  color: #333;
+  display: block;
+}
+
 /* CSS DOCUMENT */
 * {
   margin: 0;
@@ -1257,10 +1266,10 @@ body.node-type-device #content,
 body.node-type-router #content  {
   padding: 30px 20px 70px;
 }
-body.node-type-device h1,
+/*body.node-type-device h1,
 body.node-type-router h1  {
   display: none;
-}
+}*/
 .product_column1 {
   float: left;
   width: 250px;
