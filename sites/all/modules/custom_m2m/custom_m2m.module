@@ -37,7 +37,16 @@ function custom_m2m_form_views_exposed_form_alter(&$form, &$form_state) {
   }else{
     $form['submit']['#value'] = 'Search for Module';
   }
-  $form['view_all'] = array('#type' => 'markup', '#value' => '<input id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
+  $show_view_all = FALSE;
+  if($form_state['input'] && !empty($form_state['input'])){
+    foreach($form_state['input'] as $val){
+      if(!empty($val) && is_array($val)){
+        $show_view_all = TRUE;
+      }
+    }
+  }
+  $form['view_all'] = array('#type' => 'markup', '#value' => '<input style="'.(!$show_view_all ? 'display:none;' : '').'" id="view-all" class="form-submit" type="button" value="View All" onClick="var form = $jq(this).closest(\'form\');  form.find(\'option:selected\').removeAttr(\'selected\'); form.submit();return false;">');
+  drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/show_view_all.js', 'theme');
   drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/jquery.multiselect.min.js', 'theme');
   drupal_add_js(drupal_get_path('theme', 'm2m2') . '/js/multiselect_init.js', 'theme');
   if(isset($form['field_company_value_many_to_one'])){
