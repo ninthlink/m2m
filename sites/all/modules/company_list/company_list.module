@@ -5,7 +5,7 @@ function company_list_menu(){
     'description' => 'Company Options',
     'page callback' => 'company_list_export_devices',
     'page arguments' => array(1),
-    'access arguments' => array('administer access control'),
+    'access arguments' => array('administer users'),
     'type' => MENU_CALLBACK,
     'title callback' => 'company_list_set_title',
     'title arguments' => array(1)
@@ -13,7 +13,7 @@ function company_list_menu(){
   $items['company_module_options'] = array(
     'description' => 'Company Options',
     'page callback' => 'company_list_module_page',
-    'access arguments' => array('administer access control'),
+    'access arguments' => array('administer users'),
     'type' => MENU_CALLBACK,
     'title' => 'Company Options',
   );
@@ -27,6 +27,7 @@ function company_list_module_page(){
     $content .= '<li>'.l($company_name, 'company_module_options/'.$company_value).'</li>';
   }
   $content .= '</ul>';
+  //$test = variable_get('m2m_company_list_device', array());
   return $content;
 }
 
@@ -45,6 +46,7 @@ function company_list_get_company_types(){
     'connectivity_module' => 'Connectivity Modules',
     'router' => 'Wireless Gateway/Routers',
     'computing' => 'Computing Modules',
+    //'auto_module' => 'Automotive Modules',
   );
   return $content_device_types;
 }
@@ -101,6 +103,7 @@ function company_list_form_alter(&$form, $form_state, $form_id) {
     case 'connectivity_module_node_form':
     case 'router_node_form':
     case 'computing_node_form':
+    //case 'auto_module_node_form':
     case 'device_node_form':
       $user_fields = user_load($user->uid);
       //code to display only assigned companies

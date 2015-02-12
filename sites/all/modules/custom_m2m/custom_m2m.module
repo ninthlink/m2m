@@ -83,7 +83,7 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       //if((arg(0)=='user') || (arg(0)=='user' && arg(1)==$user->uid && $user->uid!=0) || (strpos($_SERVER['REQUEST_URI'],"manage/device")!==false) || (!empty($node) && $node->type=='profile') || (strpos($_SERVER['REQUEST_URI'],"manage/owndevice")!==false)){
       $display_content_tabs = FALSE;
       
-      if(in_array('Sales Rep', $user->roles)){
+      if(in_array('Sales Rep', $user->roles) && !in_array('administrator', $user->roles)){
         $device_url="manage/device";
       }else{
         $device_url="managedevice";
@@ -141,9 +141,11 @@ function custom_m2m_block($op = 'list', $delta = 0, $edit = array()) {
       //$block[0]['content'] .= '<ul class="tabs primary"><li'.$act1.'>'.l('View', 'user/'.$user->uid).'</li><li'.$act2.'>'.l('Update Profile', 'user/'.$user->uid.'/edit').'</li>';
       $block[0]['content'] .= '<ul class="tabs primary">';
       
-      if(in_array('Sales Rep', $user->roles)){
+      if(in_array('Sales Rep', $user->roles) && !in_array('administrator', $user->roles)){
         $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', 'manage/owndevice').'</li>';
         $device_url="manage/device";
+      }elseif(in_array('administrator', $user->roles)){
+        $block[0]['content'] .= '<li'.$act5.'>'.l('Approve Devices', 'manage/owndevice').'</li>';
       }else{
         $device_url="managedevice";
       }
