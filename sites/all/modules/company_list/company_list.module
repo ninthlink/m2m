@@ -146,8 +146,10 @@ function x_form_after_build($form, &$form_state){
   $option_companies = array();
   if(isset($form['group_product_details']['field_company'])){
     $options =& $form['group_product_details']['field_company']['value']['#options'];
+    $values =& $form['group_product_details']['field_company']['value']['#value'];
   }else{
     $options =& $form['field_company']['value']['#options'];
+    $values =& $form['field_company']['value']['#value'];
   }
   if(!in_array('administrator', $user->roles)){
     $profile = content_profile_load('profile', $user->uid);
@@ -167,6 +169,10 @@ function x_form_after_build($form, &$form_state){
     $option_companies = array_combine($option_companies, $option_companies);
   }
   $options = $option_companies;
+  if($form['#node']->type != 'profile' && $form_state['submitted'] == FALSE){
+    $values = $options;
+  }
+  
   return $form;
 }
 
