@@ -1,5 +1,4 @@
 <?php
-// $Id: views_content_plugin_display_ctools_context.inc,v 1.1.2.1 2010/07/20 00:17:09 merlinofchaos Exp $
 /**
  * @file
  * Contains the block display plugin.
@@ -113,7 +112,7 @@ class views_content_plugin_display_ctools_context extends views_plugin_display {
   /**
    * Provide the default form for setting options.
    */
-  function options_form(&$form, &$form_state) {
+  function options_form($form, &$form_state) {
     // It is very important to call the parent function here:
     parent::options_form($form, $form_state);
     switch ($form_state['section']) {

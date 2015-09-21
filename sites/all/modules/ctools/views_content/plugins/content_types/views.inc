@@ -1,5 +1,4 @@
 <?php
-// $Id: views.inc,v 1.11.2.11 2010/07/23 06:08:39 merlinofchaos Exp $
 
 /**
  * @file
@@ -430,6 +429,7 @@ function views_content_views_content_type_admin_info($subtype, $conf, $contexts)
   }
 
   $display = empty($conf['display']) ? $view->current_display : $conf['display'];
+  $block = new stdClass();
   $block->title = t('View information');
 
   $block->content = '<ul>';

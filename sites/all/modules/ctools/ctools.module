@@ -1,5 +1,4 @@
 <?php
-// $Id: ctools.module,v 1.27.2.50 2010/10/15 22:11:09 merlinofchaos Exp $
 
 /**
  * @file
@@ -10,7 +9,7 @@
  * must be implemented in the module file.
  */
 
-define('CTOOLS_API_VERSION', '1.8');
+define('CTOOLS_API_VERSION', '1.9');
 
 /**
  * Test the CTools API version.
@@ -330,6 +329,10 @@ function ctools_set_variable_token($token) {
  * $token = ctools_set_variable_token('id', 'mymodule_myfunction');
  */
 function ctools_set_callback_token($token, $callback) {
+  // If the callback uses arguments they are considered in the token.
+  if (is_array($callback)) {
+    $token .= '-' . md5(serialize($callback));
+  }
   $string = '<!-- ctools-page-' . $token . ' -->';
   ctools_set_page_token($string, 'callback', $callback);
   return $string;
@@ -391,7 +394,7 @@ function ctools_shutdown_handler() {
 function ctools_theme() {
   ctools_include('utility');
   $items = array();
-  _ctools_passthrough($items, 'theme');
+  ctools_passthrough('ctools', 'theme', $items);
   return $items;
 }
 
@@ -401,7 +404,7 @@ function ctools_theme() {
 function ctools_menu() {
   ctools_include('utility');
   $items = array();
-  _ctools_passthrough($items, 'menu');
+  ctools_passthrough('ctools', 'menu', $items);
   return $items;
 }
 
@@ -410,7 +413,8 @@ function ctools_menu() {
  */
 function ctools_cron() {
   ctools_include('utility');
-  _ctools_passthrough($items, 'cron');
+  $items = array();
+  ctools_passthrough('ctools', 'cron', $items);
 }
 
 /**
@@ -439,6 +443,26 @@ function ctools_forms() {
   );
 
   return $forms;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ctools_form_alter(&$form, $form_state, $form_id) {
+  $form['#after_build'][] = 'ctools_ajax_form_after_build';
+}
+
+/**
+ * #after_build callback: Mark the $form['#action'] as a trusted URL for Ajax.
+ */
+function ctools_ajax_form_after_build($form, $form_state) {
+  $settings = array(
+    'CToolsUrlIsAjaxTrusted' => array(
+      $form['#action'] => TRUE,
+    ),
+  );
+  drupal_add_js($settings, 'setting');
+  return $form;
 }
 
 /**
@@ -485,7 +509,7 @@ function ctools_js_replacements() {
     $replacements = array_merge_recursive($replacements, jquery_update_get_replacements());
     foreach ($replacements as $type => $type_replacements) {
       foreach ($type_replacements as $old_path => $new_filename) {
-        $replacements[$type][$old_path] = JQUERY_UPDATE_REPLACE_PATH . "/$new_filename";
+        $replacements[$type][$old_path] = drupal_get_path('module', 'jquery_update') . "/replace/$new_filename";
       }
     }
     $replacements['core']['misc/jquery.js'] = jquery_update_jquery_path();
@@ -541,24 +565,27 @@ function ctools_preprocess_node(&$vars) {
 function ctools_preprocess_page(&$variables) {
   $tokens = ctools_set_page_token();
   if (!empty($tokens)) {
+    $temp_tokens = array();
     foreach ($tokens as $token => $key) {
       list($type, $argument) = $key;
       switch ($type) {
         case 'variable':
-          $tokens[$token] = isset($variables[$argument]) ? $variables[$argument] : '';
+          $temp_tokens[$token] = isset($variables[$argument]) ? $variables[$argument] : '';
           break;
         case 'callback':
           if (is_string($argument) && function_exists($argument)) {
-            $tokens[$token] = $argument($variables);
+            $temp_tokens[$token] = $argument($variables);
           }
           if (is_array($argument) && function_exists($argument[0])) {
             $function = array_shift($argument);
             $argument = array_merge(array(&$variables), $argument);
-            $tokens[$token] = call_user_func_array($function, $argument);
+            $temp_tokens[$token] = call_user_func_array($function, $argument);
           }
           break;
       }
     }
+    $tokens = $temp_tokens;
+    unset($temp_tokens);
     $variables['content'] = strtr($variables['content'], $tokens);
   }
 

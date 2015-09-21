@@ -1,5 +1,4 @@
 <?php
-// $Id: watermark.inc,v 1.1.4.6 2009/10/30 14:03:54 dman Exp $
 /**
  * @file routine for image layering
  * 
@@ -12,7 +11,6 @@
  * and calculates a new valus for each of them. this is only a fallback because reliable image toolkit 
  * transparencies was buggy on certain platforms :(
  * 
- * DOES NOT WORK WELL on indexed color yet (GIFs)
  */
 
 //Niko (http://www.codeguru.com.ua)

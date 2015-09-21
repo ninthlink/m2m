@@ -1,5 +1,4 @@
 <?php
-// $Id: modal.inc,v 1.7.2.6 2010/09/08 21:10:12 merlinofchaos Exp $
 
 /**
  * @file
@@ -197,7 +196,7 @@ function ctools_modal_form_wrapper($form_id, &$form_state) {
   );
 
   $output = ctools_build_form($form_id, $form_state);
-  if (!empty($form_state['ajax']) && empty($form_state['executed'])) {
+  if (!empty($form_state['ajax']) && (!$form_state['executed'] || $form_state['rebuild'])) {
     return ctools_modal_form_render($form_state, $output);
   }
 
@@ -212,7 +211,7 @@ function ctools_modal_form_render($form_state, $output) {
 
   // If there are messages for the form, render them.
   if ($messages = theme('status_messages')) {
-    $output = '<div class="messages">' . $messages . '</div>' . $output;
+    $output = $messages . $output;
   }
 
   $commands = array();

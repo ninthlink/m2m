@@ -225,7 +225,7 @@ function domain_menu() {
         'page callback' => 'domain_batch',
         'page arguments' => array($key),
         'file' => 'domain.admin.inc',
-        'weight' => $value['#weight']
+        'weight' => isset($value['#weight']) ? $value['#weight'] : 0,
       );
     }
   }
@@ -1032,9 +1032,11 @@ function domain_validate($subdomain) {
  */
 function domain_valid_domain($subdomain) {
   $error_list = array();
-  // Check for at least one dot.
-  if (substr_count($subdomain, '.') == 0 && $subdomain != 'localhost') {
-    $error_list[] = t('At least one dot (.) is required, except for <em>localhost</em>.');
+  // Check for at least one dot or the use of 'localhost'.
+  // Note that localhost can specify a port.
+  $localhost_check = explode(':', $subdomain);
+  if (substr_count($subdomain, '.') == 0 && $localhost_check[0] != 'localhost') {
+    $error_list[] = t('At least one dot (.) is required, except when using <em>localhost</em>.');
   }
   // Check for one colon only.
   if (substr_count($subdomain, ':') > 1) {
@@ -1066,6 +1068,10 @@ function domain_valid_domain($subdomain) {
   // Check for lower case.
   if ($subdomain != drupal_strtolower($subdomain)) {
     $error_list[] = t('Only lower-case characters are allowed.');
+  }
+  // Check for 'www' prefix if redirection / handling is enabled under global domain settings.
+  if (variable_get('domain_www', 1) && (substr($subdomain, 0, strpos($subdomain, '.')) == 'www')) {
+    $error_list[] = t('WWW prefix handling: Domains must be registered without the www. prefix.');
   }
   // Allow modules to alter this behavior.
   drupal_alter('domain_validate', $error_list, $subdomain);

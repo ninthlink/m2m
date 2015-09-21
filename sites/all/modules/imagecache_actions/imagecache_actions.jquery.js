@@ -7,7 +7,11 @@ if(Drupal.jsEnabled){
     // canvasactions_roundedcorners
     // check if independent corners are enabled and disable other fields
     canvasactions_roundedcorners_form_disable_fields();
-    $(":checkbox#edit-data-independent-corners-set-independent-corners").change(function(){canvasactions_roundedcorners_form_disable_fields(); } );
+    $(":checkbox#edit-data-independent-corners-set-independent-corners").change(
+      function(){
+        canvasactions_roundedcorners_form_disable_fields(); 
+      } 
+    );
   });
 }
 
