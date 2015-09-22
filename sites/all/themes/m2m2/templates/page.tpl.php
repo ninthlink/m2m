@@ -5,13 +5,13 @@
   <head>
     <?php print $head ?>
     <title><?php print $head_title ?></title>
-    <link href="/<?php echo drupal_get_path('theme', 'm2m2');?>/css/jquery-ui-1.8.17.multiselect.css" type="text/css" rel="stylesheet" />
+    <!--link href="/<?php echo drupal_get_path('theme', 'm2m2');?>/css/jquery-ui-1.8.17.multiselect.css" type="text/css" rel="stylesheet" /-->
     <script src="/<?php echo drupal_get_path('theme', 'm2m2');?>/js/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       var $jq = jQuery.noConflict();
     </script>
-    <link href="/<?php echo drupal_get_path('theme', 'm2m2');?>/css/jquery.multiselect.css" type="text/css" rel="stylesheet" />
-    <script src="/<?php echo drupal_get_path('theme', 'm2m2');?>/js/jquery-ui-1.8.17.multiselect.min.js" type="text/javascript"></script>
+    <!--link href="/<?php echo drupal_get_path('theme', 'm2m2');?>/css/jquery.multiselect.css" type="text/css" rel="stylesheet" />
+    <script src="/<?php echo drupal_get_path('theme', 'm2m2');?>/js/jquery-ui-1.8.17.multiselect.min.js" type="text/javascript"></script-->
     <?php print $styles ?>
     <?php print $scripts ?>
   </head>
@@ -22,12 +22,13 @@
   <div id="header">
     <div id="logo">
         <?php
+          $site_title = check_plain( $site_name );
           if ($logo || $site_title) {
             print '<a href="'. check_url($base_path) .'" title="'. $site_title .'">';
             if ($logo) {
               print '<img src="'. check_url($logo) .'" alt="'. $site_title .'" />';
             }
-            print $site_html .'</a>';
+            print '<span class="site_title">'. $site_title .'</span></a>';
           }
         ?>
   </div>

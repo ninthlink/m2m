@@ -1615,3 +1615,17 @@ ul.link_sections li.link_wireless a:hover  {
 
 span.views-throbbing{ display: none !important;}
 html.js a.views-throbbing{ padding-right: 0 !important;background-image:none;}
+
+/** 2015 **/
+#bg { background: none }
+#header { background: #262626; width: auto; height: auto; padding-top: 86px; margin-bottom: 50px; }
+#logo { top: 30px; left: 15px; }
+#block-search-0 { top: 20px; right: 15px }
+.tophero { width: 100%; height: 441px; }
+#block-menu-primary-links { position: relative; top: 0; height: 90px; }
+.aboutblock { background: #0095a8; color: #fff; width: 100%; height: 360px }
+
+@media screen and (min-width: 1200px) {
+  #logo { left: 50%; margin-left: -585px }
+  #block-search-0 { right: 50%; margin-right: -585px }
+}
