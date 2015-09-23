@@ -13,7 +13,7 @@ function m2m_mult_created() {
 }
 
 if((typeof view_type === 'undefined')) {
-	var view_type = 'list';
+	var view_type = 'thumbs';
 }
 function toggle_devices(view_details) {
 	if(view_details) {
@@ -43,11 +43,11 @@ function hide_grid() {
 (function($) {
 	Drupal.behaviors.m2m_devicelist = function(context) {
 		if ( $('.devicelist').size() > 0 ) {
-			//if(view_type == 'thumbs') {
+			if(view_type == 'thumbs') {
 				show_grid();
-			//} else {
-			//	hide_grid();
-			//}
+			} else {
+				hide_grid();
+			}
       /*
 			$('.view-content .field-content a').click(function() {
 				$('#devicehere').load($(this).attr('href')+" #main_content", function() {

@@ -47,10 +47,14 @@
   <?php endif; ?>
 
   <div id="results">
-
+    
+     <?php
+     $view = views_get_current_view();
+     print '<div class="rcount">'. $view->total_rows .' '. t('Devices') .'</div>';
+     ?>
     <div class="view-display-mode-tabs">
-      <a href="#" id="list-view-link" class="list-view" onClick="if(!$(this).hasClass('active')){hide_grid();}return false;">List</a>
-      <a href="#" id="grid-view-link" class="grid-view" onClick="if(!$(this).hasClass('active')){show_grid();}return false;">Thumbs</a>
+      <a href="#" id="grid-view-link" class="grid-view" onClick="if(!$(this).hasClass('active')){show_grid();}return false;">Thumbnails</a>
+      <a href="#" id="list-view-link" class="list-view" onClick="if(!$(this).hasClass('active')){hide_grid();}return false;">List View</a>
     </div>
 
     <?php if ($attachment_before): ?>

@@ -1,7 +1,66 @@
+/* fonts */
+@font-face {
+    font-family: 'Qualcomm-Bold';
+    src: url('../fonts/QualcommWeb-Bold.eot');
+    src: url('../fonts/QualcommWeb-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/QualcommWeb-Bold.woff') format('woff'),
+         url('../fonts/QualcommWeb-Bold.ttf') format('truetype'),
+         url('../fonts/QualcommWeb-Bold.svg#QualcommWeb-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Qualcomm-Light';
+    src: url('../fonts/QualcommWeb-Light.eot');
+    src: url('../fonts/QualcommWeb-Light.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/QualcommWeb-Light.woff') format('woff'),
+         url('../fonts/QualcommWeb-Light.ttf') format('truetype'),
+         url('../fonts/QualcommWeb-Light.svg#QualcommWeb-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Qualcomm-Regular';
+    src: url('../fonts/QualcommWeb-Regular.eot');
+    src: url('../fonts/QualcommWeb-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/QualcommWeb-Regular.woff') format('woff'),
+         url('../fonts/QualcommWeb-Regular.ttf') format('truetype'),
+         url('../fonts/QualcommWeb-Regular.svg#QualcommWeb-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Qualcomm-Semibold';
+    src: url('../fonts/QualcommWeb-Semibold.eot');
+    src: url('../fonts/QualcommWeb-Semibold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/QualcommWeb-Semibold.woff') format('woff'),
+         url('../fonts/QualcommWeb-Semibold.ttf') format('truetype'),
+         url('../fonts/QualcommWeb-Semibold.svg#QualcommWeb-Semibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+html,
+body {
+  font-family: arial, helvetica, sans-serif;
+}
+#logo,
+.tophero,
+.aboutblock,
+.view-display-mode-tabs a {
+  font-family: "Qualcomm-Regular", Arial, sans-serif;
+}
+.tophero h2,
+.rcount {
+  font-family: "Qualcomm-Light", Arial, sans-serif;
+}
+#block-menu-primary-links ul.menu li a:link,
+#block-menu-primary-links ul.menu li a:visited,
+.aboutblock h2 {
+  font-family: "Qualcomm-Bold", Arial, sans-serif;
+}
 /* Layout CSS */
 body {
   font-size: 14px;
-  font-family: arial, helvetica, sans-serif;
   text-align: center;
   color: #000;
   line-height: 20px;
@@ -1617,15 +1676,235 @@ span.views-throbbing{ display: none !important;}
 html.js a.views-throbbing{ padding-right: 0 !important;background-image:none;}
 
 /** 2015 **/
-#bg { background: none }
-#header { background: #262626; width: auto; height: auto; padding-top: 86px; margin-bottom: 50px; }
-#logo { top: 30px; left: 15px; }
-#block-search-0 { top: 20px; right: 15px }
-.tophero { width: 100%; height: 441px; }
-#block-menu-primary-links { position: relative; top: 0; height: 90px; }
-.aboutblock { background: #0095a8; color: #fff; width: 100%; height: 360px }
+#bg {
+  background: none;
+}
+#header {
+  background: #262626;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 86px 0 0;
+}
+#logo {
+  top: 30px;
+  left: 15px;
+}
+#logo img {
+  float: left;
+}
+#logo .site_title {
+  float: left;
+  margin-left: 40px;
+  padding-left: 30px;
+  border-left: 1px solid #595959;
+  color: #ccc;
+  font-size: 24px;
+}
+#block-search-0 {
+  top: 20px;
+  right: 15px
+}
+#block-search-0 .captcha-admin-links,
+.sidebar .captcha-admin-links {
+  display: none;
+}
+.tophero {
+  background: #fff url(../images/2015hero.jpg) no-repeat top center;
+  color: #fff;
+  width: 100%;
+  height: 441px;
+}
+#page-layout {
+  background: #f5f5f5;
+  padding: 50px 0 0;
+  width: 100%;
+}
+.tophero .content,
+#block-menu-primary-links .content,
+.aboutblock .content,
+#main {
+  margin: 0 auto;
+  max-width: 1170px;
+}
+.tophero .content {
+  padding: 100px 15px 0;
+}
+.tophero h2 {
+  font-size: 50px;
+  font-weight: normal;
+  line-height: 1.4;
+  margin: 0;
+}
+.tophero p {
+  font-size: 21px;
+  line-height: 1.333;
+  max-width: 480px;
+}
+#block-menu-primary-links {
+  background: #2a2f32;
+  position: relative;
+  top: 0;
+  height: 90px;
+}
+#block-menu-primary-links ul.menu {
+  float: left;
+  overflow: hidden; /*fornow?*/
+  width: 100%;
+  height: 90px;
+}
+#block-menu-primary-links ul.menu li {
+  margin: 0;
+}
+#block-menu-primary-links ul.menu li a:link,
+#block-menu-primary-links ul.menu li a:visited {
+  background: none;
+  color: #8f8f8f;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 4.5;
+  padding: 0 15px;
+  width: auto;
+  height: 90px;
+}
+#block-menu-primary-links ul.menu li a.active:link,
+#block-menu-primary-links ul.menu li a.active:visited,
+#block-menu-primary-links ul.menu li.active-trail a:link,
+#block-menu-primary-links ul.menu li.active-trail a:visited {
+  background-color: #404447;
+  color: #fff;
+}
+.aboutblock {
+  background: #0095a8;
+  color: #fff;
+  overflow: hidden;
+  width: 100%;
+  height: 360px; /*fornow?*/
+}
+.aboutblock .content {
+  padding: 15px 15px 0;
+}
+.aboutblock .opener {
+  display: none;
+}
+.aboutblock .closer {
+  float: left;
+  width: 100%;
+}
+.aboutblock .closer a {
+  color: #fff;
+  float: right;
+  font-size: 20px;
+  line-height: 1.4;
+}
+.aboutblock h2 {
+  font-size: 42px;
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 1em 0 0;
+}
+.aboutblock p {
+  font-size: 21px;
+  line-height: 1.2;
+  max-width: 768px;
+}
+.aboutblock .eco {
+  background: url(../images/about_bg_cellular.jpg) no-repeat 0 0;
+  margin: 10px auto 0;
+  width: 278px;
+  height: 261px;
+}
 
+.rcount {
+  float: left;
+  font-size: 30px;
+  line-height: 1.2;
+}
+.view-display-mode-tabs {
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+}
+.view-display-mode-tabs a {
+  border: none;
+  border-radius: 0;
+  font-size: 18px;
+}
+.view-display-mode-tabs a.list-view {
+  padding-right: 0;
+}
+.view-display-mode-tabs a.grid-view.active,
+.view-display-mode-tabs a.list-view.active {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+}
+.sidebar {
+  width: 20.5%;
+  margin: 0 5% 0 0;
+}
+.view-Search .view-content,
+.view-router-search .view-content {
+  height: auto;
+  padding-top: 15px;
+}
+.attachment .view-Search .view-content,
+.attachment .view-router-search .view-content {
+  padding-top: 0;
+  margin: 0 -30px;
+}
+.view-Search .view-content table.views-view-grid,
+.view-router-search .view-content table.views-view-grid,
+.view-connectivity-search .view-content table.views-view-grid,
+.view-featured-products .view-content table.views-view-grid {
+  border-spacing: 30px;
+  margin: 0;
+  width: 100%;
+}
+.view-Search .view-content table.views-view-grid td,
+.view-router-search .view-content table.views-view-grid td,
+.view-connectivity-search .view-content table.views-view-grid td,
+.view-featured-products .view-content table.views-view-grid td {
+  width: 33.33%;
+  border: none;
+}
+.view-Search .view-content .views-row,
+.view-router-search .view-content .views-row,
+.view-connectivity-search .view-content .views-row {
+  background: #fff;
+  border-bottom: none;
+  margin: 15px 0 0;
+  padding: 30px 0 30px 240px;
+}
+#main_content {
+  width: 74.5%;
+}
+.item-list ul.pager {
+  width: 100%;
+  padding: 0;
+}
+@media screen and (min-width: 768px) {
+  .aboutblock .txt {
+    float: left;
+    width: 67%;
+  }
+  .aboutblock .eco {
+    float: right;
+    width: 29%;
+    background-size: contain;
+  }
+}
 @media screen and (min-width: 1200px) {
-  #logo { left: 50%; margin-left: -585px }
-  #block-search-0 { right: 50%; margin-right: -585px }
+  #logo {
+    left: 50%;
+    margin-left: -585px;
+  }
+  #block-search-0 {
+    right: 50%;
+    margin-right: -585px;
+  }
+  #block-menu-primary-links ul.menu li a:link,
+  #block-menu-primary-links ul.menu li a:visited {
+    padding: 0 30px;
+  }
 }
