@@ -1809,12 +1809,20 @@ html.js a.views-throbbing{ padding-right: 0 !important;background-image:none;}
   max-width: 768px;
 }
 .aboutblock .eco {
-  background: url(../images/about_bg_cellular.jpg) no-repeat 0 0;
+  background: url(../images/about_bg_cellular.png) no-repeat 0 0;
   margin: 10px auto 0;
-  width: 278px;
-  height: 261px;
+  width: 308px;
+  height: 272px;
 }
-
+.aboutblock .eco.auto {
+  background-image: url(../images/about_bg_auto.png);
+}
+.aboutblock .eco.connectivity {
+  background-image: url(../images/about_bg_connectivity.png);
+}
+.aboutblock .eco.products {
+  background-image: url(../images/about_bg_products.png);
+}
 .rcount {
   float: left;
   font-size: 30px;
