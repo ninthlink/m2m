@@ -1684,7 +1684,7 @@ html.js a.views-throbbing{ padding-right: 0 !important;background-image:none;}
   width: auto;
   height: auto;
   margin: 0;
-  padding: 86px 0 0;
+  padding: 0;
 }
 #logo {
   top: 30px;
@@ -1706,14 +1706,29 @@ html.js a.views-throbbing{ padding-right: 0 !important;background-image:none;}
   right: 15px
 }
 #block-search-0 .captcha-admin-links,
-.sidebar .captcha-admin-links {
+.sidebar .captcha-admin-links,
+.tophero,
+#logo,
+#block-search-0 {
   display: none;
+}
+body.scrolld #header {
+  padding-top: 527px;
+}
+body.scrolld .tophero,
+body.scrolld #logo,
+body.scrolld #block-search-0 {
+  display: block;
 }
 .tophero {
   background: #fff url(../images/2015hero.jpg) no-repeat top center;
   color: #fff;
   width: 100%;
   height: 441px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 86px;
 }
 #page-layout {
   background: #f5f5f5;
@@ -1842,7 +1857,6 @@ body.closedabout .aboutblock .eco {
   opacity: 0;
   z-index: 0;
 }
-
 .aboutblock .closer a {
   background: url(../images/x.png) no-repeat 100% 50%;
   color: #fff;
@@ -1888,7 +1902,6 @@ body.closedabout .aboutblock .eco {
 	-o-transition: all 400ms ease-out;
 	transition: all 400ms ease-out;
 }
-
 .rcount {
   float: left;
   font-size: 30px;

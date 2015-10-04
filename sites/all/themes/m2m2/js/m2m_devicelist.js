@@ -42,6 +42,9 @@ function hide_grid() {
 
 (function($) {
 	Drupal.behaviors.m2m_devicelist = function(context) {
+    // initial scroll to top of menu
+    $('html,body').addClass('scrolld').scrollTop(527);
+    
 		if ( $('.devicelist').size() > 0 ) {
 			if(view_type == 'thumbs') {
 				show_grid();
