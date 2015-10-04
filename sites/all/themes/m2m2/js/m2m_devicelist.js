@@ -57,5 +57,14 @@ function hide_grid() {
 			});
       */
 		}
+    
+    // expand/collapse for ABOUT block(s) ?
+    var m2mablock = $('.aboutblock');
+    if ( m2mablock.size() > 0 ) {
+      m2mablock.find('.opener a, .closer a').click(function() {
+        $('body').toggleClass('closedabout');
+        return false;
+      });
+    }
 	};
 })(jQuery);
