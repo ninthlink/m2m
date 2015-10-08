@@ -112,7 +112,10 @@
       <?php endif; ?>
       <?php if ($footer): ?>
         <div id="footer">
-          <?php print $footer ?>
+          <div class="fline"></div>
+          <div class="footer_inner">
+            <?php print $footer ?>
+          </div>
           <div class="clear"></div>
         </div>
       <?php endif; ?>
