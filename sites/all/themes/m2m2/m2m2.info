@@ -13,9 +13,9 @@ stylesheets[all][] = css/styles.css
 stylesheets[all][] = css/jquery.jscrollpane.css
 stylesheets[print][] = css/print.css
 
-scripts[] = js/jquery.mousewheel.js
-scripts[] = js/mwheelIntent.js
-scripts[] = js/jquery.jscrollpane.js
+;scripts[] = js/jquery.mousewheel.js
+;scripts[] = js/mwheelIntent.js
+;scripts[] = js/jquery.jscrollpane.js
 scripts[] = js/m2m_devicelist.js
 
 regions[header] = Header

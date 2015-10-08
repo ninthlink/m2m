@@ -69,5 +69,23 @@ function hide_grid() {
         return false;
       });
     }
+  
+    // cant figure out setting menu active so temp quickfix..
+    if ( $('body').hasClass('node-type-device') ) {
+      $('#block-menu-primary-links a.item_cellular').addClass('active').parent().addClass('active-trail');
+      $('.group-product-details > div > div:even').addClass('stripe');
+    }
+    if ( $('body').hasClass('node-type-connectivity-module') ) {
+      $('#block-menu-primary-links a.item_connectivity').addClass('active').parent().addClass('active-trail');
+      $('.group-product-details > div > div:even').addClass('stripe');
+    }
+    if ( $('body').hasClass('node-type-featured-product') ) {
+      $('#block-menu-primary-links a.item_featured').addClass('active').parent().addClass('active-trail');
+      $('.group-product-details > div > div:even').addClass('stripe');
+    }
+    if ( $('body').hasClass('node-type-router') ) {
+      $('#block-menu-primary-links a.item_wireless').addClass('active').parent().addClass('active-trail');
+      $('.group-product-details > div > div:even').addClass('stripe');
+    }
 	};
 })(jQuery);

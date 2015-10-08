@@ -51,6 +51,7 @@ body,
 .view-featured-products .view-content table.views-view-grid td,
 .sidebar,
 .sidebar .views-exposed-form .views-widget label,
+.product_links .form-item label,
 h2 {
   font-family: "Qualcomm-Regular", Arial, sans-serif;
   font-weight: normal;
@@ -79,7 +80,11 @@ h2 {
 .view-Search .view-content table.views-view-grid td .views-field-view-node a,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node a,
 .view-connectivity-search .view-content table.views-view-grid td .views-field-view-node a,
-.view-featured-products .view-content table.views-view-grid td .views-field-view-node a {
+.view-featured-products .view-content table.views-view-grid td .views-field-view-node a,
+.fieldgroup.group-product-details .field.field-type-link a,
+.fieldgroup.group-product-details .field .field-label,
+.product_links h3,
+.product_links input.form-submit {
   font-family: "Qualcomm-Semibold", Arial, sans-serif;
   font-weight: normal;
 }
@@ -149,8 +154,12 @@ body.node-type-router h1,
 body.node-type-device h1,
 body.node-type-featured-product h1,
 body.node-type-connectivity-module h1 {
-  color: #333;
+  color: #414042;
   display: block;
+  font-size: 50px;
+  line-height: 1;
+  margin: 0;
+  padding: 0 0 0 460px;
 }
 
 /* CSS DOCUMENT */
@@ -1248,7 +1257,8 @@ body.page-routersearch .view-router-search {
 .view-Search .view-content table.views-view-grid td .views-field-view-node a,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node a,
 .view-connectivity-search .view-content table.views-view-grid td .views-field-view-node a,
-.view-featured-products .view-content table.views-view-grid td .views-field-view-node a {
+.view-featured-products .view-content table.views-view-grid td .views-field-view-node a,
+.fieldgroup.group-product-details .field.field-type-link a {
   background: #0095a8 url(../images/arrow_view.png) no-repeat 100% 50%;
   border: none;
   color: #fff;
@@ -1270,6 +1280,10 @@ body.page-routersearch .view-router-search {
   font-size: 16px;
   line-height: 36px;
   height: 36px;
+}
+.fieldgroup.group-product-details .field.field-type-link a {
+  padding-left: 20px;
+  max-width: 175px;
 }
 .view-featured-products #results .featured_search_header  {
   position: relative;
@@ -1345,7 +1359,11 @@ div.view-manage-devices .views-row {
 /* product detail */
 
 body.node-type-device #content,
-body.node-type-router #content  {
+body.node-type-connectivity-module #content,
+body.node-type-router #content,
+body.node-type-featured-product #content  {
+  background: #fff;
+  margin: 0 0 65px;
   padding: 30px 20px 70px;
 }
 /*body.node-type-device h1,
@@ -1353,18 +1371,61 @@ body.node-type-router h1  {
   display: none;
 }*/
 .product_column1 {
+  color: #333;
   float: left;
-  width: 250px;
+  font-size: 18px;
   margin: 0;
-  font-size: 13px;
-  color:#333;
+  width: 377px;
+}
+.product_column1 fieldset {
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 10px 0 0;
+  padding: 0;
+}
+.product_column1 fieldset legend,
+.product_column1 fieldset .description {
+  display: none;
+}
+.product_links h3 {
+  font-size: 24px;
+  line-height: 1;
+}
+.product_links .form-item {
+  margin: 0;
+}
+.product_links input.form-text,
+.product_links textarea {
+  border: 1px solid #d7d7d7;
+  display: block;
+  font-size: 18px;
+  line-height: 2;
+  margin: 10px 0;
+  padding: 1px 10px;
+  width: 90%;
+  
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.product_links input.form-submit {
+  background: none;
+  border: none;
+  color: #22acbd;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 0;
+  text-transform: uppercase;
 }
 .product_column2 {
+  color: #414042;
   float: right;
-  width: 670px;
+  font-size: 16px;
+  line-height: 1.575;
   margin: 0;
-  font-size: 13px;
-  color:#333;
+  width: 670px;
 }
 .product_column1 h2,
 .product_column2 h2 {
@@ -1375,19 +1436,26 @@ body.node-type-router h1  {
 .product_column1 .product_image {
   margin: 0 0 30px;
 }
-.product_column1 .product_links,
-.product_column2 .product_links {
-  font-family: "Arial Rounded MT Bold", arial, sans-serif;
-}
 
-.fieldgroup.group-product-details {
-  margin: 0;
+div.fieldgroup.group-product-details {
+  margin: 30px 0 0;
 }
 .fieldgroup.group-product-details .content {
   padding: 0;
 }
-.fieldgroup.group-product-details .field  {}
-.fieldgroup.group-product-details .field-label  {
+.fieldgroup.group-product-details .field  {
+  background: #fff;
+  padding: 0 10px;
+}
+.fieldgroup.group-product-details .field.stripe {
+  background: #f5f5f5;
+}
+.fieldgroup.group-product-details .field.field-type-link,
+.fieldgroup.group-product-details .field.field-type-link.stripe {
+  background: none;
+  margin-top: 50px;
+}
+.fieldgroup.group-product-details .field .field-label  {
   display: inline;
 }
 .fieldgroup.group-product-details .field-items,
