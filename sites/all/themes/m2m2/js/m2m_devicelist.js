@@ -43,22 +43,18 @@ function hide_grid() {
 (function($) {
 	Drupal.behaviors.m2m_devicelist = function(context) {
     // initial scroll to top of menu
-    $('html,body').addClass('scrolld').scrollTop(527);
-    
+    if ( $('body').hasClass('front') ) {
+      // dont scroll for now on front page? quickfix..
+      $('html,body').addClass('scrolld');
+    } else {
+      $('html,body').addClass('scrolld').scrollTop(527);
+    }
 		if ( $('.devicelist').size() > 0 ) {
 			if(view_type == 'thumbs') {
 				show_grid();
 			} else {
 				hide_grid();
 			}
-      /*
-			$('.view-content .field-content a').click(function() {
-				$('#devicehere').load($(this).attr('href')+" #main_content", function() {
-					toggle_devices(true);
-				});
-				return false;
-			});
-      */
 		}
     
     // expand/collapse for ABOUT block(s) ?
@@ -69,8 +65,9 @@ function hide_grid() {
         return false;
       });
     }
-  
-    // cant figure out setting menu active so temp quickfix..
+    
+    // some device details magics :
+    // cant figure out setting menu active so another temp quickfix..
     if ( $('body').hasClass('node-type-device') ) {
       $('#block-menu-primary-links a.item_cellular').addClass('active').parent().addClass('active-trail');
       $('.group-product-details > div > div:even').addClass('stripe');
