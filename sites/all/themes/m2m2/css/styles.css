@@ -40,14 +40,20 @@
     font-style: normal;
 }
 html,
-body {
-  font-family: arial, helvetica, sans-serif;
-}
+body,
 #logo,
 .tophero,
 .aboutblock,
-.view-display-mode-tabs a {
+.view-display-mode-tabs a,
+.view-Search .view-content table.views-view-grid td,
+.view-router-search .view-content table.views-view-grid td,
+.view-connectivity-search .view-content table.views-view-grid td,
+.view-featured-products .view-content table.views-view-grid td,
+.sidebar,
+.sidebar .views-exposed-form .views-widget label,
+h2 {
   font-family: "Qualcomm-Regular", Arial, sans-serif;
+  font-weight: normal;
 }
 .tophero h2,
 .rcount {
@@ -55,14 +61,51 @@ body {
 }
 #block-menu-primary-links ul.menu li a:link,
 #block-menu-primary-links ul.menu li a:visited,
-.aboutblock h2 {
+.aboutblock h2,
+.view-Search .view-content table.views-view-grid td label,
+.view-router-search .view-content table.views-view-grid td label,
+.view-connectivity-search .view-content table.views-view-grid td label,
+.view-featured-products .view-content table.views-view-grid td label,
+.view-Search .view-content .views-row label,
+.view-router-search .view-content .views-row label,
+.view-connectivity-search .view-content .views-row label {
   font-family: "Qualcomm-Bold", Arial, sans-serif;
+  font-weight: normal;
 }
+.sidebar .views-exposed-form label,
+.view-Search .view-content .views-row div.views-field-view-node a,
+.view-router-search .view-content .views-row div.views-field-view-node a,
+.view-connectivity-search .view-content .views-row div.views-field-view-node a,
+.view-Search .view-content table.views-view-grid td .views-field-view-node a,
+.view-router-search .view-content table.views-view-grid td .views-field-view-node a,
+.view-connectivity-search .view-content table.views-view-grid td .views-field-view-node a,
+.view-featured-products .view-content table.views-view-grid td .views-field-view-node a {
+  font-family: "Qualcomm-Semibold", Arial, sans-serif;
+  font-weight: normal;
+}
+/* colors? */
+body {
+  color: #4b555a;
+}
+.sidebar h2 {
+  color: #777a7d;
+}
+.view-Search .view-content .views-row label,
+.view-router-search .view-content .views-row label,
+.view-connectivity-search .view-content .views-row label {
+  color: #222;
+}
+.view-Search .view-content table.views-view-grid td label,
+.view-router-search .view-content table.views-view-grid td label,
+.view-connectivity-search .view-content table.views-view-grid td label,
+.view-featured-products .view-content table.views-view-grid td label {
+  color: #000;
+}
+
 /* Layout CSS */
 body {
   font-size: 14px;
   text-align: center;
-  color: #000;
   line-height: 20px;
   background: #fff;
 }
@@ -98,7 +141,8 @@ body.page-featured h1,
 body.page-cellular h1,
 body.page-connectivity h1,
 body.page-automotivesearch h1,
-body.page-connectivitysearch h1 {
+body.page-connectivitysearch h1,
+body.page-connectivity-search h1 {
   display: none;
 }
 body.node-type-router h1,
@@ -423,19 +467,15 @@ h1 {
   line-height: 32px;
   padding: 0;
   margin: 0 0 20px;
-  font-family: "arial rounded mt", arial, sans-serif;
 }
 h2 {
   font-size: 16px;
   padding: 0 0 5px;
   margin: 0;
-  font-weight: bold;
-  font-family: "arial rounded mt", arial, sans-serif;
 }
 h3 {
   padding: 0 0 5px;
   font-size: 18px;
-  font-family: "arial rounded mt", arial, sans-serif;
 }
 h4 {
   font-size: 11px;
@@ -497,6 +537,14 @@ ul.secondary li.active a:hover {
 .sidebar ul.menu li a.active:link,
 .sidebar ul.menu li a.active:visited {
   color:#FF8200;
+}
+.sidebar h2 {
+  font-size: 18px;
+  line-height: 1;
+  margin: 0 0 1.5em;
+}
+.sidebar .views-exposed-form {
+  background: #fff;
 }
 /* content */
 #content_top  {
@@ -1050,37 +1098,34 @@ body.page-routersearch .view-router-search {
 .view-display-mode-tabs a.grid-view.active {
   background: #fff url(../images/icon_grid.png) no-repeat 15px -39px;
 }
-
 .view-Search .view-content .views-row,
 .view-router-search .view-content .views-row,
 .view-connectivity-search .view-content .views-row {
-  position: relative;
+  background: #fff;
+  border-bottom : none;
   clear: both;
-  font-size: 12px;
-  line-height: 15px;
-  min-height: 180px;
-  padding: 0 0 0 240px;
-}
-.view-Search .view-content .views-row,
-.view-router-search .view-content .views-row,
-.view-connectivity-search .view-content .views-row {
+  font-size: 15px;
+  line-height: 1.47;
+  margin: 15px 0 0;
+  padding: 25px 0 25px 27.5%;
   position: relative;
-  clear: both;
-  font-size: 12px;
-  line-height: 15px;
-  min-height: 200px;
-  padding: 0 0 25px 240px;
-  margin: 0 0 25px;
-  border-bottom : 1px solid #ccc;
-
 }
 .view-Search .view-content .views-row div,
 .view-router-search .view-content .views-row div,
 .view-connectivity-search .view-content .views-row div {
   display: inline-block;
   vertical-align: top;
-  margin: 0 10px 10px 0;
-  width: 166px;
+  margin: 0;
+  width: 49.5%;
+}
+.view-Search .view-content .views-row div.field-content,
+.view-Search .view-content .views-row div.field-item,
+.view-router-search .view-content .views-row div.field-content,
+.view-router-search .view-content .views-row div.field-item,
+.view-connectivity-search .view-content .views-row div.field-content,
+.view-connectivity-search .view-content .views-row div.field-item {
+  display: inline;
+  width: auto;
 }
 .view-Search .view-content .views-row div.views-field-field-image-fid,
 .view-router-search .view-content .views-row div.views-field-field-rout-image-fid,
@@ -1101,44 +1146,15 @@ body.page-routersearch .view-router-search {
 .view-router-search .view-content .views-row div.views-field-view-node,
 .view-connectivity-search .view-content .views-row div.views-field-view-node {
   position: absolute;
-  top: 140px;
-  left: 0;
-  width: 210px;
+  bottom: 25px;
+  left: 40px;
+  width: 18.6%;
 }
 .view-Search .view-content .views-row div.views-field-view-node .field-content,
 .view-router-search .view-content .views-row div.views-field-view-node .field-content,
 .view-connectivity-search .view-content .views-row div.views-field-view-node .field-content {
   width: auto;
   display: block;
-}
-.view-Search .view-content .views-row div.views-field-view-node a,
-.view-router-search .view-content .views-row div.views-field-view-node a,
-.view-connectivity-search .view-content .views-row div.views-field-view-node a {
-  font-size: 15px;
-  font-weight: bold;
-  color:#fff;
-  text-transform: uppercase;
-  height:37px;
-  line-height: 37px;
-  background: url(../images/btn_filter.png) repeat-x;
-  padding: 0;
-  border: 0;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  font-family: "Arial Rounded", helvetica, sans-serif;
-  text-align: center;
-  display: block;
-  text-decoration: none;
-}
-.view-Search .view-content .views-row label,
-.view-router-search .view-content .views-row label,
-.view-connectivity-search .view-content .views-row label {
-  display: block;
-  margin: 0 0 3px;
-  color:#FF8200;
-  font-weight: bold;
-  font-size: 14px;
 }
 .view-Search .view-content .views-row .field-content,
 .view-router-search .view-content .views-row .field-content,
@@ -1168,7 +1184,8 @@ body.page-routersearch .view-router-search {
 .view-featured-products .view-content table.views-view-grid td {
   border: 1px solid #ccc;
   padding: 10px;
-  font-size: 13px;
+  font-size: 18px;
+  line-height: 1.28;
   width: 25%;
   overflow: hidden;
 }
@@ -1176,8 +1193,6 @@ body.page-routersearch .view-router-search {
 .view-router-search .view-content table.views-view-grid td label,
 .view-connectivity-search .view-content table.views-view-grid td label,
 .view-featured-products .view-content table.views-view-grid td label {
-  color:#FF8200;
-  font-weight: bold;
   display: inline-block;
 }
 .view-Search .view-content table.views-view-grid td .field-content,
@@ -1206,7 +1221,7 @@ body.page-routersearch .view-router-search {
   position: relative;
   min-height: 200px;
   _height: 200px;
-  padding: 0 0 47px;
+  padding: 0 0 53px;
 }
 .view-Search .view-content table.views-view-grid td .views-field-view-node,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node,
@@ -1216,38 +1231,46 @@ body.page-routersearch .view-router-search {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 37px;
+  height: 53px;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   .view-Search .view-content table.views-view-grid td .views-field-view-node,
   .view-router-search .view-content table.views-view-grid td .views-field-view-node,
   .view-connectivity-search .view-content table.views-view-grid td .views-field-view-node,
   .view-featured-products .view-content table.views-view-grid td .views-field-view-node {
-    bottom: 20px;
+    bottom: 25px;
   }
 }
+
+.view-Search .view-content .views-row div.views-field-view-node a,
+.view-router-search .view-content .views-row div.views-field-view-node a,
+.view-connectivity-search .view-content .views-row div.views-field-view-node a,
 .view-Search .view-content table.views-view-grid td .views-field-view-node a,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node a,
 .view-connectivity-search .view-content table.views-view-grid td .views-field-view-node a,
 .view-featured-products .view-content table.views-view-grid td .views-field-view-node a {
-  font-size: 15px;
-  font-weight: bold;
-  color:#fff;
-  text-transform: uppercase;
-  height:37px;
-  line-height: 37px;
-  background: url(../images/btn_filter.png) repeat-x;
-  padding: 0;
-  border: 0;
+  background: #0095a8 url(../images/arrow_view.png) no-repeat 100% 50%;
+  border: none;
+  color: #fff;
+  display: block;
+  font-size: 20px;
+  line-height: 53px;
+  height: 53px;
+  padding: 0 55px 0 15px;
+  text-align: left;
+  text-decoration: none;
+  
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  font-family: "Arial Rounded MT Bold", helvetica, sans-serif;
-  text-align: center;
-  display: block;
-  text-decoration: none;
 }
-
+.view-Search .view-content .views-row div.views-field-view-node a,
+.view-router-search .view-content .views-row div.views-field-view-node a,
+.view-connectivity-search .view-content .views-row div.views-field-view-node a {
+  font-size: 16px;
+  line-height: 36px;
+  height: 36px;
+}
 .view-featured-products #results .featured_search_header  {
   position: relative;
   clear: both;
@@ -1931,14 +1954,20 @@ body.closedabout .aboutblock .eco {
   margin: 0 5% 0 0;
 }
 .view-Search .view-content,
-.view-router-search .view-content {
+.view-router-search .view-content,
+.view-connectivity-search .view-content,
+.view-featured-products .view-content {
   height: auto;
-  padding-top: 15px;
+  padding-top: 1px;
 }
 .attachment .view-Search .view-content,
-.attachment .view-router-search .view-content {
+.attachment .view-router-search .view-content,
+.attachment .view-connectivity-search .view-content,
+.attachment .view-featured-products .view-content {
+  margin: 0 -30px; /* offset border spacing */
   padding-top: 0;
-  margin: 0 -30px;
+  position: relative;
+  top: -15px;
 }
 .view-Search .view-content table.views-view-grid,
 .view-router-search .view-content table.views-view-grid,
@@ -1954,14 +1983,6 @@ body.closedabout .aboutblock .eco {
 .view-featured-products .view-content table.views-view-grid td {
   width: 33.33%;
   border: none;
-}
-.view-Search .view-content .views-row,
-.view-router-search .view-content .views-row,
-.view-connectivity-search .view-content .views-row {
-  background: #fff;
-  border-bottom: none;
-  margin: 15px 0 0;
-  padding: 30px 0 30px 240px;
 }
 #main_content {
   width: 74.5%;
