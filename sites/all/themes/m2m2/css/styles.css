@@ -1644,7 +1644,7 @@ div.view-router-search div.attachment-after {
   display:none;
 }
 
-/* homepage*/
+/* homepage*
 .view-front-rotator {
   position: relative;
   margin-top: -20px;
@@ -1709,8 +1709,8 @@ div.view-router-search div.attachment-after {
 .view-front-rotator .views_slideshow_slide .views-field-title  {
   position: relative;
   font-size: 36px;
-  line-height: 36px;/*
-  font-family: "Gotham Rounded", Arial, Sans-serif;*/
+  line-height: 36px;
+  font-family: "Gotham Rounded", Arial, Sans-serif;
   color:#FF8200;
   z-index: 50;
   width: 430px;
@@ -1723,12 +1723,12 @@ div.view-router-search div.attachment-after {
   z-index: 50;
   width: 370px;
 }
-
 body.front #footer_outer  {
   background: url(../images/bg_footer_top_home.png) repeat-x;
   border: 0;
   padding: 7px 0 0;
 }
+*/
 ul.link_sections  {
   padding: 0;
   margin: 0;
