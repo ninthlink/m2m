@@ -5,13 +5,6 @@
   <head>
     <?php print $head ?>
     <title><?php print $head_title ?></title>
-    <!--link href="/<?php echo drupal_get_path('theme', 'm2m2');?>/css/jquery-ui-1.8.17.multiselect.css" type="text/css" rel="stylesheet" /-->
-    <script src="/<?php echo drupal_get_path('theme', 'm2m2');?>/js/jquery-1.7.1.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      var $jq = jQuery.noConflict();
-    </script>
-    <!--link href="/<?php echo drupal_get_path('theme', 'm2m2');?>/css/jquery.multiselect.css" type="text/css" rel="stylesheet" />
-    <script src="/<?php echo drupal_get_path('theme', 'm2m2');?>/js/jquery-ui-1.8.17.multiselect.min.js" type="text/javascript"></script-->
     <?php print $styles ?>
     <?php print $scripts ?>
   </head>
