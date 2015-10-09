@@ -84,7 +84,8 @@ h2 {
 .fieldgroup.group-product-details .field.field-type-link a,
 .fieldgroup.group-product-details .field .field-label,
 .product_links h3,
-.product_links input.form-submit {
+.product_links input.form-submit,
+.views-exposed-form .views-exposed-widget .form-submit  {
   font-family: "Qualcomm-Semibold", Arial, sans-serif;
   font-weight: normal;
 }
@@ -208,10 +209,80 @@ a:hover {
   margin: 0;
 }
 .views-exposed-form .views-exposed-widget {
-  padding: 0 14px 10px 0;
-  width: 230px;
+  border-top: 1px solid #ebebeb;
+  float: none;
+  padding: 0;
 }
-
+.views-exposed-form .views-exposed-widget.first {
+  border-top: none;
+}
+.views-exposed-form .views-exposed-widget label.flabel {
+  background: url(../images/filtercollapse.png) no-repeat 100% -40px;
+  cursor: pointer;
+  display: block;
+  padding: 10px;
+}
+.views-exposed-form .views-exposed-widget.collapsed label.flabel {
+  background-position: 100% 0;
+}
+.views-exposed-form .bef-toggle {
+  display: none;
+}
+.views-exposed-form .views-exposed-widget .views-widget {
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.views-exposed-form .views-exposed-widget .views-widget .form-checkboxes {
+  color: #777a7d;
+  line-height: 24px;
+  margin: 0;
+  padding: 0 10px;
+  max-height: 192px;
+  overflow: hidden;
+  /*
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+  */
+}
+.views-exposed-form .views-exposed-widget.collapsed .views-widget .form-checkboxes {
+  max-height: 0;
+}
+.views-exposed-form .views-exposed-widget  input {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.views-exposed-form .views-exposed-widget.scrollem .views-widget .form-checkboxes {
+  overflow-y: scroll;
+}
+.views-exposed-form .views-exposed-widget.collapsed .views-widget {
+  height: 0;
+}
+.views-exposed-form .views-exposed-widget input.form-submit {
+  background: #0095a8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 28px;
+  height: 28px;
+  margin: 10px 10px 16px;
+  padding: 0 10px;
+  
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.views-exposed-form .views-exposed-widget.views-submit-button input.form-submit {
+  float: left;
+}
+.views-exposed-form .views-exposed-widget.views-submit-button input.form-submit#view-all {
+  background: #d7d7d7;
+  color: #636363;
+}
 /*
 .views-exposed-form .views-exposed-widget.views-widget-filter-field_operator_certifications_value_many_to_one,
 .views-exposed-form .views-exposed-widget.views-widget-filter-field_rout_chipset_model_value_many_to_one,
@@ -550,8 +621,9 @@ ul.secondary li.active a:hover {
 }
 .sidebar h2 {
   font-size: 18px;
+  line-height: 23px;
   line-height: 1;
-  margin: 0 0 1.5em;
+  margin: 7px 0 20px;
 }
 .sidebar .views-exposed-form {
   background: #fff;
@@ -899,41 +971,7 @@ body.page-routersearch #block-views-featured_routers-block {
 #block-block-9 .content {
   display: inline;
 }
-*/
-.views-exposed-form .views-exposed-widget.views-submit-button,
-.views-exposed-form .bef-toggle {
-  display: none;
-}
-.views-exposed-form .views-exposed-widget .form-submit {
-  margin: 0;
-}
-.views-exposed-form .views-exposed-widget .views-widget {
-  height: 100%;
-  overflow: visible;
-  
-	-webkit-transition: all 0.2s ease-out;
-	-moz-transition: all 0.2s ease-out;
-	-o-transition: all 0.2s ease-out;
-	transition: all 0.2s ease-out;
-}
-.views-exposed-form .views-exposed-widget .views-widget .form-checkboxes {
-  margin: 10px 0;
-  max-height: 200px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  
-	-webkit-transition: all 0.2s ease-out;
-	-moz-transition: all 0.2s ease-out;
-	-o-transition: all 0.2s ease-out;
-	transition: all 0.2s ease-out;
-}
-.views-exposed-form .views-exposed-widget.collapsed .views-widget .form-checkboxes {
-  max-height: 0;
-}
-.views-exposed-form .views-exposed-widget.collapsed .views-widget {
-  height: 0;
-  overflow: hidden;
-}
+*
 /* exposed
 #block-views--exp-Search-block_1,
 #block-views--exp-router_search-block_1 {
@@ -2058,6 +2096,8 @@ body.closedabout .aboutblock .eco {
   float: left;
   font-size: 30px;
   line-height: 1.2;
+  position: relative;
+  top: -7px;
 }
 .view-display-mode-tabs {
   border-bottom: none;

@@ -57,22 +57,43 @@ function hide_grid() {
 			}
       // expand/collapse filters too?
       if ( $('.views-exposed-form').size() > 0 ) {
-        $('.views-exposed-form > div > div').each(function() {
+        $('.views-exposed-form > div > div').each(function(i) {
+          if ( i == 0 ) {
+            $(this).addClass('first');
+          }
           var flabel = $(this).children(':first');
+          var flnext = flabel.next();
           if ( flabel.is('label') ) {
-            flabel.prepend('<input type="checkbox" name="'+ flabel.attr('for') +'" />').children('input').bind('change', function() {
-              flabel.next().find('.bef-toggle').click();
+            var fcheckall = flabel.addClass('flabel').prepend('<input type="checkbox" name="'+ flabel.attr('for') +'" />').children('input').bind('change', function() {
+              flnext.find('.bef-toggle').click();
             });
+            var chksize = flnext.find(':checkbox').size();
+            if ( chksize > 0 ) {
+              if ( flnext.find(':checked').size() == chksize ) {
+                fcheckall.attr('checked',true);
+              }
+            }
             flabel.bind('click', function(event) {
               var targ = $( event.target );
-              if ( targ.is('input') == false ) {
-                $(this).parent().toggleClass('collapsed');
+              if ( targ.is('input') ) {
+                // check first..
+                if ( targ.is(':checked') ) {
+                  $(this).parent().removeClass('collapsed').siblings(':not(.views-submit-button)').addClass('collapsed');
+                } else {
+                  $(this).parent().addClass('collapsed');
+                }
+              } else {
+                $(this).parent().toggleClass('collapsed').siblings(':not(.views-submit-button)').addClass('collapsed');
               }
             });
-            flabel.next().append('<input type="submit" value="Apply Filter" class="form-submit apply" />');
+            flnext.append('<input type="submit" value="Apply Filter" class="form-submit apply" />');
             
-            if ( flabel.next().find('input:checked').size() == 0 ) {
+            if ( flnext.find('input:checked').size() == 0 ) {
               $(this).addClass('collapsed');
+            }
+            
+            if ( flnext.find('input:checkbox').size() > 8 ) {
+              $(this).addClass('scrollem');
             }
           }
         });
