@@ -50,11 +50,13 @@ function hide_grid() {
       $('html,body').addClass('scrolld').scrollTop(527);
     }
 		if ( $('.devicelist').size() > 0 ) {
-			if(view_type == 'thumbs') {
-				show_grid();
-			} else {
-				hide_grid();
-			}
+      if ( $('body').hasClass('page-featured') == false ) {
+        if(view_type == 'thumbs') {
+          show_grid();
+        } else {
+          hide_grid();
+        }
+      }
       // expand/collapse filters too?
       if ( $('.views-exposed-form').size() > 0 ) {
         $('.views-exposed-form > div > div').each(function(i) {

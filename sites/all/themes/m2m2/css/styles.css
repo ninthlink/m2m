@@ -1317,9 +1317,10 @@ body.page-routersearch .view-router-search {
 .view-Search .view-content table.views-view-grid td .views-field-field-image-fid,
 .view-router-search .view-content table.views-view-grid td .views-field-field-rout-image-fid,
 .view-connectivity-search .view-content table.views-view-grid td .views-field-field-connectivity-image-fid,
-.view-featured-products .view-content table.views-view-grid td .views-field-field-featured-image-fid {
+.view-featured-products .view-content table.views-view-grid td .views-field-field-featured-image-fid,
+.view-featured-products .view-content table.views-view-grid td .views-field-field-rout-image-fid {
   text-align: center;
-  max-width: 210px;
+  /*max-width: 210px;*/
 }
 
 .view-Search .view-content table.views-view-grid td .fields_outer,
@@ -1330,6 +1331,9 @@ body.page-routersearch .view-router-search {
   min-height: 200px;
   _height: 200px;
   padding: 0 0 53px;
+}
+.view-featured-products .view-content table.views-view-grid td .fields_outer {
+  padding-bottom: 75px;
 }
 .view-Search .view-content table.views-view-grid td .views-field-view-node,
 .view-router-search .view-content table.views-view-grid td .views-field-view-node,
@@ -2030,6 +2034,10 @@ body.closedabout .aboutblock .opener {
 body.closedabout #block-menu-primary-links ul.menu li.active-trail a:after {
   border-color: transparent transparent #e3e3e3 transparent;
 }
+/* hide arrow tab part on Featured since theres no "about" block there? */
+#block-menu-primary-links ul.menu li.active-trail a.item_featured:after {
+  display: none;
+}
 .aboutblock .closer {
   float: left;
   width: 100%;
@@ -2132,7 +2140,7 @@ body.closedabout .aboutblock .eco {
 .attachment .view-Search .view-content,
 .attachment .view-router-search .view-content,
 .attachment .view-connectivity-search .view-content,
-.attachment .view-featured-products .view-content {
+.view-featured-products .view-content {
   margin: 0 -30px; /* offset border spacing */
   padding-top: 0;
   position: relative;
