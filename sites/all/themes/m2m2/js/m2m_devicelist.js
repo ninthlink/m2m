@@ -59,6 +59,15 @@ function hide_grid() {
       }
       // expand/collapse filters too?
       if ( $('.views-exposed-form').size() > 0 ) {
+        // first add trigger to check if the last submit should show..
+        $('.views-exposed-widgets').bind('m2mcheckcollapsed',function() {
+          if ( $(this).children(':not(.collapsed)').size() > 0 ) {
+            $(this).addClass('hidesub');
+          } else {
+            $(this).removeClass('hidesub');
+          }
+        });
+        
         $('.views-exposed-form > div > div').each(function(i) {
           if ( i == 0 ) {
             $(this).addClass('first');
@@ -66,6 +75,7 @@ function hide_grid() {
           var flabel = $(this).children(':first');
           var flnext = flabel.next();
           if ( flabel.is('label') ) {
+            // functionality for check all/none & expand/collapse..
             var fcheckall = flabel.addClass('flabel').prepend('<input type="checkbox" name="'+ flabel.attr('for') +'" />').children('input').bind('change', function() {
               flnext.find('.bef-toggle').click();
             });
@@ -80,13 +90,15 @@ function hide_grid() {
               if ( targ.is('input') ) {
                 // check first..
                 if ( targ.is(':checked') ) {
-                  $(this).parent().removeClass('collapsed').siblings(':not(.views-submit-button)').addClass('collapsed');
+                  $(this).parent().removeClass('collapsed');//.siblings(':not(.views-submit-button)').addClass('collapsed');
                 } else {
                   $(this).parent().addClass('collapsed');
                 }
               } else {
-                $(this).parent().toggleClass('collapsed').siblings(':not(.views-submit-button)').addClass('collapsed');
+                $(this).parent().toggleClass('collapsed');//.siblings(':not(.views-submit-button)').addClass('collapsed');
               }
+              // and check about last submit btn too..
+              $(this).parents('.views-exposed-widgets').trigger('m2mcheckcollapsed');
             });
             flnext.append('<input type="submit" value="Apply Filter" class="form-submit apply" />');
             
@@ -97,8 +109,14 @@ function hide_grid() {
             if ( flnext.find('input:checkbox').size() > 8 ) {
               $(this).addClass('scrollem');
             }
+          } else {
+            // the last one..
+            $(this).addClass('collapsed');
           }
         });
+        
+        // and check about last submit btn too..
+        $('.views-exposed-widgets').trigger('m2mcheckcollapsed');
       }
 		}
     

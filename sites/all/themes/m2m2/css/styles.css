@@ -225,7 +225,8 @@ a:hover {
 .views-exposed-form .views-exposed-widget.collapsed label.flabel {
   background-position: 100% 0;
 }
-.views-exposed-form .bef-toggle {
+.views-exposed-form .bef-toggle,
+.views-exposed-widgets.hidesub .views-submit-button {
   display: none;
 }
 .views-exposed-form .views-exposed-widget .views-widget {
