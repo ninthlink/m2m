@@ -211,6 +211,8 @@ a:hover {
   padding: 0 14px 10px 0;
   width: 230px;
 }
+
+/*
 .views-exposed-form .views-exposed-widget.views-widget-filter-field_operator_certifications_value_many_to_one,
 .views-exposed-form .views-exposed-widget.views-widget-filter-field_rout_chipset_model_value_many_to_one,
 .views-exposed-form .views-exposed-widget.views-widget-filter-field_conn_electrical_interface_value_many_to_one {
@@ -898,7 +900,40 @@ body.page-routersearch #block-views-featured_routers-block {
   display: inline;
 }
 */
-
+.views-exposed-form .views-exposed-widget.views-submit-button,
+.views-exposed-form .bef-toggle {
+  display: none;
+}
+.views-exposed-form .views-exposed-widget .form-submit {
+  margin: 0;
+}
+.views-exposed-form .views-exposed-widget .views-widget {
+  height: 100%;
+  overflow: visible;
+  
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+.views-exposed-form .views-exposed-widget .views-widget .form-checkboxes {
+  margin: 10px 0;
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+}
+.views-exposed-form .views-exposed-widget.collapsed .views-widget .form-checkboxes {
+  max-height: 0;
+}
+.views-exposed-form .views-exposed-widget.collapsed .views-widget {
+  height: 0;
+  overflow: hidden;
+}
 /* exposed
 #block-views--exp-Search-block_1,
 #block-views--exp-router_search-block_1 {

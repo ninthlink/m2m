@@ -55,6 +55,25 @@ function hide_grid() {
 			} else {
 				hide_grid();
 			}
+      // expand/collapse filters too?
+      if ( $('.views-exposed-form').size() > 0 ) {
+        $('.views-exposed-form > div > div').each(function() {
+          $(this).addClass('collapsed');
+          var flabel = $(this).children(':first');
+          if ( flabel.is('label') ) {
+            flabel.prepend('<input type="checkbox" name="'+ flabel.attr('for') +'" />').children('input').bind('change', function() {
+              flabel.next().find('.bef-toggle').click();
+            });
+            flabel.bind('click', function(event) {
+              var targ = $( event.target );
+              if ( targ.is('input') == false ) {
+                $(this).parent().toggleClass('collapsed');
+              }
+            });
+            flabel.next().append('<input type="submit" value="Apply Filter" class="form-submit apply" />');
+          }
+        });
+      }
 		}
     
     // expand/collapse for ABOUT block(s) ?
