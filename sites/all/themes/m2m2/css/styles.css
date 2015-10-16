@@ -85,7 +85,8 @@ h2 {
 .fieldgroup.group-product-details .field .field-label,
 .product_links h3,
 .product_links input.form-submit,
-.views-exposed-form .views-exposed-widget .form-submit  {
+.views-exposed-form .views-exposed-widget .form-submit,
+.item-list ul.pager li.pager-current  {
   font-family: "Qualcomm-Semibold", Arial, sans-serif;
   font-weight: normal;
 }
@@ -1467,6 +1468,7 @@ body.page-routersearch .view-router-search {
 }
 .item-list ul.pager li a {
 }
+/*
 .item-list ul.pager li.pager-next a,
 .item-list ul.pager li.pager-previous a {
   position: absolute;
@@ -1484,10 +1486,10 @@ body.page-routersearch .view-router-search {
   background: url(../images/arrow_next_black.png) no-repeat;
   right: 10px;
 }
+*/
 .item-list ul.pager li.pager-current {
-  color: #FF8200;
+  color: #000;
 }
-
 div.view-manage-devices .item-list ul.pager {
     width: auto;
 }
