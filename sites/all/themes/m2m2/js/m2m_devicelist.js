@@ -53,8 +53,10 @@ function hide_grid() {
     // search form focus trick
     $('#edit-search-block-form-1').bind('focus', function() {
       $('#block-search-0').addClass('focusd');
+      $(this).attr('placeholder','Search Modules');
     }).bind('blur', function() {
       $('#block-search-0').removeClass('focusd');
+      $(this).attr('placeholder','').val('').prev().fadeIn('fast');
     });
     
 		if ( $('.devicelist').size() > 0 ) {
