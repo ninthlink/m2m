@@ -262,6 +262,10 @@ function custom_m2m_form_alter(&$form, $form_state, $form_id) {
       }
     }
   }
+  if ( $form_id == 'search_block_form' ) {
+    //watchdog('falt', 'form_id : '. $form_id .' : <pre>'. print_r($form,true) .'</pre>');
+    $form['search_block_form']['#title'] = t('Search Modules');
+  }
 }
 
 /**
