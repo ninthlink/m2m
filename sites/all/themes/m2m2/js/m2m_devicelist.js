@@ -49,6 +49,14 @@ function hide_grid() {
     } else {
       $('html,body').addClass('scrolld').scrollTop(527);
     }
+    
+    // search form focus trick
+    $('#edit-search-block-form-1').bind('focus', function() {
+      $('#block-search-0').addClass('focusd');
+    }).bind('blur', function() {
+      $('#block-search-0').removeClass('focusd');
+    });
+    
 		if ( $('.devicelist').size() > 0 ) {
       if ( $('body').hasClass('page-featured') == false ) {
         if(view_type == 'thumbs') {
