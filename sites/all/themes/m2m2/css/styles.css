@@ -2186,6 +2186,25 @@ body.closedabout .aboutblock .eco {
   position: relative;
   top: -15px;
 }
+.view-Search .view-empty .view-content,
+.view-router-search .view-empty .view-content,
+.view-connectivity-search .view-empty .view-content,
+.view-featured-products .view-empty .view-content,
+.attachment .view-Search .view-empty .view-content,
+.attachment .view-router-search .view-empty .view-content,
+.attachment .view-connectivity-search .view-empty .view-content {
+  float: left;
+  width: 100%;
+  margin: 0; /* un-offset border spacing */
+  padding: 24px 0;
+  top: 0;
+}
+.view-Search .view-empty .view-content .searchResultHead,
+.view-router-search .view-empty .view-content .searchResultHead,
+.view-connectivity-search .view-empty .view-content .searchResultHead,
+.view-featured-products .view-empty .view-content  .searchResultHead {
+  display: none;
+}
 .view-Search .view-content table.views-view-grid,
 .view-router-search .view-content table.views-view-grid,
 .view-connectivity-search .view-content table.views-view-grid,
