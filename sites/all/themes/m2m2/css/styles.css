@@ -85,8 +85,7 @@ h2 {
 .fieldgroup.group-product-details .field .field-label,
 .product_links h3,
 .product_links input.form-submit,
-.views-exposed-form .views-exposed-widget .form-submit,
-.item-list ul.pager li.pager-current  {
+.views-exposed-form .views-exposed-widget .form-submit  {
   font-family: "Qualcomm-Semibold", Arial, sans-serif;
   font-weight: normal;
 }
@@ -1454,41 +1453,47 @@ body.page-routersearch .view-router-search {
 
 .item-list ul.pager {
   position: relative;
-  height: 20px;
-  line-height: 20px;
-  width: 814px;
-  padding: 0 80px;
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  padding: 0;
   color:#fff;
-  text-align: right;
-  margin: 0;
+  text-align: center;
+  margin: 60px 0;
+}
+.attachment .item-list ul.pager {
+  margin-top: 20px;
 }
 .item-list ul.pager li {
-  margin: 0 2px;
+  margin: 0 8px;
   padding: 0;
 }
+.item-list ul.pager li,
 .item-list ul.pager li a {
+display: inline-block;
+font-size: 16px;
+height: 30px;
+line-height: 30px;
+vertical-align: top;
 }
-/*
+.item-list ul.pager li.pager-first,
+.item-list ul.pager li.pager-last {
+  display: none;
+}
 .item-list ul.pager li.pager-next a,
 .item-list ul.pager li.pager-previous a {
-  position: absolute;
-  top: -4px;
-  right: 40px;
-  display: block;
-  width: 28px;
-  height: 28px;
-  text-indent: 9999px;
+  width: 30px;
+  height: 30px;
+  text-align: left;
+  text-indent: -999em;
   overflow: hidden;
-  background: url(../images/arrow_previous_black.png) no-repeat;
-  color:#fff;
+  background: url(../images/paginate.png) no-repeat 0 0;
 }
 .item-list ul.pager li.pager-next a {
-  background: url(../images/arrow_next_black.png) no-repeat;
-  right: 10px;
+  background-position: -30px 0;
 }
-*/
 .item-list ul.pager li.pager-current {
-  color: #000;
+  color: #0095A8;
 }
 div.view-manage-devices .item-list ul.pager {
     width: auto;
@@ -2224,10 +2229,6 @@ body.closedabout .aboutblock .eco {
 }
 #main_content {
   width: 74.5%;
-}
-.item-list ul.pager {
-  width: 100%;
-  padding: 0;
 }
 @media screen and (min-width: 768px) {
   .aboutblock .txt {
