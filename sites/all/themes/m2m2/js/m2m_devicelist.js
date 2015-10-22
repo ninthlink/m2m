@@ -90,7 +90,8 @@ function hide_grid() {
           }
         });
         
-        $('.views-exposed-form > div > div').each(function(i) {
+        $('.views-exposed-form > div > div:not(.mchkd)').each(function(i) {
+          $(this).addClass('mchkd');
           if ( i == 0 ) {
             $(this).addClass('first');
           }
