@@ -99,7 +99,8 @@ function hide_grid() {
           var flnext = flabel.next();
           if ( flabel.is('label') ) {
             // functionality for check all/none & expand/collapse..
-            var fcheckall = flabel.addClass('flabel').prepend('<input type="checkbox" name="'+ flabel.attr('for') +'" />').children('input').bind('change', function() {
+            flabel.wrap('<div class="flfx" />');
+            var fcheckall = flabel.addClass('flabel').before('<input type="checkbox" name="'+ flabel.attr('for') +'" id="'+ flabel.attr('for') +'" />').prev().bind('change', function() {
               flnext.find('.bef-toggle').click();
             });
             var chksize = flnext.find(':checkbox').size();
@@ -108,18 +109,16 @@ function hide_grid() {
                 fcheckall.attr('checked',true);
               }
             }
-            flabel.bind('click', function(event) {
-              var targ = $( event.target );
-              if ( targ.is('input') ) {
-                // check first..
-                if ( targ.is(':checked') ) {
-                  $(this).parent().removeClass('collapsed');//.siblings(':not(.views-submit-button)').addClass('collapsed');
-                } else {
-                  $(this).parent().addClass('collapsed');
-                }
+            flabel.siblings('input').bind('change', function(event) {
+              if ( $(this).is(':checked') ) {
+                $(this).parent().parent().removeClass('collapsed');//.siblings(':not(.views-submit-button)').addClass('collapsed');
               } else {
-                $(this).parent().toggleClass('collapsed');//.siblings(':not(.views-submit-button)').addClass('collapsed');
+                $(this).parent().parent().addClass('collapsed');
               }
+              // and check about last submit btn too..
+              $(this).parents('.views-exposed-widgets').trigger('m2mcheckcollapsed');
+            }).parent().bind('click', function(event) {
+              $(this).parent().toggleClass('collapsed');
               // and check about last submit btn too..
               $(this).parents('.views-exposed-widgets').trigger('m2mcheckcollapsed');
             });

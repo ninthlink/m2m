@@ -210,19 +210,21 @@ a:hover {
 }
 .views-exposed-form .views-exposed-widget {
   border-top: 1px solid #ebebeb;
-  float: none;
+  float: left;
   padding: 0;
+  width: 100%;
 }
 .views-exposed-form .views-exposed-widget.first {
   border-top: none;
 }
-.views-exposed-form .views-exposed-widget label.flabel {
+.views-exposed-form .views-exposed-widget .flfx {
   background: url(../images/filtercollapse.png) no-repeat 100% -40px;
   cursor: pointer;
   display: block;
+  height: 20px;
   padding: 10px;
 }
-.views-exposed-form .views-exposed-widget.collapsed label.flabel {
+.views-exposed-form .views-exposed-widget.collapsed .flfx {
   background-position: 100% 0;
 }
 .views-exposed-form .bef-toggle,
@@ -231,8 +233,11 @@ a:hover {
 }
 .views-exposed-form .views-exposed-widget .views-widget {
   padding: 0;
+  float: left;
+  width: 100%;
   height: 100%;
   overflow: hidden;
+  margin-top: 4px;
 }
 .views-exposed-form .views-exposed-widget .views-widget .form-checkboxes {
   color: #777a7d;
@@ -251,11 +256,74 @@ a:hover {
 .views-exposed-form .views-exposed-widget.collapsed .views-widget .form-checkboxes {
   max-height: 0;
 }
-.views-exposed-form .views-exposed-widget  input {
+/*
+.views-exposed-form .views-exposed-widget input {
   display: inline-block;
   margin-right: 8px;
   vertical-align: middle;
 }
+*/
+.views-exposed-form .views-exposed-widget input[type=checkbox] {
+  opacity: 0;
+  float:left;
+}
+.views-exposed-form .views-exposed-widget input[type=checkbox] + label {
+  margin: 0 0 0 11px;
+  position: relative;
+  cursor: pointer;
+  /*
+  font-size: 16px;
+  font-family: monospace;
+  */
+  float: left;
+}
+
+.views-exposed-form .views-exposed-widget input[type=checkbox] + label ~ label {
+  margin: 0 0 0 40px;
+}
+
+.views-exposed-form .views-exposed-widget input[type=checkbox] + label::before {
+  content: ' ';
+  position: absolute;
+  left: -25px;
+  top: 3px;
+  width: 13px;
+  height: 13px;
+  display: block;
+  background: white;
+  border: 1px solid #d7d7d7;
+}
+.views-exposed-form .views-exposed-widget .views-widget  input[type=checkbox] + label::before {
+  top: 5px;
+}
+.views-exposed-form .views-exposed-widget input[type=checkbox] + label::after  {
+  content: ' ';
+  position: absolute;
+  left: -24px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  display: block;
+  z-index: 1;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjE4MS4yIDI3MyAxNyAxNiIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAxODEuMiAyNzMgMTcgMTYiPjxwYXRoIGQ9Ik0tMzA2LjMgNTEuMmwtMTEzLTExM2MtOC42LTguNi0yNC04LjYtMzQuMyAwbC01MDYuOSA1MDYuOS0yMTIuNC0yMTIuNGMtOC42LTguNi0yNC04LjYtMzQuMyAwbC0xMTMgMTEzYy04LjYgOC42LTguNiAyNCAwIDM0LjNsMjMxLjIgMjMxLjIgMTEzIDExM2M4LjYgOC42IDI0IDguNiAzNC4zIDBsMTEzLTExMyA1MjQtNTI0YzctMTAuMyA3LTI1LjctMS42LTM2eiIvPjxwYXRoIGZpbGw9IiMzNzM3MzciIGQ9Ik0xOTcuNiAyNzcuMmwtMS42LTEuNmMtLjEtLjEtLjMtLjEtLjUgMGwtNy40IDcuNC0zLjEtMy4xYy0uMS0uMS0uMy0uMS0uNSAwbC0xLjYgMS42Yy0uMS4xLS4xLjMgMCAuNWwzLjMgMy4zIDEuNiAxLjZjLjEuMS4zLjEuNSAwbDEuNi0xLjYgNy42LTcuNmMuMy0uMS4zLS4zLjEtLjV6Ii8+PHBhdGggZD0iTTExODcuMSAxNDMuN2wtNTYuNS01Ni41Yy01LjEtNS4xLTEyLTUuMS0xNy4xIDBsLTI1My41IDI1My41LTEwNi4yLTEwNi4yYy01LjEtNS4xLTEyLTUuMS0xNy4xIDBsLTU2LjUgNTYuNWMtNS4xIDUuMS01LjEgMTIgMCAxNy4xbDExNC43IDExNC43IDU2LjUgNTYuNWM1LjEgNS4xIDEyIDUuMSAxNy4xIDBsNTYuNS01Ni41IDI2Mi0yNjJjNS4yLTMuNCA1LjItMTIgLjEtMTcuMXpNMTYzNC4xIDE2OS40bC0zNy43LTM3LjdjLTMuNC0zLjQtOC42LTMuNC0xMiAwbC0xNjkuNSAxNjkuNS03MC4yLTcxLjljLTMuNC0zLjQtOC42LTMuNC0xMiAwbC0zNy43IDM3LjdjLTMuNCAzLjQtMy40IDguNiAwIDEybDc3LjEgNzcuMSAzNy43IDM3LjdjMy40IDMuNCA4LjYgMy40IDEyIDBsMzcuNy0zNy43IDE3NC43LTE3Ni40YzEuNi0xLjcgMS42LTYuOS0uMS0xMC4zeiIvPjwvc3ZnPg==') no-repeat center center;
+  -ms-transition: all 100ms ease;
+  -webkit-transition: all 100ms ease;
+  transition: all 100ms ease;
+  -ms-transform: scale(0);
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  opacity: 0;
+}
+.views-exposed-form .views-exposed-widget .views-widget input[type=checkbox] + label::after  {
+  top: 6px;
+}
+.views-exposed-form .views-exposed-widget input[type=checkbox]:checked + label::after {
+  -ms-transform: scale(1);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+/* and then? */
 .views-exposed-form .views-exposed-widget.scrollem .views-widget .form-checkboxes {
   overflow-y: scroll;
 }
@@ -285,6 +353,7 @@ a:hover {
 /* and then? */
 .views-exposed-form .views-exposed-widget.collapsed .views-widget {
   height: 0;
+  margin-top: 0;
 }
 .views-exposed-form .views-exposed-widget input.form-submit {
   background: #0095a8;
@@ -294,7 +363,7 @@ a:hover {
   font-size: 15px;
   line-height: 28px;
   height: 28px;
-  margin: 10px 10px 16px;
+  margin: 14px 10px 17px;
   padding: 0 10px;
   
   -webkit-border-radius: 5px;
