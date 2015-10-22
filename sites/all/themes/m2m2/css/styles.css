@@ -1266,46 +1266,6 @@ body.page-featured #main_content .block-views table.views-view-grid .views-field
   height: 1%;
   clear: both;
 }
-.view-display-mode-tabs {
-  height: 34px;
-  border-bottom: 1px solid #ccc;
-  margin: 0 0 20px;
-  padding: 0 10px;
-  text-align: right;
-  font-size: 13px;
-}
-.view-display-mode-tabs a {
-  display: inline-block;
-  height: 34px;
-  line-height: 34px;
-  padding: 0 15px 0 35px;
-  color:#666;
-  border: 1px solid #fff;
-  border-width: 1px 1px 0;
-}
-.view-display-mode-tabs a.list-view {
-  background: url(../images/icon_list.png) no-repeat 15px 13px;
-}
-.view-display-mode-tabs a.grid-view {
-  background: url(../images/icon_grid.png) no-repeat 15px 11px;
-}
-.view-display-mode-tabs a.active {
-  border: 1px solid #ccc;
-  border-width: 1px 1px 0;
-  -moz-border-radius-topleft: 5px;
-  -moz-border-radius-topright: 5px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-radius: 5px 5px 0px 0px;
-  border-radius: 5px 5px 0px 0px;
-  color:#FF8200;
-}
-.view-display-mode-tabs a.list-view.active {
-  background: #fff url(../images/icon_list.png) no-repeat 15px -37px;
-}
-.view-display-mode-tabs a.grid-view.active {
-  background: #fff url(../images/icon_grid.png) no-repeat 15px -39px;
-}
 .view-Search .view-content .views-row,
 .view-router-search .view-content .views-row,
 .view-connectivity-search .view-content .views-row {
@@ -2224,22 +2184,42 @@ body.closedabout .aboutblock .eco {
 }
 .view-display-mode-tabs {
   border-bottom: none;
+  font-size: 13px;
+  height: 34px;
   margin: 0;
   padding: 0;
+  text-align: right;
+  position: relative;
+  z-index: 5;
 }
 .view-display-mode-tabs a {
   border: none;
   border-radius: 0;
+  color: #414042;
+  display: inline-block;
   font-size: 18px;
+  height: 34px;
+  line-height: 34px;
+  padding: 0 12px 0 35px;
 }
 .view-display-mode-tabs a.list-view {
-  padding-right: 0;
+  background: url(../images/icon_list.png) no-repeat 8px 11px;
+  padding-right: 3px;
 }
-.view-display-mode-tabs a.grid-view.active,
-.view-display-mode-tabs a.list-view.active {
+.view-display-mode-tabs a.grid-view {
+  background: url(../images/icon_grid.png) no-repeat 8px 10px;
+}
+.view-display-mode-tabs a.active {
   background-color: transparent;
   border-radius: 0;
   border: none;
+  color: #0095a8;
+}
+.view-display-mode-tabs a.list-view.active {
+  background-position: 8px -39px;
+}
+.view-display-mode-tabs a.grid-view.active {
+  background-position: 8px -40px;
 }
 .sidebar {
   width: 20.5%;
