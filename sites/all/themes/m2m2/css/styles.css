@@ -621,8 +621,9 @@ a:hover {
   width: 220px;
 }
 #block-search-0.focusd {
-  padding-right: 10px;
   background: url(../images/search_close.png) no-repeat 100% 50%;
+  cursor: pointer;
+  padding-right: 10px;
 }
 #block-search-0 .form-submit {
   display: none;
