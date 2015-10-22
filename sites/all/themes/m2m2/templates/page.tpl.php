@@ -63,7 +63,9 @@
           <div class="clear"></div>
         </div><!-- END: content_top -->
       <?php endif; ?>
-
+      
+      <?php if ($breadcrumb): print $breadcrumb; endif; ?>
+      
       <div id="content">
 
           <?php if ($tabs): print '<div id="tabs-wrapper" class="clear-block">'; endif; ?>

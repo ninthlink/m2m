@@ -1135,15 +1135,6 @@ body.page-featured #main_content .block-views table.views-view-grid .views-field
 }
 
 /* search device page */
-
-body.page-devicesearch #content_top,
-body.page-routersearch #content_top {
-}
-
-
-body.page-devicesearch .view-Search,
-body.page-routersearch .view-router-search {
-}
 .view-Search .view-header,
 .view-router-search .view-header {
   background: #FF8200 url(../images/bg_subhead_green.png) repeat-x;
@@ -1507,7 +1498,15 @@ div.view-manage-devices .views-row {
     padding:10px;
 }
 /* product detail */
-
+.breadcrumb {
+  color: #777A7D;
+  font-size: 18px;
+  line-height: 1.2;
+  margin: 6px 0 12px;
+}
+.breadcrumb a {
+  text-decoration: underline;
+}
 body.node-type-device #content,
 body.node-type-connectivity-module #content,
 body.node-type-router #content,
