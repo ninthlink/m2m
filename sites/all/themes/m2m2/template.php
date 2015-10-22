@@ -33,7 +33,12 @@ function phptemplate_body_class($left, $right) {
  */
 function phptemplate_breadcrumb($breadcrumb) {
   if (!empty($breadcrumb)) {
-    return '<div class="breadcrumb">'. implode(' › ', $breadcrumb) .'</div>';
+    if ( count( $breadcrumb ) > 2 ) {
+      if ( strpos( $breadcrumb[0], t('Home') ) > 0 ) {
+        array_shift( $breadcrumb );
+      }
+      return '<div class="breadcrumb">'. implode(' &nbsp;/&nbsp; ', $breadcrumb) .'</div>';
+    }
   }
 }
 

@@ -69,6 +69,11 @@
 
   <div id="results">
 
+     <?php
+     $view = views_get_current_view();
+     print '<div class="rcount">'. $view->total_rows .' '. t('Devices') .'</div>';
+     ?>
+     
     <?php if ($attachment_before): ?>
       <div class="attachment attachment-before">
         <?php print $attachment_before; ?>
