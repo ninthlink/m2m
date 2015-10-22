@@ -46,6 +46,18 @@ function hide_grid() {
     if ( $('body').hasClass('front') ) {
       // dont scroll for now on front page? quickfix..
       $('html,body').addClass('scrolld');
+      // unless htere was already some filtering going on..
+      if ( location.search != '' ) {
+        $('html,body').scrollTop(527);
+      }
+      // and make the Cellular Modules link scroll instead anyways
+      $('#block-menu-primary-links .menu a:first').click(function() {
+        var wscrollTop = $(window).scrollTop();
+        if ( wscrollTop < 527 ) {
+          $('html,body').animate({scrollTop: "527px"});
+        }
+        return false;
+      });
     } else {
       $('html,body').addClass('scrolld').scrollTop(527);
     }
