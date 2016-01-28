@@ -8,8 +8,55 @@ function custom_m2m_menu(){
     'type' => MENU_CALLBACK,
     'title' => ''
   );
+  $items['admin/company_contacts'] = array(
+    'description' => 'Company Contacts',
+    'page callback' => 'custom_m2m_company_contacts',
+    'access arguments' => array('administer users'),
+    'type' => MENU_CALLBACK,
+    'title' => 'Company Contacts'
+  );
   //$items['']
   return $items;
+}
+
+function custom_m2m_company_contacts(){
+  $query = "SELECT 
+      content_field_company.field_company_value AS company,
+      users.name AS name,
+      users_roles.rid AS role,
+      users.uid AS uid
+    FROM {node} node 
+    INNER JOIN {content_field_company} content_field_company ON content_field_company.nid = node.nid
+    INNER JOIN {users} users ON node.uid = users.uid
+    LEFT JOIN {users_roles} users_roles ON users_roles.uid = users.uid
+    WHERE node.type in ('profile')
+    ORDER BY company ASC";
+  $header = array(
+    array('data' => t('Company')),
+    array('data' => t('Company Users')),
+    array('data' => t('Sales Reps')),
+  );
+  $q = db_query($query);
+  $companies = content_allowed_values(content_fields('field_company'));
+  foreach($companies as $c){
+    $rows[$c] = array('company' => $c, 'users' => array(), 'sales' => array());
+  }
+  while ($r = db_fetch_array($q)) {
+    if(!isset($rows[$r['company']])){
+      $rows[$r['company']] = array('company' => $r['company'], 'users' => array(), 'sales' => array());
+    }
+    if($r['role'] == 3){
+      $rows[$r['company']]['sales'][] = l($r['name'], 'user/'.$r['uid']);
+    }else{
+      $rows[$r['company']]['users'][] = l($r['name'], 'user/'.$r['uid']);
+    }
+  }
+  foreach($rows as &$r){
+    $r['users'] = implode(', ', $r['users']);
+    $r['sales'] = implode(', ', $r['sales']);
+  }
+  asort($rows);
+  return theme('table', $header, $rows);
 }
 
 function custom_m2m_content_allowed_values_alter(&$allowed_values, $field) {
