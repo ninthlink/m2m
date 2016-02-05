@@ -22,15 +22,19 @@ function custom_m2m_menu(){
 function custom_m2m_company_contacts(){
   $query = "SELECT 
       content_field_company.field_company_value AS company,
+      content_type_profile.field_last_name_value AS last_name,
+      content_type_profile.field_first_name_value AS first_name,
       users.name AS name,
+      users.mail AS mail,
       users_roles.rid AS role,
       users.uid AS uid
     FROM {node} node 
     INNER JOIN {content_field_company} content_field_company ON content_field_company.nid = node.nid
     INNER JOIN {users} users ON node.uid = users.uid
+    INNER JOIN {content_type_profile} content_type_profile ON content_type_profile.nid = node.nid
     LEFT JOIN {users_roles} users_roles ON users_roles.uid = users.uid
     WHERE node.type in ('profile')
-    ORDER BY company ASC";
+    ORDER BY company ASC, name ASC";
   $header = array(
     array('data' => t('Company')),
     array('data' => t('Company Users')),
@@ -42,18 +46,28 @@ function custom_m2m_company_contacts(){
     $rows[$c] = array('company' => $c, 'users' => array(), 'sales' => array());
   }
   while ($r = db_fetch_array($q)) {
-    if(!isset($rows[$r['company']])){
-      $rows[$r['company']] = array('company' => $r['company'], 'users' => array(), 'sales' => array());
-    }
-    if($r['role'] == 3){
-      $rows[$r['company']]['sales'][] = l($r['name'], 'user/'.$r['uid']);
-    }else{
-      $rows[$r['company']]['users'][] = l($r['name'], 'user/'.$r['uid']);
+    if($r['uid'] != 1){
+      if(!isset($rows[$r['company']])){
+        $rows[$r['company']] = array('company' => $r['company'], 'users' => array(), 'sales' => array());
+      }
+      $name = '';
+      if(!empty($r['first_name'])){
+        $name = $r['first_name'];
+      }
+      if(!empty($r['last_name'])){
+        $name .= (!empty($name) ? ' ' : '').$r['last_name'];
+      }
+      $user_link =  l($r['name'], 'user/'.$r['uid']).' ('.$r['mail'].(!empty($name) ? ', '.$name : '').')';
+      if($r['role'] == 3 || $r['role'] == 4){
+        $rows[$r['company']]['sales'][$r['uid']] = $user_link;
+      }else{
+        $rows[$r['company']]['users'][$r['uid']] = $user_link;
+      }
     }
   }
   foreach($rows as &$r){
-    $r['users'] = implode(', ', $r['users']);
-    $r['sales'] = implode(', ', $r['sales']);
+    $r['users'] = implode('<br />', $r['users']);
+    $r['sales'] = implode('<br />', $r['sales']);
   }
   asort($rows);
   return theme('table', $header, $rows);
